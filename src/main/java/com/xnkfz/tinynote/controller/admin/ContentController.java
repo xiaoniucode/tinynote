@@ -3,15 +3,16 @@ package com.xnkfz.tinynote.controller.admin;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xnkfz.tinynote.common.Ajax;
 import com.xnkfz.tinynote.common.PageResult;
+import com.xnkfz.tinynote.controller.admin.req.GetPostRes;
 import com.xnkfz.tinynote.controller.admin.req.QueryPostReq;
 import com.xnkfz.tinynote.controller.admin.req.SavePostReq;
 import com.xnkfz.tinynote.entity.Content;
 import com.xnkfz.tinynote.service.IContentService;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -32,10 +33,20 @@ public class ContentController {
         Integer id = contentService.savePost(savePostReq);
         return Ajax.success(id);
     }
-
     @PostMapping("query-post")
     public Ajax queryPost(@RequestBody QueryPostReq queryPostReq) {
         PageResult res = contentService.queryPage(queryPostReq);
+        return Ajax.success(res);
+    }
+    @DeleteMapping("remove-batch-post")
+    public Ajax removeBatchPost(@RequestBody List<Integer> ids) {
+        contentService.removeBatchPost(ids);
+        return Ajax.success();
+    }
+
+    @GetMapping("get-post")
+    public Ajax getPost(Integer id) {
+        GetPostRes res = contentService.getPost(id);
         return Ajax.success(res);
     }
 

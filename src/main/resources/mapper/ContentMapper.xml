@@ -2,4 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xnkfz.tinynote.mapper.ContentMapper">
 
+    <insert id="relationContentMeta">
+        insert into relationship(cid,mid)
+        values
+        <foreach collection="metaIds" item="mid" separator=",">
+            (#{cid},#{mid})
+        </foreach>
+    </insert>
 </mapper>

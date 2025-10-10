@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xnkfz.tinynote.mapper.MetaMapper">
+    <insert id="batchInsert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO meta (name,type)
+        VALUES
+        <foreach collection="list" item="meta" separator=",">
+            (#{meta.name},#{meta.type})
+        </foreach>
+        ON DUPLICATE KEY UPDATE name = name <!-- 防止并发情况下重复插入 -->
+    </insert>
 
+    <delete id="clearContentMetaRelation">
+        delete
+        from relationship
+        where cid = #{cid};
+    </delete>
 </mapper>

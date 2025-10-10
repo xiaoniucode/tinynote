@@ -3,6 +3,9 @@ package com.xnkfz.tinynote.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xnkfz.tinynote.entity.Content;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +17,10 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ContentMapper extends BaseMapper<Content> {
-
+    /**
+     * 创建meta与内容的关联
+     * @param cid  内容ID
+     * @param metaIds 元数据IDS
+     */
+    void relationContentMeta(@Param("cid") Integer cid, @Param("metaIds") List<Integer> metaIds);
 }

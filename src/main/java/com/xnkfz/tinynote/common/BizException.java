@@ -13,6 +13,11 @@ public class BizException extends RuntimeException {
         this.code = code;
         this.message = message;
     }
+    public BizException(String message) {
+        super(message);
+        this.code = Ajax.CODE_ERROR;
+        this.message = message;
+    }
 
     public BizException(Integer code, String message, Throwable cause) {
         super(message, cause);
