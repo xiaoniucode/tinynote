@@ -1,4 +1,7 @@
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   # FreeMarker 配置
   freemarker:
     template-loader-path: classpath:/templates/ # 模板存放路径
@@ -11,11 +14,15 @@ spring:
     expose-session-attributes: true # 允许模板访问会话属性
     expose-spring-macro-helpers: true # 支持 Spring 的 FreeMarker 宏
   datasource:
-    url: jdbc:mysql://localhost:3306/neatink?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/tinynote?useSSL=false&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    hibernate:
-      ddl-auto: none
-    show-sql: true
+#  sql:
+#    init:
+#      schema-locations: classpath:db/schema-mysql.sql
+#      data-locations: classpath:db/data-mysql.sql
+logging:
+  level:
+    com.baomidou.mybatisplus.samples.quickstart: debug
+
