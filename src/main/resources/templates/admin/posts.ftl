@@ -6,7 +6,7 @@
     <@c.styles/>
 </head>
 <body>
-<@c.navigation user='admin'/>
+<@c.navigation user={}/>
 <div class="tn-container">
 
     <div class="d-flex justify-content-center">
@@ -33,11 +33,11 @@
                 <div class="d-flex justify-content-between">
                     <div class="d-flex align-items-center">
                         <span>操作:</span>
-                        <select>
-                            <option disabled selected>操作选项</option>
-                            <option id="removeBatch">批量删除</option>
-                            <option id="removeBatch">标记为私密</option>
-                            <option id="removeBatch">标记为公开</option>
+                        <select id="operation">
+                            <option value="" disabled selected>操作选项</option>
+                            <option value="removeBatch">批量删除</option>
+                            <option value="setPrivate">标记为私密</option>
+                            <option value="setPublic">标记为公开</option>
                         </select>
                     </div>
                     <div>
@@ -59,8 +59,9 @@
                         <tbody>
                         <#if posts??>
                             <#list posts.records as post>
-                                <tr>
+                                <tr data-id="${post.id}">
                                     <td class="checkbox"><input type="checkbox" class="itemCheckbox"></td>
+
                                     <td class="title">
                                         <a href="/admin/write-post/${post.id}">${post.title}</a>
                                         <a href="/post/${post.id}">浏览</a>
@@ -99,14 +100,12 @@
 <@c.scripts/>
 <@c.footer/>
 <script>
-    $(document).ready(function() {
-        // 获取全选复选框和所有条目复选框
+    $(document).ready(function() {   // 获取全选复选框和所有条目复选框
         const $selectAll = $('#selectAll');
         const $itemCheckboxes = $('.itemCheckbox');
 
-        // 1. 当点击全选复选框时
+        // 1.点击全选复选框
         $selectAll.on('change', function() {
-            // 设置所有条目复选框的选中状态与全选复选框一致
             $itemCheckboxes.prop('checked', this.checked);
         });
 
@@ -117,6 +116,48 @@
             // 根据检查结果，更新全选复选框的状态
             $selectAll.prop('checked', allChecked);
         });
+        // 获取选中ID
+        function getSelectedArticleIds() {
+            return $('.itemCheckbox:checked').map(function() {
+                return $(this).closest('tr').data('id');
+            }).get().filter(id => id);
+
+        }
+        //功能操作
+        $('#operation').change(function() {
+            $('#operation').val('');//重置操作选项
+            const selectedValue = $(this).val();
+            const selectedIds = getSelectedArticleIds();
+            if (selectedIds.length === 0) {
+                alert('请先选择要操作的文章！');
+                return;
+            }
+            let url;
+            if (selectedValue === 'removeBatch') {
+                url = '/admin/post/batch-delete';
+            } else if (selectedValue === 'setPrivate') {
+                url = '/admin/post/set-private';
+            } else if (selectedValue === 'setPublic') {
+                url = '/admin/post/set-public';
+            }
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: { ids: selectedIds },
+                success: function(response) {
+                    alert('操作成功！');
+                    // 刷新页面或更新表格
+                    location.reload();
+                },
+                error: function() {
+                    alert('操作失败，请重试！');
+                }
+            });
+        });
+
+
+
     })
 </script>
 

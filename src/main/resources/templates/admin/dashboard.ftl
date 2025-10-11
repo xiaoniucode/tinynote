@@ -6,7 +6,7 @@
     <@c.styles/>
 </head>
 <body>
-<@c.navigation user='admin'/>
+<@c.navigation user={}/>
 
 
 <@c.footer/>

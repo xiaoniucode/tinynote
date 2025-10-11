@@ -40,7 +40,7 @@ public class RouteController {
                             @RequestParam(defaultValue = "15") Long size,
                             @RequestParam(required = false) String title,
                             @RequestParam(required = false) Integer status,
-    @RequestParam(required = false)Integer draft) {
+                            @RequestParam(required = false) Integer draft) {
         QueryPostReq req = new QueryPostReq();
         req.setCurrent(current);
         req.setSize(size);
@@ -68,4 +68,5 @@ public class RouteController {
     public String configBase() {
         return "/admin/config-base";
     }
+
 }

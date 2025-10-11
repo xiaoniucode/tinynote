@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-<@c.navigation user='admin'/>
+<@c.navigation/>
 <div class="tn-container">
     <div class="d-flex justify-content-center">
         <div>

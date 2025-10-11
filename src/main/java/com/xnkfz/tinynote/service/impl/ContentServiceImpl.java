@@ -115,6 +115,7 @@ public class ContentServiceImpl implements IContentService {
         if (!ObjectUtils.isEmpty(req.getStatus())) {
             wrapper.eq(Content::getStatus, req.getStatus());
         }
+        wrapper.orderByDesc(Content::getCreatedAt);
         Page<Content> contentPage = contentMapper.selectPage(pageVo, wrapper);
         return PageResult.of(contentPage);
     }

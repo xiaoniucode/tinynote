@@ -1,4 +1,4 @@
-<#macro navigation user>
+<#macro navigation user={}>
     <div class="mb-3" style="background-color: #292D33; ">
         <nav class="d-flex justify-content-between mx-3">
             <div>
@@ -9,10 +9,8 @@
             </div>
             <div>
                 <#if user??>
-                    <a class="tn-color-gray" href="/profile">欢迎, ${user}</a>
-                    <a class="tn-color-gray" href="/logout">退出</a>
-                <#else>
-                    <a class="tn-color-gray" href="/login">登录</a>
+                    <a class="tn-color-gray" href="/profile">${(user.username?html)!}</a>
+                    <a class="tn-color-gray" href="/admin/exit">退出</a>
                 </#if>
                 <a class="tn-color-gray" href="/">站点</a>
             </div>

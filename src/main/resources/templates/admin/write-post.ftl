@@ -7,19 +7,20 @@
     <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/cherry/editor.css">
 </head>
 <body>
-<@c.navigation user='admin'/>
+<@c.navigation />
 
 <div class="tn-container">
     <h2>撰写新文章</h2>
     <div>
-        <input id="title" value="${(post.title)!}" style="width: 100%;margin-bottom: 15px" placeholder="标题" type="text">
+        <input id="title" value="${(post.title)!}" style="width: 100%;margin-bottom: 15px" placeholder="标题"
+               type="text">
         <div id="editor" style="height: 65vh;"></div>
     </div>
     <div style="display: flex;justify-content: space-between;margin-top:10px">
         <div>
             <input id="cid" hidden="hidden" value="${(post.id)!}">
             <label>发布日期:</label>
-            <input id="publishDate" value="${(post.publishAt)!}"  type="datetime-local"/>
+            <input id="publishDate" value="${(post.publishAt)!}" type="datetime-local"/>
             <label>标签:</label>
             <input id="tags" name='tags' autofocus value="${(post.tags?join(','))!}">
             <label for="status">状态:</label>
@@ -67,7 +68,7 @@
                 data: JSON.stringify(body),
                 success: function (res) {
                     $('#cid').val(res.data)
-                 //   window.location.href = '/admin/posts'
+                    window.location.href = '/admin/posts'
                 },
             });
         });
