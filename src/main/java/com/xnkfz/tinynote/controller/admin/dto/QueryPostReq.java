@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+
 /**
  * @author 晓牛开发者
  */
@@ -12,8 +13,9 @@ import java.io.Serializable;
 @Setter
 @ToString
 public class QueryPostReq implements Serializable {
-    private Integer current;
-    private Integer size;
+    private Long current;
+    private Long size;
     private String title;
-    private String tag;
+    private Integer status;
+    private Integer draft;
 }

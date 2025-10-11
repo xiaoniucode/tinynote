@@ -12,20 +12,20 @@
 <div class="tn-container">
     <h2>撰写新文章</h2>
     <div>
-        <input id="title" style="width: 100%;margin-bottom: 15px" placeholder="标题" type="text">
+        <input id="title" value="${(post.title)!}" style="width: 100%;margin-bottom: 15px" placeholder="标题" type="text">
         <div id="editor" style="height: 65vh;"></div>
     </div>
     <div style="display: flex;justify-content: space-between;margin-top:10px">
         <div>
-            <input id="cid" hidden="hidden">
+            <input id="cid" hidden="hidden" value="${(post.id)!}">
             <label>发布日期:</label>
-            <input id="publishDate" type="datetime-local"/>
+            <input id="publishDate" value="${(post.publishAt)!}"  type="datetime-local"/>
             <label>标签:</label>
-            <input id="tags" name='tags' autofocus>
+            <input id="tags" name='tags' autofocus value="${(post.tags?join(','))!}">
             <label for="status">状态:</label>
             <select id="status" name="status">
-                <option selected value="1">发布</option>
-                <option value="2">私密</option>
+                <option value="1" <#if (post.status)?? && post.status == 1>selected="selected"</#if>>发布</option>
+                <option value="2" <#if (post.status)?? && post.status == 2>selected="selected"</#if>>私密</option>
             </select>
         </div>
         <div>
@@ -40,10 +40,11 @@
 <script src="${springMacroRequestContext.contextPath}/cherry/editor.js"></script>
 <script>
     $(document).ready(function () {
+        const content = "${(post.content?js_string)!''}";
         // 初始化编辑器
         const cherry = new Cherry({
             id: 'editor',
-            value: '',
+            value: content,
         });
         //发布文章
         $("#publishPost").click(function () {
@@ -55,7 +56,7 @@
                 id: $('#cid').val(),
                 title: $("#title").val(),
                 content: cherry.getMarkdown(),
-                publishDate: $('#publishDate').val(),
+                publishAt: $('#publishDate').val(),
                 tags: tagList,
                 status: $('#status').val()
             }
@@ -66,7 +67,7 @@
                 data: JSON.stringify(body),
                 success: function (res) {
                     $('#cid').val(res.data)
-                    window.location.href = '/admin/posts'
+                 //   window.location.href = '/admin/posts'
                 },
             });
         });
@@ -80,7 +81,7 @@
                 id: $('#cid').val(),
                 title: $("#title").val(),
                 content: cherry.getMarkdown(),
-                publishDate: $('#publishDate').val(),
+                publishAt: $('#publishDate').val(),
                 tags: tagList,
                 status: $('#status').val(),
                 draft: 1

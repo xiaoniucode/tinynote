@@ -6,6 +6,7 @@ import com.xnkfz.tinynote.controller.admin.dto.QueryPostReq;
 import com.xnkfz.tinynote.controller.admin.dto.SavePostReq;
 import com.xnkfz.tinynote.controller.theme.dto.PostDetailRes;
 import com.xnkfz.tinynote.controller.theme.dto.QueryPostViewReq;
+import com.xnkfz.tinynote.entity.Content;
 import com.xnkfz.tinynote.entity.ContentStatus;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public interface IContentService {
      * @param queryPostReq 请求参数
      * @return 分页结果
      */
-    PageResult queryPage(QueryPostReq queryPostReq);
+    PageResult<Content> queryPage(QueryPostReq queryPostReq);
 
     /**
      * 批量删除文章
@@ -56,7 +57,7 @@ public interface IContentService {
     PageResult findPageListView(QueryPostViewReq req);
 
     /**
-     * 查询文章详情【前端】
+     * 查询文章详情【前端】 (未登录用户需要添加添加：status:1 draft:0)
      * @param id 编号
      * @return 内容
      */

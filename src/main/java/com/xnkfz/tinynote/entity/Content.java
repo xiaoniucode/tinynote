@@ -43,10 +43,8 @@ public class Content implements Serializable {
     private Integer status;
     @TableField("draft")
     private Integer draft;
-
     @TableField("created_at")
     private LocalDateTime createdAt;
-
     @TableField("updated_at")
     private LocalDateTime updatedAt;
 

@@ -53,15 +53,11 @@
 
 <#macro styles meta={}>
     <meta charset="UTF-8">
-    <!-- 核心SEO -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="${meta.description!''}">
     <meta name="keywords" content="${meta.keywords!''}">
     <meta name="robots" content="${meta.robots!''}">
-    <!-- 结构化数据 -->
-    <!-- XSS防护 -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
-    <!-- 禁止转码 -->
+<#--    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">-->
     <meta http-equiv="Cache-Control" content="no-transform">
     <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/grid.css">
     <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/global.css">

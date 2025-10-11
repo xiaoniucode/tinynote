@@ -1,4 +1,7 @@
 spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss  # 定义日期格式
+    time-zone: GMT+8  # 定义时区，避免时间偏差
   devtools:
     restart:
       enabled: true
@@ -12,6 +15,10 @@ spring:
       matching-strategy: ant_path_matcher
   # FreeMarker 配置
   freemarker:
+
+    settings:
+      datetime_format: yyyy-MM-dd HH:mm:ss
+      time_zone: GMT+8
     template-loader-path: classpath:/templates/ # 模板存放路径
     suffix: .ftl # 模板文件后缀
     cache: false # 开发时禁用缓存，便于调试

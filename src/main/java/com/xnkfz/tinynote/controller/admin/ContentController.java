@@ -5,6 +5,7 @@ import com.xnkfz.tinynote.common.PageResult;
 import com.xnkfz.tinynote.controller.admin.dto.GetPostRes;
 import com.xnkfz.tinynote.controller.admin.dto.QueryPostReq;
 import com.xnkfz.tinynote.controller.admin.dto.SavePostReq;
+import com.xnkfz.tinynote.entity.Content;
 import com.xnkfz.tinynote.service.IContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,11 +31,13 @@ public class ContentController {
         Integer id = contentService.savePost(savePostReq);
         return Ajax.success(id);
     }
+
     @PostMapping("query-post")
     public Ajax queryPost(@RequestBody QueryPostReq queryPostReq) {
-        PageResult res = contentService.queryPage(queryPostReq);
+        PageResult<Content> res = contentService.queryPage(queryPostReq);
         return Ajax.success(res);
     }
+
     @DeleteMapping("remove-batch-post")
     public Ajax removeBatchPost(@RequestBody List<Integer> ids) {
         contentService.removeBatchPost(ids);
@@ -43,8 +46,7 @@ public class ContentController {
 
     @GetMapping("get-post")
     public Ajax getPost(Integer id) {
-        GetPostRes res = contentService.getPost(id);
-        return Ajax.success(res);
+        return Ajax.success(contentService.getPost(id));
     }
 
 }

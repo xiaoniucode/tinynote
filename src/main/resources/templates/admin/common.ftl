@@ -1,20 +1,20 @@
 <#macro navigation user>
-    <div class="mb-3" style="background-color: #8baceb; ">
-        <nav class="d-flex justify-content-between mx-3" >
+    <div class="mb-3" style="background-color: #292D33; ">
+        <nav class="d-flex justify-content-between mx-3">
             <div>
-                <a href="/admin/dashboard">控制台</a>
-                <a href="/admin/write-post">撰写文章</a>
-                <a href="/admin/posts">文章管理</a>
-                <a href="/admin/config-base">系统配置</a>
+                <a class="tn-color-gray" href="/admin/dashboard">控制台</a>
+                <a class="tn-color-gray" href="/admin/write-post">撰写文章</a>
+                <a class="tn-color-gray" href="/admin/posts">文章管理</a>
+                <a class="tn-color-gray" href="/admin/config-base">系统配置</a>
             </div>
             <div>
                 <#if user??>
-                    <a href="/profile">欢迎, ${user}</a>
-                    <a href="/logout">退出</a>
+                    <a class="tn-color-gray" href="/profile">欢迎, ${user}</a>
+                    <a class="tn-color-gray" href="/logout">退出</a>
                 <#else>
-                    <a href="/login">登录</a>
+                    <a class="tn-color-gray" href="/login">登录</a>
                 </#if>
-                <a href="/">站点</a>
+                <a class="tn-color-gray" href="/">站点</a>
             </div>
         </nav>
     </div>

@@ -25,6 +25,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -101,10 +102,20 @@ public class ContentServiceImpl implements IContentService {
     }
 
     @Override
-    public PageResult queryPage(QueryPostReq req) {
-
+    public PageResult<Content> queryPage(QueryPostReq req) {
         Page<Content> pageVo = Page.of(req.getCurrent(), req.getSize());
-        return null;
+        LambdaQueryWrapper<Content> wrapper = new LambdaQueryWrapper<>();
+        if (StringUtils.hasText(req.getTitle())) {
+            wrapper.like(Content::getTitle, req.getTitle());
+        }
+        if (!ObjectUtils.isEmpty(req.getDraft())) {
+            wrapper.eq(Content::getDraft, 1);
+        }
+        if (!ObjectUtils.isEmpty(req.getStatus())) {
+            wrapper.eq(Content::getStatus, req.getStatus());
+        }
+        Page<Content> contentPage = contentMapper.selectPage(pageVo, wrapper);
+        return PageResult.of(contentPage);
     }
 
     @Override
@@ -115,8 +126,19 @@ public class ContentServiceImpl implements IContentService {
     @Override
     public GetPostRes getPost(Integer id) {
         Content content = contentMapper.selectById(id);
-
-        return null;
+        if (ObjectUtils.isEmpty(content)) {
+            return null;
+        }
+        List<Meta> tags = metaService.findMetaByContentId(id, MetaType.TAG);
+        List<String> tagList = tags.stream().map(Meta::getName).collect(Collectors.toList());
+        GetPostRes res = new GetPostRes();
+        res.setId(content.getId());
+        res.setTitle(content.getTitle());
+        res.setContent(content.getText());
+        res.setTags(tagList);
+        res.setPublishAt(content.getCreatedAt());
+        res.setStatus(content.getStatus());
+        return res;
     }
 
     @Override
@@ -128,13 +150,23 @@ public class ContentServiceImpl implements IContentService {
     @Override
     public PostDetailRes getPostDetail(Integer id) {
         PostDetailRes res = new PostDetailRes();
-        LambdaQueryWrapper<Object> wrapper = new LambdaQueryWrapper<>();
+        LambdaQueryWrapper<Content> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Content::getId, id);
+        boolean isLogin=true;
+        if (!isLogin) {
+            wrapper.eq(Content::getDraft, 0);
+            wrapper.eq(Content::getStatus, 1);
+        }
         //文章内容
-        Content content = contentMapper.selectById(id);
+        Content content = contentMapper.selectOne(wrapper);
+        if (ObjectUtils.isEmpty(content)) {
+            throw new BizException("文章不存在或已删除");
+        }
         //标签
         List<Meta> tags = metaService.findMetaByContentId(content.getId(), MetaType.TAG);
         res.setId(content.getId());
         res.setTitle(content.getTitle());
+        res.setContent(content.getText());
         res.setPublishAt(content.getCreatedAt().toString());
         res.setTags(tags);
         return res;
