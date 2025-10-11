@@ -1,11 +1,12 @@
 package com.xnkfz.tinynote.service;
 
 import com.xnkfz.tinynote.common.PageResult;
-import com.xnkfz.tinynote.controller.admin.req.GetPostRes;
-import com.xnkfz.tinynote.controller.admin.req.QueryPostReq;
-import com.xnkfz.tinynote.controller.admin.req.SavePostReq;
-import com.xnkfz.tinynote.entity.Content;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.xnkfz.tinynote.controller.admin.dto.GetPostRes;
+import com.xnkfz.tinynote.controller.admin.dto.QueryPostReq;
+import com.xnkfz.tinynote.controller.admin.dto.SavePostReq;
+import com.xnkfz.tinynote.controller.theme.dto.PostDetailRes;
+import com.xnkfz.tinynote.controller.theme.dto.QueryPostViewReq;
+import com.xnkfz.tinynote.entity.ContentStatus;
 
 import java.util.List;
 
@@ -46,4 +47,18 @@ public interface IContentService {
      * @return 文章详细信息
      */
     GetPostRes getPost(Integer id);
+
+    /**
+     * 【站点使用】分页查询文章列表
+     * @param req 请求参数
+     * @return 文章分页结果
+     */
+    PageResult findPageListView(QueryPostViewReq req);
+
+    /**
+     * 查询文章详情【前端】
+     * @param id 编号
+     * @return 内容
+     */
+    PostDetailRes getPostDetail(Integer id);
 }

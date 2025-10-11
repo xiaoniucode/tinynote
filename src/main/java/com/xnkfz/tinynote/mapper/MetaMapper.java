@@ -30,4 +30,11 @@ public interface MetaMapper extends BaseMapper<Meta> {
      */
     void batchInsert(List<Meta> metas);
 
+    /**
+     * 查询内容关联的meta
+     * @param cid 内容id
+     * @param type 类型
+     * @return meta列表
+     */
+    List<Meta> selectMetaList(@Param("cid") Integer cid, @Param("type") String type);
 }

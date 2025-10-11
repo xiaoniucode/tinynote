@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -28,6 +30,9 @@ public class MetaServiceImpl extends ServiceImpl<MetaMapper, Meta> implements IM
     private MetaMapper metaMapper;
     @Override
     public List<Integer> createMetaIfNotExist(List<String> metaNames, MetaType metaType) {
+        if (CollectionUtils.isEmpty(metaNames)) {
+            return new ArrayList<>();
+        }
         //1.批量查询标签
         LambdaQueryWrapper<Meta> metaWrapper = new LambdaQueryWrapper<>();
         metaWrapper.in(Meta::getName, metaNames);
@@ -63,5 +68,10 @@ public class MetaServiceImpl extends ServiceImpl<MetaMapper, Meta> implements IM
                 .map(existingMetaMap::get)
                 .distinct()
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Meta> findMetaByContentId(Integer id, MetaType metaType) {
+       return metaMapper.selectMetaList(id,metaType.getType());
     }
 }

@@ -13,23 +13,24 @@
     <h2>撰写新文章</h2>
     <div>
         <input id="title" style="width: 100%;margin-bottom: 15px" placeholder="标题" type="text">
-        <div id="markdown-container" style="height: 65vh;"></div>
+        <div id="editor" style="height: 65vh;"></div>
     </div>
     <div style="display: flex;justify-content: space-between;margin-top:10px">
         <div>
+            <input id="cid" hidden="hidden">
             <label>发布日期:</label>
             <input id="publishDate" type="datetime-local"/>
             <label>标签:</label>
             <input id="tags" name='tags' autofocus>
             <label for="status">状态:</label>
             <select id="status" name="status">
-                <option value="publish">发布</option>
-                <option value="hidden">隐藏</option>
+                <option selected value="1">发布</option>
+                <option value="2">私密</option>
             </select>
         </div>
         <div>
             <button id="previewPost">预览文章</button>
-            <button>保存草稿</button>
+            <button id="saveDraft">保存草稿</button>
             <button id="publishPost">发布文章</button>
         </div>
     </div>
@@ -38,54 +39,79 @@
 <@c.scripts/>
 <script src="${springMacroRequestContext.contextPath}/cherry/editor.js"></script>
 <script>
-
-    // 确保 DOM 完全加载后再初始化编辑器
     $(document).ready(function () {
         // 初始化编辑器
         const cherry = new Cherry({
-            id: 'markdown-container',
-            value: '# welcome to cherry editor!',
+            id: 'editor',
+            value: '',
         });
         //发布文章
         $("#publishPost").click(function () {
-
+            const tags = $('#tags').val()
+            const tagList = tags.split(",")
+                .map(item => item.trim())
+                .filter(item => item.length > 0);
             const body = {
+                id: $('#cid').val(),
                 title: $("#title").val(),
                 content: cherry.getMarkdown(),
                 publishDate: $('#publishDate').val(),
-                tags: $('#tags').val(),
+                tags: tagList,
                 status: $('#status').val()
             }
             $.ajax({
-                url: '/admin/content/save',
+                url: '/admin/content/save-post',
                 type: 'post',
                 contentType: 'application/json',
                 data: JSON.stringify(body),
-                success: function (data) {
-                    console.log(data);
-                    alert("success");
+                success: function (res) {
+                    $('#cid').val(res.data)
+                    window.location.href = '/admin/posts'
+                },
+            });
+        });
+        //保存草稿
+        $('#saveDraft').click(function () {
+            const tags = $('#tags').val()
+            const tagList = tags.split(",")
+                .map(item => item.trim())
+                .filter(item => item.length > 0);
+            const body = {
+                id: $('#cid').val(),
+                title: $("#title").val(),
+                content: cherry.getMarkdown(),
+                publishDate: $('#publishDate').val(),
+                tags: tagList,
+                status: $('#status').val(),
+                draft: 1
+            }
+            $.ajax({
+                url: '/admin/content/save-post',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify(body),
+                success: function (res) {
+                    $('#cid').val(res.data)
+                    alert("保存成功");
                 },
                 error: function (xhr, status, error) {
                     console.log(status);
                 }
             });
-        });
-        //保存草稿
 
+        })
         //预览文章
-
         var view = false
         $('#previewPost').click(function () {
             view = !view
             if (view) {
                 cherry.switchModel('previewOnly');
                 $(this).text('关闭预览')
-            }else{
+            } else {
                 cherry.switchModel('edit&preview')
                 $(this).text('预览文章')
             }
         })
-
     });
 </script>
 </body>

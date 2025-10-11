@@ -1,14 +1,11 @@
 package com.xnkfz.tinynote.controller.admin;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xnkfz.tinynote.common.Ajax;
 import com.xnkfz.tinynote.common.PageResult;
-import com.xnkfz.tinynote.controller.admin.req.GetPostRes;
-import com.xnkfz.tinynote.controller.admin.req.QueryPostReq;
-import com.xnkfz.tinynote.controller.admin.req.SavePostReq;
-import com.xnkfz.tinynote.entity.Content;
+import com.xnkfz.tinynote.controller.admin.dto.GetPostRes;
+import com.xnkfz.tinynote.controller.admin.dto.QueryPostReq;
+import com.xnkfz.tinynote.controller.admin.dto.SavePostReq;
 import com.xnkfz.tinynote.service.IContentService;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +20,7 @@ import java.util.List;
  * @since 2025-10-10
  */
 @RestController
-@RequestMapping("/content")
+@RequestMapping("/admin/content")
 public class ContentController {
     @Autowired
     private IContentService contentService;

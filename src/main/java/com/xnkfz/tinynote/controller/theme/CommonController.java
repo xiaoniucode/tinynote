@@ -1,20 +1,24 @@
 package com.xnkfz.tinynote.controller.theme;
 
+import com.xnkfz.tinynote.service.IConfigService;
+import com.xnkfz.tinynote.service.IContentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.HashMap;
+import java.util.Map;
 
+/**
+ * @author 晓牛开发者
+ */
 public abstract class CommonController {
+    @Autowired
+    private IConfigService configService;
+
     @ModelAttribute
     public void addCommonModel(Model model) {
-        HashMap<Object, Object> meta = new HashMap<>();
-        // 核心SEO标签
-        meta.put("keywords", "Java,编程,Spring Boot");
-        meta.put("description", "技术博客分享编程经验");
-        meta.put("robots", "index,follow");
-
-        model.addAttribute("meta", meta);
-
+        Map<String, Object> config = configService.getConfigAsMap();
+        model.addAttribute("meta", config);
     }
 }

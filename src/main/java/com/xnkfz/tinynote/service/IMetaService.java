@@ -22,4 +22,12 @@ public interface IMetaService extends IService<Meta> {
      * @return meta ids
      */
     List<Integer> createMetaIfNotExist(List<String> metas, MetaType metaType);
+
+    /**
+     * 根据内容ID查询元数据列表
+     * @param id 内容ID
+     * @param metaType meta类型：tag，category
+     * @return 元数据列表
+     */
+    List<Meta> findMetaByContentId(Integer id, MetaType metaType);
 }

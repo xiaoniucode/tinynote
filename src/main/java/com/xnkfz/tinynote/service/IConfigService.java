@@ -4,6 +4,8 @@ import com.xnkfz.tinynote.entity.Config;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Map;
+
 /**
  * <p>
  *  服务类
@@ -13,6 +15,10 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2025-10-10
  */
 
-public interface IConfigService extends IService<Config> {
-
+public interface IConfigService  {
+    /**
+     * 获取所有的配置
+     * @return 配置信息
+     */
+    Map<String, Object> getConfigAsMap();
 }

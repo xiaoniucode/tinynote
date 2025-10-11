@@ -1,10 +1,13 @@
-package com.xnkfz.tinynote.controller.admin.req;
+package com.xnkfz.tinynote.controller.admin.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+/**
+ * @author 晓牛开发者
+ */
 @Getter
 @Setter
 @ToString

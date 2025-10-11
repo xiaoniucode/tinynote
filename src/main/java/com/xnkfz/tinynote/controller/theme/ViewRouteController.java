@@ -1,5 +1,10 @@
 package com.xnkfz.tinynote.controller.theme;
 
+import com.xnkfz.tinynote.common.PageResult;
+import com.xnkfz.tinynote.controller.theme.dto.PostDetailRes;
+import com.xnkfz.tinynote.controller.theme.dto.QueryPostViewReq;
+import com.xnkfz.tinynote.service.IConfigService;
+import com.xnkfz.tinynote.service.IContentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,22 +22,28 @@ import java.util.*;
 @RequestMapping("/")
 @Controller
 public class ViewRouteController extends CommonController {
+    @Autowired
+    private IContentService contentService;
+
     @GetMapping("/")
     public String index(Model mv) {
         addCommonModel(mv);
-     //   mv.addAttribute("posts", posts);
+        QueryPostViewReq req = new QueryPostViewReq();
+        req.setCurrent(1);
+        req.setSize(30);
+        PageResult res = contentService.findPageListView(req);
+        mv.addAttribute("postRes", res);
         return "themes/index";
     }
+
     @GetMapping("post/{id}")
     public String post(Model mv, @PathVariable Integer id) {
         addCommonModel(mv);
-        HashMap<String, Object> post = new HashMap<>();
-        post.put("id", id);
-        post.put("title", "blog");
-        post.put("content", "hello world\nhello world \n#替换我的文章\n\nhellow orl");
-        mv.addAttribute("post", post);
+        PostDetailRes res = contentService.getPostDetail(id);
+        mv.addAttribute("post", res);
         return "themes/post";
     }
+
     @GetMapping("tag/{name}")
     public String tag(Model model, @PathVariable String name) {
         addCommonModel(model);

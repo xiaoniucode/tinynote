@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author 晓牛开发者
@@ -38,6 +38,11 @@ public class Content implements Serializable {
 
     @TableField("text")
     private String text;
+
+    @TableField("status")
+    private Integer status;
+    @TableField("draft")
+    private Integer draft;
 
     @TableField("created_at")
     private LocalDateTime createdAt;

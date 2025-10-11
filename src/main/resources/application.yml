@@ -1,4 +1,12 @@
 spring:
+  devtools:
+    restart:
+      enabled: true
+      poll-interval: 1000  # 检查间隔1秒
+      quiet-period: 500    # 安静期0.5秒
+      exclude: "static/**,templates/**,**.json"
+    livereload:
+      enabled: true
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
@@ -13,6 +21,7 @@ spring:
     expose-request-attributes: true # 允许模板访问请求属性
     expose-session-attributes: true # 允许模板访问会话属性
     expose-spring-macro-helpers: true # 支持 Spring 的 FreeMarker 宏
+
   datasource:
     url: jdbc:mysql://localhost:3306/tinynote?useSSL=false&useUnicode=true&characterEncoding=UTF-8
     username: root

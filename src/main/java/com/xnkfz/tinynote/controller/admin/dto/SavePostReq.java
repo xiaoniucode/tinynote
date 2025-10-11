@@ -1,4 +1,4 @@
-package com.xnkfz.tinynote.controller.admin.req;
+package com.xnkfz.tinynote.controller.admin.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,5 +18,6 @@ public class SavePostReq implements Serializable {
     private String content;
     private List<String> tags;
     private Integer status;
+    private Integer draft;
     private LocalDateTime publishAt;
 }
