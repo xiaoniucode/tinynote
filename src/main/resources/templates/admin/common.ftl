@@ -22,7 +22,7 @@
 
 <#macro footer>
     <div style="flex-shrink:0" class="d-flex justify-content-center">
-        <p>&copy; 2025 我的网站. 版权所有.</p>
+        <p>&copy; 2025 xilio.cn. 版权所有.</p>
     </div>
 </#macro>
 

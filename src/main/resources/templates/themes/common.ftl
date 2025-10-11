@@ -1,18 +1,12 @@
-<#macro nav >
+<#macro nav meta={}>
     <div>
-
-
         <div class="d-flex justify-content-between align-content-center">
-            <div style="font-size: 50px;font-weight: bold">晓牛开发者</div>
+            <div style="font-size: 50px;font-weight: bold">${(meta.site_title)!}</div>
             <div>
                 <input id="searchInput" placeholder="输入关键字搜索">
             </div>
         </div>
-        <div>
-            一只清晨的晓牛，写代码，睡觉觉
-            实际搜索逻辑，例如跳转或调用 API
-            实际搜索逻辑，例如跳转或调用 API
-        </div>
+        <div>${(meta.site_description)!}</div>
         <hr/>
         <div>
             <a href="/">首页</a>
@@ -26,10 +20,9 @@
         $(document).ready(function () {
             $('#searchInput').on('keypress', function (event) {
                 if (event.key === 'Enter') {
-                    var query = $(this).val().trim();
+                    const query = $(this).val().trim();
                     if (query) {
-                        alert('搜索: ' + query); // 示例：弹出搜索内容
-                        // window.location.href = '/search?q=' + encodeURIComponent(query);
+                        window.location.href = '/?title=' + encodeURIComponent(query);
                     } else {
                         alert('请输入搜索内容');
                     }

@@ -11,8 +11,8 @@ import java.io.Serializable;
 @Getter
 public class QueryPostViewReq implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Integer current;
-    private Integer size ;
+    private Long current;
+    private Long size ;
     private String title;
     private String tag;
 }

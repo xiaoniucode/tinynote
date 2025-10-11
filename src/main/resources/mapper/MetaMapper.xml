@@ -22,4 +22,30 @@
         where rs.cid = #{cid}
           and m.type = #{type}
     </select>
+    <select id="findMetaContentCount" resultType="com.xnkfz.tinynote.entity.MetaContentCount">
+        SELECT
+        m.name AS name,
+        COUNT(c.id) AS count
+        FROM
+        meta m
+        INNER JOIN
+        relationship r ON m.id = r.mid
+        INNER JOIN
+        content c ON r.cid = c.id
+        <where>
+            <if test="type != null and type != ''">
+                AND m.type = #{type}
+            </if>
+            <if test="status != null">
+                AND c.status = #{status}
+            </if>
+            <if test="draft != null">
+                AND c.draft = #{draft}
+            </if>
+        </where>
+        GROUP BY
+        m.name
+        ORDER BY
+        count DESC;
+    </select>
 </mapper>

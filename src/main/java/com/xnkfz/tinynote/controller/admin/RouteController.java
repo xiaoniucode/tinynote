@@ -35,7 +35,8 @@ public class RouteController {
     }
 
     @GetMapping("/post/search")
-    public String queryPost(Model model, @RequestParam(defaultValue = "1") Long current,
+    public String queryPost(Model model,
+                            @RequestParam(defaultValue = "1") Long current,
                             @RequestParam(defaultValue = "15") Long size,
                             @RequestParam(required = false) String title,
                             @RequestParam(required = false) Integer status,

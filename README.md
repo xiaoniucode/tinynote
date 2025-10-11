@@ -1,2 +1,3 @@
 # TinyNote 
 一款轻量级写作软件，遵循大道至简设计思想，引入优质的对写作者友好的markdown的编辑器。
+![write.png](docs/screenshot/write.png)

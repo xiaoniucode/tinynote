@@ -2,6 +2,8 @@ package com.xnkfz.tinynote.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xnkfz.tinynote.entity.Meta;
+import com.xnkfz.tinynote.entity.MetaContentCount;
+import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -37,4 +39,6 @@ public interface MetaMapper extends BaseMapper<Meta> {
      * @return meta列表
      */
     List<Meta> selectMetaList(@Param("cid") Integer cid, @Param("type") String type);
+
+    List<MetaContentCount> findMetaContentCount(@Param("status") Integer status, @Param("draft") Integer draft, @Param("type") String type);
 }

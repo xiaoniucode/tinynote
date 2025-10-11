@@ -2,6 +2,7 @@ package com.xnkfz.tinynote.service;
 
 import com.xnkfz.tinynote.entity.Meta;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xnkfz.tinynote.entity.MetaContentCount;
 import com.xnkfz.tinynote.entity.MetaType;
 
 import java.util.List;
@@ -30,4 +31,11 @@ public interface IMetaService extends IService<Meta> {
      * @return 元数据列表
      */
     List<Meta> findMetaByContentId(Integer id, MetaType metaType);
+
+    /**
+     * 统计meta对应的content数量
+     * @param metaType meta类型：tag、category
+     * @return 数量关系列表
+     */
+    List<MetaContentCount> metaContentCount(MetaType metaType);
 }

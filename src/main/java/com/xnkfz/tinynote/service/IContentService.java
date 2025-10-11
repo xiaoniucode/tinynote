@@ -54,7 +54,7 @@ public interface IContentService {
      * @param req 请求参数
      * @return 文章分页结果
      */
-    PageResult findPageListView(QueryPostViewReq req);
+    PageResult<PostDetailRes> findPageListView(QueryPostViewReq req);
 
     /**
      * 查询文章详情【前端】 (未登录用户需要添加添加：status:1 draft:0)

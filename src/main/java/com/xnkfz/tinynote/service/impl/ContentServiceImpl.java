@@ -17,6 +17,7 @@ import com.xnkfz.tinynote.mapper.ContentMapper;
 import com.xnkfz.tinynote.mapper.MetaMapper;
 import com.xnkfz.tinynote.service.IContentService;
 import com.xnkfz.tinynote.service.IMetaService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -141,10 +142,48 @@ public class ContentServiceImpl implements IContentService {
         return res;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public PageResult findPageListView(QueryPostViewReq req) {
-        PageResult result = new PageResult();
-        return result;
+    public PageResult<PostDetailRes> findPageListView(QueryPostViewReq req) {
+        boolean isLogin = true;
+        Page<Content> page = Page.of(req.getCurrent(), req.getSize());
+        LambdaQueryWrapper<Content> wrapper = new LambdaQueryWrapper<>();
+        if (StringUtils.hasText(req.getTitle())) {
+            wrapper.like(Content::getTitle, req.getTitle());
+        }
+        if (!isLogin) {
+            wrapper.eq(Content::getStatus, 1);
+            wrapper.eq(Content::getDraft, 0);
+        }
+        wrapper.orderByDesc(Content::getCreatedAt);
+        //分别为文章查询标签【数据量大需要优化】
+        // 执行分页查询
+        Page<Content> contentPage = contentMapper.selectPage(page, wrapper);
+
+        // 转换为响应对象并查询标签
+        List<PostDetailRes> postDetails = contentPage.getRecords().stream()
+                .map(this::convertToPostDetailRes)
+                .collect(Collectors.toList());
+
+        // 为每个文章查询标签
+        for (PostDetailRes post : postDetails) {
+            post.setTags(metaService.findMetaByContentId(post.getId(), MetaType.TAG));
+        }
+        // 创建新的分页结果
+        Page<PostDetailRes> resultPage = new Page<>();
+        BeanUtils.copyProperties(contentPage, resultPage);
+        resultPage.setRecords(postDetails);
+        return PageResult.of(resultPage);
+    }
+
+    private PostDetailRes convertToPostDetailRes(Content content) {
+        PostDetailRes res = new PostDetailRes();
+        res.setId(content.getId());
+        res.setTitle(content.getTitle());
+        res.setContent(content.getText());
+        res.setSummary(content.getSummary());
+        res.setPublishAt(content.getCreatedAt().toString());
+        return res;
     }
 
     @Override
@@ -152,7 +191,7 @@ public class ContentServiceImpl implements IContentService {
         PostDetailRes res = new PostDetailRes();
         LambdaQueryWrapper<Content> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Content::getId, id);
-        boolean isLogin=true;
+        boolean isLogin = true;
         if (!isLogin) {
             wrapper.eq(Content::getDraft, 0);
             wrapper.eq(Content::getStatus, 1);

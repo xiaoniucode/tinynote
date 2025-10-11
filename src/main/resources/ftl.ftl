@@ -20,3 +20,4 @@
 
 </body>
 </html>
+media="print" onload="this.media='all'">

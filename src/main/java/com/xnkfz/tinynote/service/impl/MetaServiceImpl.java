@@ -2,6 +2,7 @@ package com.xnkfz.tinynote.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.xnkfz.tinynote.entity.Meta;
+import com.xnkfz.tinynote.entity.MetaContentCount;
 import com.xnkfz.tinynote.entity.MetaType;
 import com.xnkfz.tinynote.mapper.MetaMapper;
 import com.xnkfz.tinynote.service.IMetaService;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author 晓牛开发者
@@ -28,6 +29,7 @@ import java.util.stream.Collectors;
 public class MetaServiceImpl extends ServiceImpl<MetaMapper, Meta> implements IMetaService {
     @Autowired
     private MetaMapper metaMapper;
+
     @Override
     public List<Integer> createMetaIfNotExist(List<String> metaNames, MetaType metaType) {
         if (CollectionUtils.isEmpty(metaNames)) {
@@ -72,6 +74,13 @@ public class MetaServiceImpl extends ServiceImpl<MetaMapper, Meta> implements IM
 
     @Override
     public List<Meta> findMetaByContentId(Integer id, MetaType metaType) {
-       return metaMapper.selectMetaList(id,metaType.getType());
+        return metaMapper.selectMetaList(id, metaType.getType());
+    }
+
+    @Override
+    public List<MetaContentCount> metaContentCount(MetaType metaType) {
+        boolean isLogin = true;
+        List<MetaContentCount> list = metaMapper.findMetaContentCount(null,null, metaType.getType());
+        return list;
     }
 }

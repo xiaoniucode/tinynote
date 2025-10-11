@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="tn-site-home" style="width: 65%;margin: 0 auto">
-    <@c.nav/>
+    <@c.nav meta=meta/>
     <div class="d-flex justify-content-between">
         <div class="flex-grow-1 me-3">
             <div>
