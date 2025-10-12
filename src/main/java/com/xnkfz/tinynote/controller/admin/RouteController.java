@@ -33,25 +33,6 @@ public class RouteController {
         model.addAttribute("posts", res);
         return "admin/posts";
     }
-
-    @GetMapping("/post/search")
-    public String queryPost(Model model,
-                            @RequestParam(defaultValue = "1") Long current,
-                            @RequestParam(defaultValue = "15") Long size,
-                            @RequestParam(required = false) String title,
-                            @RequestParam(required = false) Integer status,
-                            @RequestParam(required = false) Integer draft) {
-        QueryPostReq req = new QueryPostReq();
-        req.setCurrent(current);
-        req.setSize(size);
-        req.setTitle(title);
-        req.setStatus(status);
-        req.setDraft(draft);
-        PageResult<Content> res = contentService.queryPage(req);
-        model.addAttribute("posts", res);
-        return "admin/posts";
-    }
-
     @GetMapping("/write-post")
     public String writePost() {
         return "/admin/write-post";

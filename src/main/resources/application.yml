@@ -30,7 +30,7 @@ spring:
     expose-spring-macro-helpers: true # 支持 Spring 的 FreeMarker 宏
 
   datasource:
-    url: jdbc:mysql://localhost:3306/tinynote?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/tinynote?useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver

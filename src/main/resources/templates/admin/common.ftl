@@ -27,12 +27,15 @@
 <#macro styles meta={}>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/admin/vendor/layui/css/layui.css">
     <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/grid.css">
     <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/global.css">
     <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/app.css">
+
 </#macro>
 
 <#macro scripts>
     <script src="${springMacroRequestContext.contextPath}/jquery.js"></script>
+    <script src="${springMacroRequestContext.contextPath}/admin/vendor/layui/layui.js"></script>
 </#macro>
 

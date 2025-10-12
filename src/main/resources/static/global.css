@@ -7,11 +7,3 @@ body {
     background-color: #f6f6f3;
     overflow-x: hidden; /* 防止水平滚动 */
 }
-
-.cherry-previewer {
-    padding: 20px 45px 20px 20px;
-    width: 50%;
-    background-color: #fff;
-    overflow-y: auto;
-    print-color-adjust: exact;
-}

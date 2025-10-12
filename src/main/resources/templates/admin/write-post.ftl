@@ -12,43 +12,98 @@
 <div class="tn-container">
     <h2>撰写新文章</h2>
     <div>
-        <input id="title" value="${(post.title)!}" style="width: 100%;margin-bottom: 15px" placeholder="标题"
+        <input id="title" class="layui-input mb-2 mt-3" value="${(post.title)!}"  placeholder="标题"
                type="text">
         <div id="editor" style="height: 65vh;"></div>
     </div>
-    <div style="display: flex;justify-content: space-between;margin-top:10px">
-        <div>
-            <input id="cid" hidden="hidden" value="${(post.id)!}">
-            <label>发布日期:</label>
-            <input id="publishDate" value="${(post.publishAt)!}" type="datetime-local"/>
-            <label>标签:</label>
-            <input id="tags" name='tags' autofocus value="${(post.tags?join(','))!}">
-            <label for="status">状态:</label>
-            <select id="status" name="status">
-                <option value="1" <#if (post.status)?? && post.status == 1>selected="selected"</#if>>发布</option>
-                <option value="2" <#if (post.status)?? && post.status == 2>selected="selected"</#if>>私密</option>
-            </select>
+
+    <form class="layui-form mt-2">
+        <input id="cid" hidden="hidden" value="${(post.id)!}">
+        <div class="layui-row ">
+            <div class="layui-col-md8">
+                <div class="layui-row">
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item" style="margin-bottom: 0;">
+                            <label class="layui-form-label">发布日期</label>
+                            <div class="layui-input-block">
+                                <input type="text" value="${(post.publishAt)!}" class="layui-input" id="publishDate"
+                                       placeholder="yyyy-MM-dd HH:mm:ss">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item" style="margin-bottom: 0;">
+                            <label class="layui-form-label">发布状态</label>
+                            <div class="layui-input-block">
+                                <select id="status">
+                                    <option value="1"
+                                            <#if (post.status)?? && post.status == 1>selected="selected"</#if>>公开
+                                    </option>
+                                    <option value="2"
+                                            <#if (post.status)?? && post.status == 2>selected="selected"</#if>>私密
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item" style="margin-bottom: 0;">
+                            <label class="layui-form-label">文章标签</label>
+                            <div class="layui-input-block">
+                                <input placeholder="英文逗号分隔" class="layui-input" id="tags" name='tags' autofocus
+                                       value="${(post.tags?join(','))!}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md4" style="text-align: right">
+                <button class="layui-btn layui-btn-primary" id="previewPost" >预览文章</button>
+                <button class="layui-btn" id="saveDraft">保存草稿</button>
+                <button class="layui-btn layui-btn-normal" id="publishPost">发布文章</button>
+            </div>
         </div>
-        <div>
-            <button id="previewPost">预览文章</button>
-            <button id="saveDraft">保存草稿</button>
-            <button id="publishPost">发布文章</button>
-        </div>
-    </div>
+
+    </form>
+</div>
+
+</form>
 </div>
 <@c.footer/>
 <@c.scripts/>
 <script src="${springMacroRequestContext.contextPath}/cherry/editor.js"></script>
 <script>
-    $(document).ready(function () {
+    layui.use(['jquery', 'form'],function () {
+        const $ = layui.$;
+        const laydate = layui.laydate;
+        laydate.render({
+            elem: '#publishDate',
+            type: 'datetime',
+            fullPanel: true
+        });
         const content = "${(post.content?js_string)!''}";
         // 初始化编辑器
         const cherry = new Cherry({
             id: 'editor',
             value: content,
         });
+        //预览文章
+        var view = false
+        // 预览文章按钮
+        $('#previewPost').on('click', function(e){
+            e.preventDefault()
+            view = !view
+            if (view) {
+                cherry.switchModel('previewOnly');
+                $(this).text('关闭预览')
+            } else {
+                cherry.switchModel('edit&preview')
+                $(this).text('预览文章')
+            }
+            return false;
+        });
         //发布文章
-        $("#publishPost").click(function () {
+        $("#publishPost").on('click', function(){
             const tags = $('#tags').val()
             const tagList = tags.split(",")
                 .map(item => item.trim())
@@ -71,9 +126,11 @@
                     window.location.href = '/admin/posts'
                 },
             });
+            return false;
         });
+
         //保存草稿
-        $('#saveDraft').click(function () {
+        $('#saveDraft').on('click', function(){
             const tags = $('#tags').val()
             const tagList = tags.split(",")
                 .map(item => item.trim())
@@ -94,27 +151,15 @@
                 data: JSON.stringify(body),
                 success: function (res) {
                     $('#cid').val(res.data)
-                    alert("保存成功");
+                    window.location.href = '/admin/posts'
                 },
                 error: function (xhr, status, error) {
                     console.log(status);
                 }
             });
-
+            return false;
         })
-        //预览文章
-        var view = false
-        $('#previewPost').click(function () {
-            view = !view
-            if (view) {
-                cherry.switchModel('previewOnly');
-                $(this).text('关闭预览')
-            } else {
-                cherry.switchModel('edit&preview')
-                $(this).text('预览文章')
-            }
-        })
-    });
+    })
 </script>
 </body>
 </html>

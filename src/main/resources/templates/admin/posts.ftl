@@ -3,12 +3,13 @@
 <html lang="en">
 <head>
     <title>文章管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <@c.styles/>
 </head>
 <body>
 <@c.navigation user={}/>
 <div class="tn-container">
-
     <div class="d-flex justify-content-center">
         <div style="min-width: 1000px">
             <div class="d-flex flex-column mb-2">
@@ -18,147 +19,167 @@
                         新增
                     </a>
                 </div>
-                <div class="d-flex justify-content-between">
-                    <div class="d-flex align-items-center">
-                        <a href="/admin/post/search">全部</a>
-                        <a href="/admin/post/search?status=1">公开</a>
-                        <a href="/admin/post/search?status=2">私密</a>
-
-                    </div>
-                    <div>
-                        <a href="/admin/post/search?draft=1">草稿</a>
-                    </div>
+                <div id="tabs" class="layui-tabs layui-tabs-card" lay-options="{index: 0}">
+                    <ul class="layui-tabs-header">
+                        <li lay-id="all" class="layui-this">全部</li>
+                        <li lay-id="public">公开</li>
+                        <li lay-id="privacy">私密</li>
+                        <li lay-id="draft">草稿</li>
+                    </ul>
                 </div>
-
-                <div class="d-flex justify-content-between">
-                    <div class="d-flex align-items-center">
-                        <span>操作:</span>
-                        <select id="operation">
-                            <option value="" disabled selected>操作选项</option>
-                            <option value="removeBatch">批量删除</option>
-                            <option value="setPrivate">标记为私密</option>
-                            <option value="setPublic">标记为公开</option>
-                        </select>
-                    </div>
-                    <div>
-                        <input id="searchKey" placeholder="搜索">
-                    </div>
-                </div>
-
-                <div style="background-color: white;min-height: 200px">
-
-                    <table class="ui-table ui-widget ui-widget-content">
-                        <thead>
-                        <tr>
-                            <th class="checkbox"><input type="checkbox" id="selectAll"></th>
-                            <th>文章标题</th>
-                            <th>日期</th>
-                            <th>状态</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <#if posts??>
-                            <#list posts.records as post>
-                                <tr data-id="${post.id}">
-                                    <td class="checkbox"><input type="checkbox" class="itemCheckbox"></td>
-
-                                    <td class="title">
-                                        <a href="/admin/write-post/${post.id}">${post.title}</a>
-                                        <a href="/post/${post.id}">浏览</a>
-                                    </td>
-                                    <td>${post.createdAt}</td>
-                                    <td>${post.status}</td>
-                                </tr>
-                            </#list>
-                        </#if>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="d-flex justify-content-end">
-                    <div>
-                        <span class="me-3">第 ${(posts.current)!} 页 / 共 ${(posts.pages)!} 页</span>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <#if posts.current gt 1>
-                            <a href="/admin/post/search/?current=${posts.current - 1}&size=${posts.size}"
-                               class="me-3">上一页</a>
-                        <#else>
-                            <span class="me-3 text-muted" style="cursor: not-allowed;">上一页</span>
-                        </#if>
-                        <#-- 下一页：如果当前页小于总页数才有下一页 -->
-                        <#if posts.current lt posts.pages>
-                            <a href="/admin/post/search/?current=${posts.current + 1}&size=${posts.size}">下一页</a>
-                        <#else>
-                            <span class="text-muted" style="cursor: not-allowed;">下一页</span>
-                        </#if>
-                    </div>
+                <div style="padding: 16px;">
+                    <table class="layui-hide" id="test" lay-filter="test"></table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" id="dropdownButton">
+            操作选项
+            <i class="layui-icon layui-icon-down layui-font-12"></i>
+        </button>
+    </div>
+</script>
+<script type="text/html" id="post_table_tool">
+    <div class="layui-clear-space">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-xs" lay-event="view">浏览</a>
+    </div>
+</script>
 <@c.scripts/>
 <@c.footer/>
 <script>
-    $(document).ready(function() {   // 获取全选复选框和所有条目复选框
-        const $selectAll = $('#selectAll');
-        const $itemCheckboxes = $('.itemCheckbox');
+    layui.use(['table', 'dropdown'], function () {
+        const table = layui.table;
+        var dropdown = layui.dropdown;
 
-        // 1.点击全选复选框
-        $selectAll.on('change', function() {
-            $itemCheckboxes.prop('checked', this.checked);
-        });
-
-        // 2. 当点击任意一个条目复选框时
-        $itemCheckboxes.on('change', function() {
-            // 检查是否所有的条目复选框都被选中了
-            const allChecked = $itemCheckboxes.length === $itemCheckboxes.filter(':checked').length;
-            // 根据检查结果，更新全选复选框的状态
-            $selectAll.prop('checked', allChecked);
-        });
-        // 获取选中ID
-        function getSelectedArticleIds() {
-            return $('.itemCheckbox:checked').map(function() {
-                return $(this).closest('tr').data('id');
-            }).get().filter(id => id);
-
-        }
-        //功能操作
-        $('#operation').change(function() {
-            $('#operation').val('');//重置操作选项
-            const selectedValue = $(this).val();
-            const selectedIds = getSelectedArticleIds();
-            if (selectedIds.length === 0) {
-                alert('请先选择要操作的文章！');
-                return;
-            }
-            let url;
-            if (selectedValue === 'removeBatch') {
-                url = '/admin/post/batch-delete';
-            } else if (selectedValue === 'setPrivate') {
-                url = '/admin/post/set-private';
-            } else if (selectedValue === 'setPublic') {
-                url = '/admin/post/set-public';
-            }
-
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: { ids: selectedIds },
-                success: function(response) {
-                    alert('操作成功！');
-                    // 刷新页面或更新表格
-                    location.reload();
+        // 创建渲染实例
+        table.render({
+            elem: '#test',
+            text: "空空如也",
+            skin: "line",
+            url: '/admin/content/post/search2',
+            toolbar: '#toolbarDemo',
+            cellMinWidth: 80,
+            page: true,
+            limits: [10, 20, 30, 50, 100],
+            limit: 20,
+            cols: [[
+                {type: 'checkbox', fixed: 'left'},
+                {field: 'id', fixed: 'left', width: 80, title: 'ID', sort: true},
+                {field: 'title', title: '标题'},
+                {
+                    field: 'status', width: 80, title: '公开', sort: true, templet: function (d) {
+                        if (d.status === 1) {
+                            return '<span style="color: green">公开</span>';
+                        } else if (d.status === 2) {
+                            return '<span style="color: red">私密</span>';
+                        }
+                    }
                 },
-                error: function() {
-                    alert('操作失败，请重试！');
-                }
-            });
+                {field: 'createdAt', title: '发布时间', width: 200},
+                {fixed: 'right', title: '操作', width: 134, minWidth: 125, templet: '#post_table_tool'}
+            ]],
+            done: function () {
+                var id = this.id;
+                // 下拉按钮测试
+                dropdown.render({
+                    elem: '#dropdownButton',
+                    data: [{
+                        id: 'mark_public',
+                        title: '标记为公开'
+                    }, {
+                        id: 'mark_privacy',
+                        title: '标记为私密'
+                    }, {
+                        id: 'batch_delete',
+                        title: '批量删除'
+                    }],
+                    // 菜单被点击的事件
+                    click: function (obj) {
+                        var checkStatus = table.checkStatus(id)
+                        var data = checkStatus.data;
+                        var ids = checkStatus.data.map(function (item) {
+                            return item.id;
+                        });
+                        switch (obj.id) {
+                            case 'mark_public':
+                                alert(ids)
+                                break;
+                            case 'mark_privacy':
+                                if (data.length !== 1) return layer.msg('请选择一行');
+
+                                break;
+                            case 'batch_delete':
+                                if (data.length === 0) {
+                                    return layer.msg('请选择一行');
+                                }
+                                layer.msg('delete event');
+                                break;
+                        }
+                    }
+                });
+            },
+            error: function (res, msg) {
+                console.log(res, msg)
+            }
+        });
+        //Tab 选项卡
+        const tabs = layui.tabs;
+        // tabs 切换后的事件
+        tabs.on('afterChange(tabs)', function (data) {
+            const operation = $(this).attr('lay-id');
+            switch (operation) {
+                case 'all':
+                    table.reloadData('test', {
+                        where: {
+                            status: undefined,
+                        },
+                        scrollPos: 'fixed',
+                        page: {curr: 1, limit: 20}
+                    });
+                    break;
+                case 'public':
+                    table.reloadData('test', {
+                        where: {
+                            status: 1,
+                        },
+                        scrollPos: 'fixed',  // 保持滚动条位置不变 - v2.7.3 新增
+                        page: {curr: 1, limit: 20} // 重新指向分页
+                    });
+                    break;
+                case 'privacy':
+                    table.reloadData('test', {
+                        where: {
+                            status: 2,
+                        },
+                        scrollPos: 'fixed',  // 保持滚动条位置不变 - v2.7.3 新增
+                        page: {curr: 1, limit: 20} // 重新指向分页
+                    });
+                    break;
+                case 'draft':
+                    table.reloadData('test', {
+                        where: {
+                            draft: 1,
+                        },
+                        scrollPos: 'fixed',  // 保持滚动条位置不变 - v2.7.3 新增
+                        page: {curr: 1, limit: 20} // 重新指向分页
+                    });
+                    break;
+            }
         });
 
-
-
-    })
+        // 触发单元格工具事件
+        table.on('tool(test)', function (obj) {
+            const data = obj.data;
+            if (obj.event === 'edit') {
+                window.location.href = "/admin/write-post/" + data.id
+            } else if (obj.event === 'view') {
+                window.location.href = "/post/" + data.id
+            }
+        });
+    });
 </script>
-
 </body>
