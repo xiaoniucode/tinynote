@@ -121,11 +121,6 @@ public class ContentServiceImpl implements IContentService {
     }
 
     @Override
-    public void removeBatchPost(List<Integer> ids) {
-
-    }
-
-    @Override
     public GetPostRes getPost(Integer id) {
         Content content = contentMapper.selectById(id);
         if (ObjectUtils.isEmpty(content)) {
@@ -210,5 +205,20 @@ public class ContentServiceImpl implements IContentService {
         res.setPublishAt(content.getCreatedAt().toString());
         res.setTags(tags);
         return res;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void markContentStatus(List<Integer> ids, ContentStatus status) {
+         contentMapper.setStatusBatchIds(ids,status.getStatus());
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void batchDeletePost(List<Integer> ids) {
+        //删除所有内容
+        contentMapper.deleteBatchIds(ids);
+        //删除内容与meta元数据的关联
+        metaMapper.clearContentRelationship(ids);
     }
 }

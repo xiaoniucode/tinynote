@@ -34,15 +34,7 @@ public interface IContentService {
      * @return 分页结果
      */
     PageResult<Content> queryPage(QueryPostReq queryPostReq);
-
-    /**
-     * 批量删除文章
-     *
-     * @param ids 文章ID列表
-     */
-    void removeBatchPost(List<Integer> ids);
-
-    /**
+     /**
      * 获取文章详情
      * @param id ID
      * @return 文章详细信息
@@ -62,4 +54,16 @@ public interface IContentService {
      * @return 内容
      */
     PostDetailRes getPostDetail(Integer id);
+
+    /**
+     *批量标记内容的状态
+     * @param ids 需要设置的ID列表
+     */
+    void markContentStatus(List<Integer> ids,ContentStatus status);
+
+    /**
+     * 批量删除文章
+     * @param ids 需要删除的文章ID
+     */
+    void batchDeletePost(List<Integer> ids);
 }

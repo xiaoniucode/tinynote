@@ -41,4 +41,10 @@ public interface MetaMapper extends BaseMapper<Meta> {
     List<Meta> selectMetaList(@Param("cid") Integer cid, @Param("type") String type);
 
     List<MetaContentCount> findMetaContentCount(@Param("status") Integer status, @Param("draft") Integer draft, @Param("type") String type);
+
+    /**
+     * 清除所有内容与meta的关联关系
+     * @param ids 内容ID列表
+     */
+    void clearContentRelationship(@Param("ids") List<Integer> ids);
 }

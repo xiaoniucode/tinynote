@@ -23,4 +23,12 @@ public interface ContentMapper extends BaseMapper<Content> {
      * @param metaIds 元数据IDS
      */
     void relationContentMeta(@Param("cid") Integer cid, @Param("metaIds") List<Integer> metaIds);
+
+    /**
+     * 批量更新内容状态
+     * @param ids 内容ID列表
+     * @param status 新状态值
+     * @return 影响的行数
+     */
+    int setStatusBatchIds(@Param("ids") List<Integer> ids, @Param("status") Integer status);
 }

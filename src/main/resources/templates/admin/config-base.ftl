@@ -85,14 +85,6 @@
             }
         });
 
-        // 指定开关事件
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关 checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是 ON|OFF', data.othis)
-        });
-
         // 提交事件
         form.on('submit(demo1)', function (data) {
             var field = data.field; // 获取表单字段值
@@ -104,12 +96,6 @@
             // …
             return false; // 阻止默认 form 跳转
         });
-
-        // 日期
-        laydate.render({
-            elem: '#date'
-        });
-
         // 普通事件
         util.on('lay-on', {
             // 获取验证码

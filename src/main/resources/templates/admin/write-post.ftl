@@ -9,7 +9,7 @@
 <body>
 <@c.navigation />
 
-<div class="tn-container">
+<div class="tn-container mt-3">
     <h2>撰写新文章</h2>
     <div>
         <input id="title" class="layui-input mb-2 mt-3" value="${(post.title)!}"  placeholder="标题"

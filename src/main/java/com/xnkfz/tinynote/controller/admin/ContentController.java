@@ -3,9 +3,11 @@ package com.xnkfz.tinynote.controller.admin;
 import com.xnkfz.tinynote.common.Ajax;
 import com.xnkfz.tinynote.common.PageResult;
 import com.xnkfz.tinynote.controller.admin.dto.GetPostRes;
+import com.xnkfz.tinynote.controller.admin.dto.MarkStatusReq;
 import com.xnkfz.tinynote.controller.admin.dto.QueryPostReq;
 import com.xnkfz.tinynote.controller.admin.dto.SavePostReq;
 import com.xnkfz.tinynote.entity.Content;
+import com.xnkfz.tinynote.entity.ContentStatus;
 import com.xnkfz.tinynote.service.IContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -27,31 +29,30 @@ public class ContentController {
     @Autowired
     private IContentService contentService;
 
-    @PostMapping("save-post")
+    @PostMapping(value = "save-post",name = "保存文章")
     public Ajax savePost(@RequestBody SavePostReq savePostReq) {
         Integer id = contentService.savePost(savePostReq);
         return Ajax.success(id);
     }
-
-    @PostMapping("query-post")
-    public Ajax queryPost(@RequestBody QueryPostReq queryPostReq) {
-        PageResult<Content> res = contentService.queryPage(queryPostReq);
-        return Ajax.success(res);
-    }
-
-    @DeleteMapping("remove-batch-post")
-    public Ajax removeBatchPost(@RequestBody List<Integer> ids) {
-        contentService.removeBatchPost(ids);
+    @DeleteMapping(value = "batch-delete-post",name = "批量删除文章")
+    public Ajax batchDeletePost(@RequestBody List<Integer> ids) {
+        contentService.batchDeletePost(ids);
         return Ajax.success();
     }
 
-    @GetMapping("/post/search2")
+    @PutMapping(value = "mark-post-status", name = "批量标记文章状态")
+    public Ajax markContentStatus(@RequestBody MarkStatusReq req) {
+        contentService.markContentStatus(req.getIds(), ContentStatus.fromStatus(req.getStatus()));
+        return Ajax.success();
+    }
+
+    @GetMapping(value = "search",name = "分页条件查询文章列表")
     public Ajax queryPost(
-                          @RequestParam(defaultValue = "1") Long page,
-                          @RequestParam(defaultValue = "10") Long limit,
-                          @RequestParam(required = false) String title,
-                          @RequestParam(required = false) Integer status,
-                          @RequestParam(required = false) Integer draft) {
+            @RequestParam(defaultValue = "1") Long page,
+            @RequestParam(defaultValue = "10") Long limit,
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) Integer status,
+            @RequestParam(required = false) Integer draft) {
         QueryPostReq req = new QueryPostReq();
         req.setCurrent(page);
         req.setSize(limit);
@@ -61,7 +62,6 @@ public class ContentController {
         PageResult<Content> res = contentService.queryPage(req);
         return Ajax.success(res.getRecords()).put("count", res.getTotal());
     }
-
     @GetMapping("get-post")
     public Ajax getPost(Integer id) {
         return Ajax.success(contentService.getPost(id));

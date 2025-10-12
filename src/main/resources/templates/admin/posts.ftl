@@ -9,15 +9,16 @@
 </head>
 <body>
 <@c.navigation user={}/>
-<div class="tn-container">
+<div class="tn-container mt-3">
     <div class="d-flex justify-content-center">
         <div style="min-width: 1000px">
             <div class="d-flex flex-column mb-2">
-                <div>
-                    <label>管理文章</label>
-                    <a href="/admin/write-post">
-                        新增
-                    </a>
+                <div class="mb-3 d-flex align-items-center">
+                    <h2 class="me-2">管理文章</h2>
+                    <button class="layui-btn layui-btn-xs" onclick="window.location.href='/admin/write-post'">
+                        <i class="layui-icon layui-icon-add-1"></i>
+                        创作
+                    </button>
                 </div>
                 <div id="tabs" class="layui-tabs layui-tabs-card" lay-options="{index: 0}">
                     <ul class="layui-tabs-header">
@@ -51,6 +52,7 @@
 <@c.scripts/>
 <@c.footer/>
 <script>
+
     layui.use(['table', 'dropdown'], function () {
         const table = layui.table;
         var dropdown = layui.dropdown;
@@ -60,7 +62,7 @@
             elem: '#test',
             text: "空空如也",
             skin: "line",
-            url: '/admin/content/post/search2',
+            url: '/admin/content/search',
             toolbar: '#toolbarDemo',
             cellMinWidth: 80,
             page: true,
@@ -104,19 +106,39 @@
                         var ids = checkStatus.data.map(function (item) {
                             return item.id;
                         });
+                        const selectTip = "请至少选择一条记录"
                         switch (obj.id) {
+
                             case 'mark_public':
-                                alert(ids)
+                                if (data.length === 0) return layer.msg(selectTip);
+                                batchMarkStatus(ids, 1)
                                 break;
                             case 'mark_privacy':
-                                if (data.length !== 1) return layer.msg('请选择一行');
-
+                                if (data.length === 0) return layer.msg(selectTip);
+                                batchMarkStatus(ids, 2)
                                 break;
                             case 'batch_delete':
                                 if (data.length === 0) {
-                                    return layer.msg('请选择一行');
+                                    return layer.msg(selectTip);
                                 }
-                                layer.msg('delete event');
+                                layer.confirm('您确认要删除选中的文章吗？', function (index) {
+                                    $.ajax({
+                                        url: '/admin/content/batch-delete-post',
+                                        type: 'delete',
+                                        contentType: 'application/json',
+                                        data: JSON.stringify(ids),
+                                        success: function () {
+                                            table.reloadData('test', {
+                                                where: {
+                                                    status: undefined,
+                                                },
+                                                scrollPos: 'fixed',
+                                                page: {curr: 1, limit: 20}
+                                            });
+                                        }
+                                    });
+                                    layer.close(index);
+                                })
                                 break;
                         }
                     }
@@ -126,6 +148,27 @@
                 console.log(res, msg)
             }
         });
+
+        //批量标记内容的状态
+        function batchMarkStatus(ids, status) {
+            $.ajax({
+                url: '/admin/content/mark-post-status',
+                type: 'put',
+                contentType: 'application/json',
+                data: JSON.stringify({ids: ids, status: status}),
+                success: function () {
+                    table.reloadData('test', {
+                        where: {
+                            status: undefined,
+                        },
+                        scrollPos: 'fixed',
+                        page: {curr: 1, limit: 20}
+                    });
+
+                }
+            });
+        }
+
         //Tab 选项卡
         const tabs = layui.tabs;
         // tabs 切换后的事件
@@ -146,8 +189,8 @@
                         where: {
                             status: 1,
                         },
-                        scrollPos: 'fixed',  // 保持滚动条位置不变 - v2.7.3 新增
-                        page: {curr: 1, limit: 20} // 重新指向分页
+                        scrollPos: 'fixed',
+                        page: {curr: 1, limit: 20}
                     });
                     break;
                 case 'privacy':
@@ -155,8 +198,8 @@
                         where: {
                             status: 2,
                         },
-                        scrollPos: 'fixed',  // 保持滚动条位置不变 - v2.7.3 新增
-                        page: {curr: 1, limit: 20} // 重新指向分页
+                        scrollPos: 'fixed',
+                        page: {curr: 1, limit: 20}
                     });
                     break;
                 case 'draft':
@@ -164,8 +207,8 @@
                         where: {
                             draft: 1,
                         },
-                        scrollPos: 'fixed',  // 保持滚动条位置不变 - v2.7.3 新增
-                        page: {curr: 1, limit: 20} // 重新指向分页
+                        scrollPos: 'fixed',
+                        page: {curr: 1, limit: 20}
                     });
                     break;
             }
