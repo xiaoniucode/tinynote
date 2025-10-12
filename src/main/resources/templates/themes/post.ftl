@@ -4,13 +4,35 @@
 <head>
     <title>${post.title}</title>
     <@c.styles meta=meta/>
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/cherry/editor.css"
+    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/cherry/editor.css">
+    <style>
+        .cherry-previewer {
+            padding: 0 !important;
+            border-left: 0 !important;
+            width: 50%;
+            box-sizing: border-box;
+            background-color: #fff;
+            min-height: auto;
+            overflow-y: auto;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        .cherry {
+            font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+            font-size: 16px;
+            line-height: 1.625;
+            color: #343a40;
+            background: #fff;
+            box-shadow: none;
+        }
+    </style>
 </head>
 <body>
 <div class="tn-site-home" style="width: 65%;margin: 0 auto">
     <@c.nav meta=meta/>
     <div>
-        <div>${post.title}</div>
+        <h2>${post.title}</h2>
+        <div style="border-top: 1px dashed #999; margin: 10px 0;"></div>
         <div id="markdown-container"></div>
     </div>
     <@c.scripts/>
