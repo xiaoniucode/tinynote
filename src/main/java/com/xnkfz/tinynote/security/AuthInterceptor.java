@@ -22,15 +22,19 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
+        LoginUser user = (LoginUser) session.getAttribute("user");
+        if (user != null) {
+            SecurityUtils.setUser(user);
+        }
+        // 非管理员请求直接通过
         if (!request.getRequestURI().startsWith("/admin/")) {
             return true;
         }
-        LoginUser user = (LoginUser) session.getAttribute("user");
-        if (ObjectUtils.isEmpty(user)) {
+        // 管理员请求需要登录
+        if (user == null) {
             response.sendRedirect("/admin/login");
             return false;
         }
-        SecurityUtils.setUser(user);
         return true;
     }
 

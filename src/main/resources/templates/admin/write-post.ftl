@@ -83,6 +83,9 @@
             id: 'editor',
             value: content,
             engine: {
+                global: {
+                    classicBr: false//是否换行
+                },
                 syntax: {
                     toc: {
                         allowMultiToc: true,
@@ -90,8 +93,12 @@
                     header: {
                         anchorStyle: 'none',
                     },
-                }
+                },
+                codeBlock: {
+                    wrap: false, // 超出长度是否换行，false则显示滚动条
+                },
             },
+
             nameSpace: "editor",
             themeSettings: {
                 themeList: [
