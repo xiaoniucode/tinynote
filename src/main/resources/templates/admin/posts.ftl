@@ -81,7 +81,7 @@
                         }
                     }
                 },
-                {field: 'createdAt', title: '发布时间', width: 200},
+                {field: 'createdAt',sort: true, title: '发布时间', width: 200},
                 {fixed: 'right', title: '操作', width: 134, minWidth: 125, templet: '#post_table_tool'}
             ]],
             done: function () {

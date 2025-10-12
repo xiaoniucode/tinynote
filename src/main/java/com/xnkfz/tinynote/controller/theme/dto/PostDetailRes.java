@@ -20,8 +20,7 @@ public class PostDetailRes implements Serializable {
     private String title;
     private String summary;
     private String content;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime publishAt;
+    private String publishAt;
     private List<Meta> tags;
 
 }

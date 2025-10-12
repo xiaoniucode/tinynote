@@ -180,7 +180,7 @@ public class ContentServiceImpl implements IContentService {
         res.setTitle(content.getTitle());
         res.setContent(content.getText());
         res.setSummary(content.getSummary());
-        res.setPublishAt(content.getCreatedAt());
+        res.setPublishAt(DateUtils.format(content.getCreatedAt()));
         return res;
     }
 
@@ -204,17 +204,15 @@ public class ContentServiceImpl implements IContentService {
         res.setId(content.getId());
         res.setTitle(content.getTitle());
         res.setContent(content.getText());
-        res.setPublishAt(content.getCreatedAt());
+        res.setPublishAt(DateUtils.format(content.getCreatedAt()));
         res.setTags(tags);
         return res;
     }
-
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void markContentStatus(List<Integer> ids, ContentStatus status) {
         contentMapper.setStatusBatchIds(ids, status.getStatus());
     }
-
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void batchDeletePost(List<Integer> ids) {

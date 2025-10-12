@@ -12,6 +12,16 @@
     <@c.nav meta=meta/>
     <div>
         <h2>${post.title}</h2>
+        <div class="d-flex mb-2 align-content-center justify-content-between">
+            <div>${(post.publishAt)!}</div>
+            <div class="d-flex align-content-center">
+                <#if post.tags??>
+                    <#list post.tags as tag>
+                        <label class="${(tag?has_next)?then('me-2','')}">${(tag.name)!}</label>
+                    </#list>
+                </#if>
+            </div>
+        </div>
         <div style="border-top: 1px dashed #999; margin: 10px 0;"></div>
         <div id="editor-preview"></div>
     </div>
