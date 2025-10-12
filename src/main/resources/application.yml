@@ -15,10 +15,10 @@ spring:
       matching-strategy: ant_path_matcher
   # FreeMarker 配置
   freemarker:
-
     settings:
       datetime_format: yyyy-MM-dd HH:mm:ss
       time_zone: GMT+8
+      output_format: HTML
     template-loader-path: classpath:/templates/ # 模板存放路径
     suffix: .ftl # 模板文件后缀
     cache: false # 开发时禁用缓存，便于调试
@@ -28,7 +28,6 @@ spring:
     expose-request-attributes: true # 允许模板访问请求属性
     expose-session-attributes: true # 允许模板访问会话属性
     expose-spring-macro-helpers: true # 支持 Spring 的 FreeMarker 宏
-
   datasource:
     url: jdbc:mysql://localhost:3306/tinynote?useSSL=false&allowPublicKeyRetrieval=true
     username: root

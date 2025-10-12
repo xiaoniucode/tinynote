@@ -4,7 +4,7 @@
 <head>
     <title>撰写文章</title>
     <@c.styles/>
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/cherry/editor.css">
+    <link rel="stylesheet" href="/static/cherry/editor.css">
 </head>
 <body>
 <@c.navigation />
@@ -12,7 +12,7 @@
 <div class="tn-container mt-3">
     <h2>撰写新文章</h2>
     <div>
-        <input id="title" class="layui-input mb-2 mt-3" value="${(post.title)!}"  placeholder="标题"
+        <input id="title" class="layui-input mb-2 mt-3" value="${(post.title)!}" placeholder="标题"
                type="text">
         <div id="editor" style="height: 65vh;"></div>
     </div>
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="layui-col-md4" style="text-align: right">
-                <button class="layui-btn layui-btn-primary" id="previewPost" >预览文章</button>
+                <button class="layui-btn layui-btn-primary" id="previewPost">预览文章</button>
                 <button class="layui-btn" id="saveDraft">保存草稿</button>
                 <button class="layui-btn layui-btn-normal" id="publishPost">发布文章</button>
             </div>
@@ -71,9 +71,9 @@
 </div>
 <@c.footer/>
 <@c.scripts/>
-<script src="${springMacroRequestContext.contextPath}/cherry/editor.js"></script>
+<script src="/static/cherry/editor.js"></script>
 <script>
-    layui.use(['jquery', 'form'],function () {
+    layui.use(['jquery', 'form'], function () {
         const $ = layui.$;
         const laydate = layui.laydate;
         laydate.render({
@@ -86,11 +86,35 @@
         const cherry = new Cherry({
             id: 'editor',
             value: content,
+            engine: {
+                syntax: {
+                    toc: {
+                        allowMultiToc: true,
+                    },
+                    header: {
+                        anchorStyle: 'none',
+                    },
+                }
+            },
+            nameSpace: "editor",
+            themeSettings: {
+                themeList: [
+                    {className: 'default', label: '默认'},
+                    {className: 'dark', label: '暗黑'},
+                    {className: 'light', label: '明亮'},
+                    {className: 'green', label: '清新'},
+                    {className: 'red', label: '热情'},
+                    {className: 'violet', label: '淡雅'},
+                    {className: 'blue', label: '清幽'},
+                ],
+                mainTheme: "light",
+                codeBlockTheme: "tomorrow-night"
+            },
         });
         //预览文章
         var view = false
         // 预览文章按钮
-        $('#previewPost').on('click', function(e){
+        $('#previewPost').on('click', function (e) {
             e.preventDefault()
             view = !view
             if (view) {
@@ -103,7 +127,7 @@
             return false;
         });
         //发布文章
-        $("#publishPost").on('click', function(){
+        $("#publishPost").on('click', function () {
             const tags = $('#tags').val()
             const tagList = tags.split(",")
                 .map(item => item.trim())
@@ -130,7 +154,7 @@
         });
 
         //保存草稿
-        $('#saveDraft').on('click', function(){
+        $('#saveDraft').on('click', function () {
             const tags = $('#tags').val()
             const tagList = tags.split(",")
                 .map(item => item.trim())

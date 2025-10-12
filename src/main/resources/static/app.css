@@ -3,6 +3,7 @@
     margin-right: 5%
 }
 .tn-site-home{
+    flex: 1 0 auto;
     width: 65%;
     min-width: 950px;
     padding: 30px;

@@ -4,28 +4,8 @@
 <head>
     <title>${post.title}</title>
     <@c.styles meta=meta/>
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/cherry/editor.css">
-    <style>
-        .cherry-previewer {
-            padding: 0 !important;
-            border-left: 0 !important;
-            width: 50%;
-            box-sizing: border-box;
-            background-color: #fff;
-            min-height: auto;
-            overflow-y: auto;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-        }
-        .cherry {
-            font-family: "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-            font-size: 16px;
-            line-height: 1.625;
-            color: #343a40;
-            background: #fff;
-            box-shadow: none;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/cherry/editor.css">
+    <link rel="stylesheet" href="/static/site/cus_cherry_editor.css">
 </head>
 <body>
 <div class="tn-site-home" style="width: 65%;margin: 0 auto">
@@ -33,21 +13,45 @@
     <div>
         <h2>${post.title}</h2>
         <div style="border-top: 1px dashed #999; margin: 10px 0;"></div>
-        <div id="markdown-container"></div>
+        <div id="editor-preview"></div>
     </div>
     <@c.scripts/>
     <@c.navSearchEvent/>
     <@c.footer/>
 </div>
-<script src="${springMacroRequestContext.contextPath}/cherry/editor.js"></script>
+<script src="/static/cherry/editor.js"></script>
 <script>
     $(document).ready(function () {
         const content = "${(post.content!'')?js_string}"
         const editor = new Cherry({
-            id: 'markdown-container',
+            id: 'editor-preview',
             value: content,
+            engine: {
+                syntax: {
+                    toc: {
+                        allowMultiToc: true,
+                    },
+                    header: {
+                        anchorStyle: 'none',
+                    },
+                }
+            },
             editor: {
                 defaultModel: 'previewOnly',
+            },
+            nameSpace: "preview",
+            themeSettings: {
+                themeList: [
+                    {className: 'default', label: '默认'},
+                    {className: 'dark', label: '暗黑'},
+                    {className: 'light', label: '明亮'},
+                    {className: 'green', label: '清新'},
+                    {className: 'red', label: '热情'},
+                    {className: 'violet', label: '淡雅'},
+                    {className: 'blue', label: '清幽'},
+                ],
+                mainTheme: "light",
+                codeBlockTheme: "tomorrow-night"
             },
         });
     })

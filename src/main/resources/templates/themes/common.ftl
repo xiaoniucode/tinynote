@@ -52,11 +52,11 @@
     <meta name="robots" content="${meta.robots!''}">
 <#--    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">-->
     <meta http-equiv="Cache-Control" content="no-transform">
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/grid.css">
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/global.css">
-    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/app.css">
+    <link rel="stylesheet" href="/static/grid.css">
+    <link rel="stylesheet" href="/static/global.css">
+    <link rel="stylesheet" href="/static/app.css">
 </#macro>
 
 <#macro scripts>
-    <script src="${springMacroRequestContext.contextPath}/jquery.js"></script>
+    <script src="/static/jquery.js"></script>
 </#macro>
