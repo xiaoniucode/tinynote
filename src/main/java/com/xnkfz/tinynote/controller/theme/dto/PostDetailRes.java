@@ -1,11 +1,14 @@
 package com.xnkfz.tinynote.controller.theme.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.xnkfz.tinynote.entity.Meta;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -17,7 +20,8 @@ public class PostDetailRes implements Serializable {
     private String title;
     private String summary;
     private String content;
-    private String publishAt;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private LocalDateTime publishAt;
     private List<Meta> tags;
 
 }

@@ -5,7 +5,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -17,5 +16,5 @@ public class GetPostRes implements Serializable {
     private String content;
     private List<String> tags;
     private Integer status;
-    private LocalDateTime publishAt;
+    private String publishAt;
 }

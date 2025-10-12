@@ -17,6 +17,7 @@ import com.xnkfz.tinynote.mapper.ContentMapper;
 import com.xnkfz.tinynote.mapper.MetaMapper;
 import com.xnkfz.tinynote.service.IContentService;
 import com.xnkfz.tinynote.service.IMetaService;
+import com.xnkfz.tinynote.util.DateUtils;
 import com.xnkfz.tinynote.util.SecurityUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,7 +135,7 @@ public class ContentServiceImpl implements IContentService {
         res.setTitle(content.getTitle());
         res.setContent(content.getText());
         res.setTags(tagList);
-        res.setPublishAt(content.getCreatedAt());
+        res.setPublishAt(DateUtils.format(content.getCreatedAt()));
         res.setStatus(content.getStatus());
         return res;
     }
@@ -179,7 +180,7 @@ public class ContentServiceImpl implements IContentService {
         res.setTitle(content.getTitle());
         res.setContent(content.getText());
         res.setSummary(content.getSummary());
-        res.setPublishAt(content.getCreatedAt().toString());
+        res.setPublishAt(content.getCreatedAt());
         return res;
     }
 
@@ -203,7 +204,7 @@ public class ContentServiceImpl implements IContentService {
         res.setId(content.getId());
         res.setTitle(content.getTitle());
         res.setContent(content.getText());
-        res.setPublishAt(content.getCreatedAt().toString());
+        res.setPublishAt(content.getCreatedAt());
         res.setTags(tags);
         return res;
     }

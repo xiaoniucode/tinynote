@@ -23,9 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ViewRouteController extends CommonController {
     @Autowired
     private IContentService contentService;
-    @Autowired
-    private IMetaService metaService;
-
     @GetMapping("/")
     public String index(Model mv,
                         @RequestParam(defaultValue = "1", required = false) Long current,

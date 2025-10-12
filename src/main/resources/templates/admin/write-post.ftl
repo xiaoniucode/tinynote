@@ -104,6 +104,9 @@
         laydate.render({
             elem: '#publishDate',
             type: 'datetime',
+            format: 'yyyy-MM-dd HH:mm:ss', // 显示格式
+            isInitValue: true,
+            placeholder: 'yyyy-MM-dd HH:mm:ss',
             fullPanel: true
         });
         const content = "${(post.content?js_string)!''}";
