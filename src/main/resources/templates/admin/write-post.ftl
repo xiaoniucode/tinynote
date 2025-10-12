@@ -9,7 +9,7 @@
 <body>
 <@c.navigation />
 
-<div class="tn-container mt-3">
+<div class="tn-container mt-3 mb-5">
     <h2>撰写新文章</h2>
     <div>
         <input id="title" class="layui-input mb-2 mt-3" value="${(post.title)!}" placeholder="标题"
@@ -63,11 +63,7 @@
                 <button class="layui-btn layui-btn-normal" id="publishPost">发布文章</button>
             </div>
         </div>
-
     </form>
-</div>
-
-</form>
 </div>
 <@c.footer/>
 <@c.scripts/>
