@@ -71,7 +71,7 @@
                 {field: 'id', fixed: 'left', width: 80, title: 'ID', sort: true},
                 {field: 'title', title: '标题'},
                 {
-                    field: 'status', width: 80, title: '公开', sort: true, templet: function (d) {
+                    field: 'status', width: 80, title: '状态', sort: true, templet: function (d) {
                         if (d.status === 1) {
                             return '<span style="color: green">公开</span>';
                         } else if (d.status === 2) {

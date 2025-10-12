@@ -1,21 +1,37 @@
 <#macro navigation user={}>
-    <div class="mb-3" style="background-color: #292D33; ">
-        <nav class="d-flex justify-content-between mx-3">
+    <ul class="layui-nav">
+        <div class="d-flex justify-content-between">
             <div>
-                <a class="tn-color-gray" href="/admin/dashboard">控制台</a>
-                <a class="tn-color-gray" href="/admin/write-post">撰写文章</a>
-                <a class="tn-color-gray" href="/admin/posts">文章管理</a>
-                <a class="tn-color-gray" href="/admin/config-base">系统配置</a>
+                <li class="layui-nav-item layui-this"><a href="/admin/dashboard">控制面板</a></li>
+                <li class="layui-nav-item">
+                    <a href="/admin/write-post">撰写文章</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/admin/posts">文章管理</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">系统配置</a>
+                    <dl class="layui-nav-child">
+                        <a href="/admin/config-base">基本配置</a>
+                    </dl>
+                </li>
             </div>
             <div>
-                <#if user??>
-                    <a class="tn-color-gray" href="/profile">${(user.username?html)!}</a>
-                    <a class="tn-color-gray" href="/admin/exit">退出</a>
-                </#if>
-                <a class="tn-color-gray" href="/">站点</a>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <img src="https://unpkg.com/outeres@0.0.10/demo/avatar/1.jpg" class="layui-nav-img">
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">个人信息</a></dd>
+                        <dd><a href="javascript:;">修改密码</a></dd>
+                        <hr>
+                        <dd style="text-align: center;"><a href="/admin/exit">退出登陆</a></dd>
+                    </dl>
+                </li>
+                <li style="text-align: right" class="layui-nav-item"><a href="/">访问站点</a></li>
             </div>
-        </nav>
-    </div>
+        </div>
+    </ul>
 </#macro>
 
 <#macro footer>
