@@ -1,8 +1,13 @@
 package com.xnkfz.tinynote.common;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * @author 晓牛开发者
  */
+@Getter
+@Setter
 public class BizException extends RuntimeException {
     private static final long serialVersionUID = 1L;
     private Integer code;

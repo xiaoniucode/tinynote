@@ -69,6 +69,35 @@
 <@c.scripts/>
 <script src="/static/cherry/editor.js"></script>
 <script>
+    function myFileUpload(file, callback){
+        if (/image/i.test(file.type)) {
+            var formData = new FormData();
+            formData.append("file", file);
+            $.ajax({
+                url: '/admin/file/upload',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response) {
+                        if (response.code===0&&response.data) {
+                            callback(response.data, {
+                                name: file.name.replace(/\.[^.]+$/, ""),
+                                width: '60%', // 图片的宽度，默认100%，可配置百分比，也可配置像素值
+                            });
+                        }else{
+                            layer.msg(response.msg);
+                        }
+                    }
+                },
+                error: function () {
+                    callback("/error.png");
+                }
+            });
+        }
+    }
+
     layui.use(['jquery', 'form'], function () {
         const $ = layui.$;
         const laydate = layui.laydate;
@@ -82,6 +111,7 @@
         const cherry = new Cherry({
             id: 'editor',
             value: content,
+            fileUpload: myFileUpload,
             engine: {
                 global: {
                     classicBr: false//是否换行
@@ -98,7 +128,6 @@
                     wrap: false, // 超出长度是否换行，false则显示滚动条
                 },
             },
-
             nameSpace: "editor",
             themeSettings: {
                 themeList: [

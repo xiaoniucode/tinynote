@@ -1,4 +1,9 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB #最大文件
+      max-request-size: 10MB #最大文件请求大小
+      enabled: true # 关闭 multipart 支持
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss  # 定义日期格式
     time-zone: GMT+8  # 定义时区，避免时间偏差
@@ -33,6 +38,8 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+  profiles:
+    active: dev
 #  sql:
 #    init:
 #      schema-locations: classpath:db/schema-mysql.sql
@@ -41,3 +48,6 @@ logging:
   level:
     com.baomidou.mybatisplus.samples.quickstart: debug
 
+projectName: TinyNode
+upload:
+  allowedextensions: jpg,png,gif,jpeg
