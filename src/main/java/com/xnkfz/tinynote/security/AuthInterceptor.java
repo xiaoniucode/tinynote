@@ -7,6 +7,7 @@ import com.xnkfz.tinynote.util.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,16 +22,15 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
-        LoginUser user = (LoginUser) session.getAttribute("user");
-        // 将用户信息存入 ThreadLocal
-        if (user != null) {
-            SecurityUtils.setUser(user);
+        if (!request.getRequestURI().startsWith("/admin/")) {
+            return true;
         }
-        // 检查是否登录
-        if (user == null) {
+        LoginUser user = (LoginUser) session.getAttribute("user");
+        if (ObjectUtils.isEmpty(user)) {
             response.sendRedirect("/admin/login");
             return false;
         }
+        SecurityUtils.setUser(user);
         return true;
     }
 

@@ -17,6 +17,7 @@ import com.xnkfz.tinynote.mapper.ContentMapper;
 import com.xnkfz.tinynote.mapper.MetaMapper;
 import com.xnkfz.tinynote.service.IContentService;
 import com.xnkfz.tinynote.service.IMetaService;
+import com.xnkfz.tinynote.util.SecurityUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -141,7 +142,7 @@ public class ContentServiceImpl implements IContentService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public PageResult<PostDetailRes> findPageListView(QueryPostViewReq req) {
-        boolean isLogin = true;
+        boolean isLogin = SecurityUtils.isLogin();
         Page<Content> page = Page.of(req.getCurrent(), req.getSize());
         LambdaQueryWrapper<Content> wrapper = new LambdaQueryWrapper<>();
         if (StringUtils.hasText(req.getTitle())) {
@@ -187,7 +188,7 @@ public class ContentServiceImpl implements IContentService {
         PostDetailRes res = new PostDetailRes();
         LambdaQueryWrapper<Content> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Content::getId, id);
-        boolean isLogin = true;
+        boolean isLogin = SecurityUtils.isLogin();
         if (!isLogin) {
             wrapper.eq(Content::getDraft, 0);
             wrapper.eq(Content::getStatus, 1);
@@ -210,7 +211,7 @@ public class ContentServiceImpl implements IContentService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void markContentStatus(List<Integer> ids, ContentStatus status) {
-         contentMapper.setStatusBatchIds(ids,status.getStatus());
+        contentMapper.setStatusBatchIds(ids, status.getStatus());
     }
 
     @Transactional(rollbackFor = Exception.class)

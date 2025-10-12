@@ -7,6 +7,7 @@ import com.xnkfz.tinynote.entity.MetaType;
 import com.xnkfz.tinynote.mapper.MetaMapper;
 import com.xnkfz.tinynote.service.IMetaService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xnkfz.tinynote.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -76,11 +77,9 @@ public class MetaServiceImpl extends ServiceImpl<MetaMapper, Meta> implements IM
     public List<Meta> findMetaByContentId(Integer id, MetaType metaType) {
         return metaMapper.selectMetaList(id, metaType.getType());
     }
-
     @Override
     public List<MetaContentCount> metaContentCount(MetaType metaType) {
-        boolean isLogin = true;
-        List<MetaContentCount> list = metaMapper.findMetaContentCount(null,null, metaType.getType());
-        return list;
+        boolean isLogin = SecurityUtils.isLogin();
+        return metaMapper.findMetaContentCount(isLogin ? null : 1, isLogin ? null : 0, metaType.getType());
     }
 }
