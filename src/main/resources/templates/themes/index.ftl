@@ -19,7 +19,7 @@
                                style="font-weight: 600;font-size: 16px;line-height: 24px;color: #252933;width: 100%">
                                 ${post.title}
                             </a>
-                            <div style="color: #8a919f;font-size: 13px;line-height: 22px">
+                            <div  style="color: #8a919f;font-size: 13px;line-height: 22px">
                                 ${(post.summary)!}
                             </div>
                             <div class="d-flex align-content-center justify-content-between">
