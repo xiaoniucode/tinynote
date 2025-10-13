@@ -11,7 +11,7 @@
 <@c.navigation user={}/>
 <div class="tn-container mt-3">
     <div class="d-flex justify-content-center">
-        <div style="min-width: 1100px">
+        <div style="min-width: 1200px">
             <div class="d-flex flex-column mb-2">
                 <div class="mb-3 d-flex align-items-center">
                     <h2 class="me-2">管理文章</h2>
@@ -72,16 +72,24 @@
                 {field: 'id', fixed: 'left', width: 80, title: 'ID', sort: true},
                 {field: 'title', title: '标题'},
                 {
-                    field: 'status', width: 80, title: '状态', sort: true, templet: function (d) {
+                    field: 'status', width: 120, title: '可见范围', sort: true, templet: function (d) {
                         if (d.status === 1) {
                             return ' <span class="layui-badge layui-bg-green">公开</span>';
                         } else if (d.status === 2) {
                             return '<span class="layui-badge">私密</span>';
                         }
-
                     }
                 },
-                {field: 'createdAt', sort: true, title: '发布时间', width: 200},
+                {field: 'createdAt', sort: true, title: '发布时间', width: 190},
+                {
+                    field: 'draft', width: 120, title: '发布状态', sort: true, templet: function (d) {
+                        if (d.draft === 0) {
+                            return ' <span class="layui-badge layui-bg-blue">已发布</span>';
+                        } else if (d.draft === 1) {
+                            return '<span class="layui-badge-gray">待修改</span>';
+                        }
+                    }
+                },
                 {fixed: 'right', title: '操作', width: 134, minWidth: 125, templet: '#post_table_tool'}
             ]],
             done: function () {
