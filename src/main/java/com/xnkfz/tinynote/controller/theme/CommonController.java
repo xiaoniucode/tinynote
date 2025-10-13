@@ -4,6 +4,7 @@ import com.xnkfz.tinynote.entity.MetaContentCount;
 import com.xnkfz.tinynote.entity.MetaType;
 import com.xnkfz.tinynote.service.IConfigService;
 import com.xnkfz.tinynote.service.IMetaService;
+import com.xnkfz.tinynote.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +25,7 @@ public abstract class CommonController {
     public void addCommonModel(Model model) {
         Map<String, Object> config = configService.getConfigAsMap();
         model.addAttribute("meta", config);
+        model.addAttribute("isLogin", SecurityUtils.isLogin());
     }
     @ModelAttribute
     public void addTagPostCountModel(Model model) {

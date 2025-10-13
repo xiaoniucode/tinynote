@@ -1,11 +1,13 @@
 package com.xnkfz.tinynote.service.impl;
 
+import com.xnkfz.tinynote.common.BizException;
 import com.xnkfz.tinynote.entity.Config;
 import com.xnkfz.tinynote.mapper.ConfigMapper;
 import com.xnkfz.tinynote.service.IConfigService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -38,5 +40,29 @@ public class ConfigServiceImpl implements IConfigService {
         } catch (Exception e) {
             return Collections.emptyMap();
         }
+    }
+
+    @Override
+    public Object findByKey(String key) {
+        Config config = configMapper.selectById(key);
+        return Optional.ofNullable(config).map(Config::getValue).orElse(null);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public int updateByKey(String key, Object value) {
+        Config config = configMapper.selectById(key);
+        if (config == null) {
+            throw new BizException("key不存在!");
+        }
+        config.setName(key);
+        config.setValue(value);
+        return configMapper.updateById(config);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void batchUpdate(List<Config> configs) {
+        configMapper.batchUpdate(configs);
     }
 }

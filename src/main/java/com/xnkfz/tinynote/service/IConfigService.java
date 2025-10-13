@@ -4,6 +4,7 @@ import com.xnkfz.tinynote.entity.Config;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,4 +22,23 @@ public interface IConfigService  {
      * @return 配置信息
      */
     Map<String, Object> getConfigAsMap();
+
+    /**
+     * 通过key获取对应的value值
+     * @param key 键
+     * @return 值
+     */
+    public Object findByKey(String key);
+    /**
+     * 通过key更新对应的value值
+     * @param key 键
+     * @return 值
+     */
+    public int updateByKey(String key,Object value);
+
+    /**
+     * 批量更新配置，只更新存在的key
+     * @param configs 配置kv列表
+     */
+    public void batchUpdate(List<Config> configs);
 }

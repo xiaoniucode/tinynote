@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xnkfz.tinynote.mapper.ConfigMapper">
-
+    <!-- 批量更新：只更新已存在的name -->
+    <update id="batchUpdate">
+        UPDATE config
+        SET value =
+        <foreach collection="configs" item="item" open="CASE" close="END">
+            WHEN name = #{item.name} THEN #{item.value}
+        </foreach>
+        WHERE name IN
+        <foreach collection="configs" item="item" open="(" close=")" separator=",">
+            #{item.name}
+        </foreach>
+    </update>
 </mapper>

@@ -1,16 +1,18 @@
 package com.xnkfz.tinynote.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import nonapi.io.github.classgraph.json.Id;
 
 import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author 晓牛开发者
@@ -23,10 +25,9 @@ import java.io.Serializable;
 public class Config implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    @TableField("name")
+    @TableId("name")
     private String name;
 
     @TableField("value")
-    private String value;
+    private Object value;
 }
