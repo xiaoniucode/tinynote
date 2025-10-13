@@ -14,7 +14,7 @@
         <#if post??>编辑文章<#else >撰写新文章</#if>
     </h2>
     <div>
-        <input id="title" class="layui-input mb-2 mt-3" value="${(post.title)!}" placeholder="标题"
+        <input id="title" class="layui-input mb-2 mt-3" value="${(post.title)!}" placeholder="请输入文章标题"
                type="text">
         <div id="editor" style="height: 65vh;"></div>
     </div>
@@ -103,6 +103,7 @@
     layui.use(['jquery', 'form'], function () {
         const $ = layui.$;
         const laydate = layui.laydate;
+        const layer = layui.layer;
         laydate.render({
             elem: '#publishDate',
             type: 'datetime',
@@ -159,6 +160,10 @@
         });
         //发布文章
         $("#publishPost").on('click', function () {
+            if ($("#title").val() === '') {
+                layer.msg("标题不能为空");
+                return false
+            }
             const tags = $('#tags').val()
             const tagList = tags.split(",")
                 .map(item => item.trim())
@@ -183,9 +188,12 @@
             });
             return false;
         });
-
         //保存草稿
         $('#saveDraft').on('click', function () {
+            if ($("#title").val() === '') {
+                layer.msg("标题不能为空");
+                return false
+            }
             const tags = $('#tags').val()
             const tagList = tags.split(",")
                 .map(item => item.trim())
