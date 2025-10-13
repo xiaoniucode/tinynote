@@ -175,7 +175,8 @@
                 content: cherry.getMarkdown(),
                 publishAt: $('#publishDate').val(),
                 tags: tagList,
-                status: $('#status').val()
+                status: $('#status').val(),
+                draft: 0
             }
             $.ajax({
                 url: '/admin/content/save-post',

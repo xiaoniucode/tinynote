@@ -1,6 +1,7 @@
 package com.xnkfz.tinynote.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.xnkfz.tinynote.controller.admin.dto.ChangePasswordReq;
 import com.xnkfz.tinynote.domain.User;
 import com.xnkfz.tinynote.mapper.UserMapper;
 import com.xnkfz.tinynote.service.IUserService;
@@ -26,5 +27,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(User::getUsername, username);
         return userMapper.selectOne(wrapper);
+    }
+
+    @Override
+    public void updatePassword(ChangePasswordReq req) {
+
     }
 }

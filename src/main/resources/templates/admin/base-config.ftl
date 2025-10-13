@@ -16,7 +16,7 @@
     <div class="d-flex justify-content-center mt-5">
         <form class="layui-form" action="">
             <div class="layui-form-item">
-                <label class="layui-form-label">站点名称</label>
+                <label class="layui-form-label">网站名称</label>
                 <div class="layui-input-block">
                     <input type="text" name="site_title" value="${(baseConfig.site_title)!}" lay-verify="required"
                            placeholder="请输入网站名称" autocomplete="off"
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">站点地址</label>
+                <label class="layui-form-label">网站域名</label>
                 <div class="layui-input-block">
                     <input type="text" name="site_url" value="${baseConfig.site_url!}" placeholder="站点访问地址"
                            autocomplete="off"
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">站点描述</label>
+                <label class="layui-form-label">网站描述</label>
                 <div class="layui-input-block">
                     <textarea type="text" name="description" placeholder="用于展示在html meta中" autocomplete="off"
                               class="layui-textarea">${(baseConfig.description)!}</textarea>

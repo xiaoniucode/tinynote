@@ -22,8 +22,8 @@
                         <img src="https://unpkg.com/outeres@0.0.10/demo/avatar/1.jpg" class="layui-nav-img">
                     </a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">个人信息</a></dd>
-                        <dd><a href="javascript:;">修改密码</a></dd>
+                        <dd><a href="/admin/user/profile">个人信息</a></dd>
+                        <dd><a href="/admin/user/change-password">修改密码</a></dd>
                         <hr>
                         <dd style="text-align: center;"><a href="/admin/exit">退出登陆</a></dd>
                     </dl>
