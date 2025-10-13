@@ -55,7 +55,6 @@
             </#list>
         </div>
     </div>
-    <hr/>
     <@c.footer/>
 </div>
 

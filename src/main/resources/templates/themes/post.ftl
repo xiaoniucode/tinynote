@@ -34,6 +34,7 @@
     <@c.navSearchEvent/>
     <@c.footer/>
 </div>
+
 <script src="/static/cherry/editor.js"></script>
 <script>
     $(document).ready(function () {

@@ -7,6 +7,7 @@ import com.xnkfz.tinynote.service.IConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -24,21 +25,27 @@ public class ConfigServiceImpl implements IConfigService {
     @Autowired
     private ConfigMapper configMapper;
 
+
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public Map<String, Object> getConfigAsMap() {
-        try {
-            return Optional.ofNullable(configMapper.selectMaps(null))
-                    .orElseGet(Collections::emptyList)
-                    .stream()
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toMap(
-                            map -> Optional.ofNullable(map.get("name")).map(Object::toString).orElse(""),
-                            map -> map.getOrDefault("value", ""),
-                            (v1, v2) -> v1
-                    ));
-        } catch (Exception e) {
-            return Collections.emptyMap();
+        List<Map<String, Object>> maps = configMapper.selectMaps(null);
+        Map<String, Object> result = new HashMap<>();
+        if (maps != null) {
+            for (Map<String, Object> map : maps) {
+                if (map != null) {
+                    String name = map.get("name").toString();
+                    Object value = map.get("value");
+                    if (StringUtils.hasText(name) && (value != null && StringUtils.hasText(value.toString()))) {
+                        result.put(name, value);
+                    } else if (StringUtils.hasText(name)) {
+                        //存在key则将value设置为null
+                        result.put(name, null);
+                    }
+                }
+            }
         }
+        return result;
     }
 
     @Override
@@ -58,6 +65,7 @@ public class ConfigServiceImpl implements IConfigService {
         config.setValue(value);
         return configMapper.updateById(config);
     }
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void batchUpdate(List<Config> configs) {

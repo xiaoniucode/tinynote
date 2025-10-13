@@ -33,15 +33,32 @@
 </#macro>
 
 <#macro footer>
-    <div class="d-flex justify-content-center align-items-center">
-        <div style="text-align: center">
-            <div>TinyNote © 2004-2025</div>
-            <div>
-                浙公网安备 33010602451771号 浙ICP备2021012463号-3
+    <footer class="mt-5">
+        <div style="border-top: 1px dashed #999; margin: 10px 0;"></div>
+        <div class="d-flex justify-content-center align-items-center">
+            <div style="text-align: center">
+                <#if meta.copyright??>
+                    <div>${meta.copyright!''}</div>
+                </#if>
+                <#if meta?? && (meta.public_security??|| meta.icp_number??)>
+                    <div class="mt-2">
+                        <div class="d-flex align-items-center">
+                            <img class="me-2" src="/static/site/images/reords.png">
+                            <#if meta.public_security??>
+                                <a class="me-3" style="text-decoration: none;color: inherit" target="_blank"
+                                   href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=">
+                                    ${meta.public_security!''}</a>
+                            </#if>
+                            <#if meta.icp_number??>
+                                <a style="text-decoration: none;color: inherit" href="https://beian.miit.gov.cn"
+                                   target="_blank">${meta.icp_number!''}</a>
+                            </#if>
+                        </div>
+                    </div>
+                </#if>
             </div>
-
         </div>
-    </div>
+    </footer>
 </#macro>
 
 <#macro styles title="" description="" keywords="" robots="">
