@@ -17,7 +17,7 @@
         </div>
         <div class="flex-shrink-0" style="width: 200px">
             <#list 1..20 as i>
-                <a href="/tag/${i}" class="d-flex align-content-center justify-content-between mb-1">
+                <a href="/tag/${i}" class="d-flex align-items-center justify-content-between mb-1">
                     <div class="me-3">大数据</div>
                     <div>32</div>
                 </a>

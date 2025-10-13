@@ -111,14 +111,11 @@
         });
         const content = "${(post.content?js_string)!''}";
         // 初始化编辑器
-        const cherry = new Cherry({
+        var cherry = new Cherry({
             id: 'editor',
             value: content,
             fileUpload: myFileUpload,
             engine: {
-                global: {
-                    classicBr: false//是否换行
-                },
                 syntax: {
                     toc: {
                         allowMultiToc: true,
@@ -127,16 +124,12 @@
                         anchorStyle: 'none',
                     },
                 },
-                codeBlock: {
-                    wrap: false, // 超出长度是否换行，false则显示滚动条
-                },
             },
             nameSpace: "editor",
             themeSettings: {
                 themeList: [
                     {className: 'default', label: '默认'},
                     {className: 'dark', label: '暗黑'},
-                    {className: 'light', label: '明亮'},
                     {className: 'green', label: '清新'},
                     {className: 'red', label: '热情'},
                     {className: 'violet', label: '淡雅'},

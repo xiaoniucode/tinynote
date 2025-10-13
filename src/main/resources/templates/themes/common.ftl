@@ -1,15 +1,15 @@
 <#macro nav meta={}>
     <div>
-        <div class="d-flex justify-content-between align-content-center">
+        <div class="d-flex justify-content-between align-items-center">
             <div style="font-size: 50px;font-weight: bold">${(meta.site_title)!}</div>
             <div>
                 <input id="searchInput" placeholder="输入关键字搜索">
             </div>
         </div>
         <div>${(meta.site_description)!}</div>
-        <hr/>
-        <div>
-            <a href="/">首页</a>
+
+        <div class="mt-3">
+            <a style="font-size: 21px" href="/">首页</a>
         </div>
         <hr/>
     </div>

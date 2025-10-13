@@ -11,10 +11,16 @@
 <div class="tn-site-home" style="width: 65%;margin: 0 auto">
     <@c.nav meta=meta/>
     <div>
-        <h2>${post.title}</h2>
-        <div class="d-flex mb-2 align-content-center justify-content-between">
+       <div class="d-flex   justify-content-between ">
+           <h2>${post.title}</h2>
+           <div style="min-width: 80px;text-align: right">
+               <a href="/admin/write-post/${(post.id)!}" style="cursor: pointer;color: #1e9fff;">编辑</a>
+           </div>
+       </div>
+
+        <div class="d-flex mb-2 align-items-center justify-content-between">
             <div>${(post.publishAt)!}</div>
-            <div class="d-flex align-content-center">
+            <div class="d-flex align-items-center">
                 <#if post.tags??>
                     <#list post.tags as tag>
                         <label class="${(tag?has_next)?then('me-2','')}">${(tag.name)!}</label>
@@ -33,13 +39,10 @@
 <script>
     $(document).ready(function () {
         const content = "${(post.content!'')?js_string}"
-        const editor = new Cherry({
+        const  cherry = new Cherry({
             id: 'editor-preview',
             value: content,
             engine: {
-                global: {
-                    classicBr: false//是否换行
-                },
                 syntax: {
                     toc: {
                         allowMultiToc: true,
@@ -48,12 +51,10 @@
                         anchorStyle: 'none',
                     },
                 },
-                codeBlock: {
-                    wrap: false, // 超出长度是否换行，false则显示滚动条
-                },
             },
             editor: {
                 defaultModel: 'previewOnly',
+                keepDocumentScrollAfterInit: true,
             },
             nameSpace: "preview",
             themeSettings: {

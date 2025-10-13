@@ -22,8 +22,8 @@
                             <div  style="color: #8a919f;font-size: 13px;line-height: 22px">
                                 ${(post.summary)!}
                             </div>
-                            <div class="d-flex align-content-center justify-content-between">
-                                <div class="d-flex align-content-center ">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center ">
                                     <div style="color: #8a919f;font-size: 13px;max-width: 132px;line-height: 22px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;word-break: break-all">
                                         ${(meta.author)}
                                     </div>
@@ -45,9 +45,8 @@
         </div>
         <div class="flex-shrink-0" style="width: 150px">
             <#list tagRes as t>
-                <a href="/tag/${(t.name)!}" class="d-flex align-content-center justify-content-between mb-1">
-                    <div class="me-3">${(t.name)!}</div>
-                    <div>${(t.count)!}</div>
+                <a href="/tag/${(t.name)!}" >
+                 ${(t.name)!} (${(t.count)!})
                 </a>
             </#list>
         </div>

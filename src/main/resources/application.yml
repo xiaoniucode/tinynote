@@ -23,7 +23,7 @@ spring:
     settings:
       datetime_format: yyyy-MM-dd HH:mm:ss
       time_zone: GMT+8
-      output_format: HTML
+      #output_format:   #HTML !!!会导致md内容转.  PlainText
     template-loader-path: classpath:/templates/ # 模板存放路径
     suffix: .ftl # 模板文件后缀
     cache: false # 开发时禁用缓存，便于调试

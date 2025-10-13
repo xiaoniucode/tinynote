@@ -59,7 +59,6 @@ public class ConfigServiceImpl implements IConfigService {
         config.setValue(value);
         return configMapper.updateById(config);
     }
-
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void batchUpdate(List<Config> configs) {

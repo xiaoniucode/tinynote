@@ -37,7 +37,7 @@ public interface IConfigService  {
     public int updateByKey(String key,Object value);
 
     /**
-     * 批量更新配置，只更新存在的key
+     * 批量更新配置:只更新存在的key
      * @param configs 配置kv列表
      */
     public void batchUpdate(List<Config> configs);
