@@ -74,13 +74,14 @@
                 {
                     field: 'status', width: 80, title: '状态', sort: true, templet: function (d) {
                         if (d.status === 1) {
-                            return '<span style="color: green">公开</span>';
+                            return ' <span class="layui-badge layui-bg-green">公开</span>';
                         } else if (d.status === 2) {
-                            return '<span style="color: red">私密</span>';
+                            return '<span class="layui-badge">私密</span>';
                         }
+
                     }
                 },
-                {field: 'createdAt',sort: true, title: '发布时间', width: 200},
+                {field: 'createdAt', sort: true, title: '发布时间', width: 200},
                 {fixed: 'right', title: '操作', width: 134, minWidth: 125, templet: '#post_table_tool'}
             ]],
             done: function () {

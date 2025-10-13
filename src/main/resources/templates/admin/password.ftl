@@ -65,7 +65,7 @@
                 data: JSON.stringify(field),
                 success: function (res) {
                     if (res.code === 0) {
-                        layer.msg("更新成功", {time: 1000});
+                        layer.msg("更新成功", {icon: 1, time: 1000});
                         setTimeout(function () {
                             window.location.href = "/admin/exit";
                         }, 1000);
