@@ -10,9 +10,9 @@
                     <a href="/admin/posts">文章管理</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;">系统配置</a>
+                    <a href="/admin/config/base-config">系统配置</a>
                     <dl class="layui-nav-child">
-                        <a href="/admin/config-base">基本配置</a>
+                        <a href="/admin/config/base-config">基本配置</a>
                     </dl>
                 </li>
             </div>

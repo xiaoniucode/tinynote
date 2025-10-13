@@ -1,9 +1,9 @@
 package com.xnkfz.tinynote.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.xnkfz.tinynote.entity.Meta;
-import com.xnkfz.tinynote.entity.MetaContentCount;
-import com.xnkfz.tinynote.entity.MetaType;
+import com.xnkfz.tinynote.domain.Meta;
+import com.xnkfz.tinynote.domain.MetaContentCount;
+import com.xnkfz.tinynote.domain.MetaType;
 import com.xnkfz.tinynote.mapper.MetaMapper;
 import com.xnkfz.tinynote.service.IMetaService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;

@@ -1,7 +1,7 @@
 package com.xnkfz.tinynote.controller.theme;
 
-import com.xnkfz.tinynote.entity.MetaContentCount;
-import com.xnkfz.tinynote.entity.MetaType;
+import com.xnkfz.tinynote.domain.MetaContentCount;
+import com.xnkfz.tinynote.domain.MetaType;
 import com.xnkfz.tinynote.service.IConfigService;
 import com.xnkfz.tinynote.service.IMetaService;
 import com.xnkfz.tinynote.util.SecurityUtils;

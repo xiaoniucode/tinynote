@@ -1,4 +1,4 @@
-package com.xnkfz.tinynote.entity;
+package com.xnkfz.tinynote.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

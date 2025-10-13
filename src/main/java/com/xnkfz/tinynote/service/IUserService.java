@@ -1,6 +1,6 @@
 package com.xnkfz.tinynote.service;
 
-import com.xnkfz.tinynote.entity.User;
+import com.xnkfz.tinynote.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

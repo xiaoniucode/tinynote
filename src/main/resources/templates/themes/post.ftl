@@ -2,8 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>${post.title}</title>
-    <@c.styles meta=meta/>
+    <@c.styles title=post.title description=post.summary keywords=post.title robots=meta.robots/>
     <link rel="stylesheet" href="/static/cherry/editor.css">
     <link rel="stylesheet" href="/static/site/cus_cherry_editor.css">
 </head>
@@ -11,12 +10,12 @@
 <div class="tn-site-home" style="width: 65%;margin: 0 auto">
     <@c.nav meta=meta/>
     <div>
-       <div class="d-flex   justify-content-between ">
-           <h2>${post.title}</h2>
-           <div style="min-width: 80px;text-align: right">
-               <a href="/admin/write-post/${(post.id)!}" style="cursor: pointer;color: #1e9fff;">编辑</a>
-           </div>
-       </div>
+        <div class="d-flex  mb-2 mt-2 justify-content-between ">
+            <div style="font-size: 24px;font-weight: bold">${post.title}</div>
+            <div style="min-width: 80px;text-align: right">
+                <a href="/admin/write-post/${(post.id)!}" style="cursor: pointer;color: #1e9fff;">编辑</a>
+            </div>
+        </div>
 
         <div class="d-flex mb-2 align-items-center justify-content-between">
             <div>${(post.publishAt)!}</div>
@@ -29,7 +28,7 @@
             </div>
         </div>
         <div style="border-top: 1px dashed #999; margin: 10px 0;"></div>
-        <div id="editor-preview"></div>
+        <div class="mb-5" id="editor-preview"></div>
     </div>
     <@c.scripts/>
     <@c.navSearchEvent/>
@@ -39,7 +38,7 @@
 <script>
     $(document).ready(function () {
         const content = "${(post.content!'')?js_string}"
-        const  cherry = new Cherry({
+        const cherry = new Cherry({
             id: 'editor-preview',
             value: content,
             engine: {

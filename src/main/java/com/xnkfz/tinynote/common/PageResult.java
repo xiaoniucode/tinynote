@@ -1,7 +1,6 @@
 package com.xnkfz.tinynote.common;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.xnkfz.tinynote.entity.Content;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

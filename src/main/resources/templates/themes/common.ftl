@@ -44,12 +44,13 @@
     </div>
 </#macro>
 
-<#macro styles meta={}>
+<#macro styles title="" description="" keywords="" robots="">
     <meta charset="UTF-8">
+    <title>${title!''}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="${meta.description!''}">
-    <meta name="keywords" content="${meta.keywords!''}">
-    <meta name="robots" content="${meta.robots!''}">
+    <meta name="description" content="${description!''}">
+    <meta name="keywords" content="${keywords!''}">
+    <meta name="robots" content="${robots!''}">
 <#--    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">-->
     <meta http-equiv="Cache-Control" content="no-transform">
     <link rel="stylesheet" href="/static/grid.css">

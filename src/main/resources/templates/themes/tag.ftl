@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <title>Title</title>
-    <@c.styles meta=meta/>
+    <@c.styles />
 </head>
 <body>
 <div class="tn-site-home" style="width: 65%;margin: 0 auto">

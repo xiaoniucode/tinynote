@@ -15,14 +15,14 @@
         from relationship
         where cid = #{cid};
     </delete>
-    <select id="selectMetaList" resultType="com.xnkfz.tinynote.entity.Meta">
+    <select id="selectMetaList" resultType="com.xnkfz.tinynote.domain.Meta">
         select m.id as id, m.name as name, m.type as type
         from meta m
                  left join relationship rs on m.id = rs.mid
         where rs.cid = #{cid}
           and m.type = #{type}
     </select>
-    <select id="findMetaContentCount" resultType="com.xnkfz.tinynote.entity.MetaContentCount">
+    <select id="findMetaContentCount" resultType="com.xnkfz.tinynote.domain.MetaContentCount">
         SELECT
         m.name AS name,
         COUNT(c.id) AS count

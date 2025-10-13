@@ -1,4 +1,4 @@
-package com.xnkfz.tinynote.entity;
+package com.xnkfz.tinynote.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author 晓牛开发者

@@ -3,7 +3,11 @@
 <html lang="zh-CN">
 <head>
     <title>首页</title>
-    <@c.styles meta=meta />
+    <@c.styles
+    title=meta.site_title
+    description=meta.description
+    keywords=meta.keywords
+    robots=meta.robots/>
 </head>
 <body>
 <div class="tn-site-home" style="width: 65%;margin: 0 auto">
@@ -19,7 +23,7 @@
                                style="font-weight: 600;font-size: 16px;line-height: 24px;color: #252933;width: 100%">
                                 ${post.title}
                             </a>
-                            <div  style="color: #8a919f;font-size: 13px;line-height: 22px">
+                            <div style="color: #8a919f;font-size: 13px;line-height: 22px">
                                 ${(post.summary)!}
                             </div>
                             <div class="d-flex align-items-center justify-content-between">
@@ -45,8 +49,8 @@
         </div>
         <div class="flex-shrink-0" style="width: 150px">
             <#list tagRes as t>
-                <a href="/tag/${(t.name)!}" >
-                 ${(t.name)!} (${(t.count)!})
+                <a href="/tag/${(t.name)!}">
+                    ${(t.name)!} (${(t.count)!})
                 </a>
             </#list>
         </div>

@@ -1,9 +1,9 @@
 package com.xnkfz.tinynote.service;
 
-import com.xnkfz.tinynote.entity.Meta;
+import com.xnkfz.tinynote.domain.Meta;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xnkfz.tinynote.entity.MetaContentCount;
-import com.xnkfz.tinynote.entity.MetaType;
+import com.xnkfz.tinynote.domain.MetaContentCount;
+import com.xnkfz.tinynote.domain.MetaType;
 
 import java.util.List;
 

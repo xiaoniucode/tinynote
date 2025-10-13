@@ -1,7 +1,7 @@
 package com.xnkfz.tinynote.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.xnkfz.tinynote.entity.User;
+import com.xnkfz.tinynote.domain.User;
 import com.xnkfz.tinynote.mapper.UserMapper;
 import com.xnkfz.tinynote.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

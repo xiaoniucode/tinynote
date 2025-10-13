@@ -1,7 +1,6 @@
 package com.xnkfz.tinynote.controller.theme.dto;
 
-import com.xnkfz.tinynote.entity.Meta;
-import lombok.Data;
+import com.xnkfz.tinynote.domain.Meta;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

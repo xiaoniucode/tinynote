@@ -1,8 +1,6 @@
 package com.xnkfz.tinynote.service;
 
-import com.xnkfz.tinynote.entity.Config;
-import com.baomidou.mybatisplus.extension.service.IService;
-import org.apache.ibatis.annotations.Mapper;
+import com.xnkfz.tinynote.domain.Config;
 
 import java.util.List;
 import java.util.Map;

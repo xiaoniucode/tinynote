@@ -9,10 +9,10 @@ import com.xnkfz.tinynote.controller.admin.dto.QueryPostReq;
 import com.xnkfz.tinynote.controller.admin.dto.SavePostReq;
 import com.xnkfz.tinynote.controller.theme.dto.PostDetailRes;
 import com.xnkfz.tinynote.controller.theme.dto.QueryPostViewReq;
-import com.xnkfz.tinynote.entity.Content;
-import com.xnkfz.tinynote.entity.ContentStatus;
-import com.xnkfz.tinynote.entity.Meta;
-import com.xnkfz.tinynote.entity.MetaType;
+import com.xnkfz.tinynote.domain.Content;
+import com.xnkfz.tinynote.domain.ContentStatus;
+import com.xnkfz.tinynote.domain.Meta;
+import com.xnkfz.tinynote.domain.MetaType;
 import com.xnkfz.tinynote.mapper.ContentMapper;
 import com.xnkfz.tinynote.mapper.MetaMapper;
 import com.xnkfz.tinynote.service.IContentService;
@@ -202,6 +202,7 @@ public class ContentServiceImpl implements IContentService {
         //标签
         List<Meta> tags = metaService.findMetaByContentId(content.getId(), MetaType.TAG);
         res.setId(content.getId());
+        res.setSummary(content.getSummary());
         res.setTitle(content.getTitle());
         res.setContent(content.getText());
         res.setPublishAt(DateUtils.format(content.getCreatedAt()));

@@ -1,10 +1,9 @@
 package com.xnkfz.tinynote.service.impl;
 
 import com.xnkfz.tinynote.common.BizException;
-import com.xnkfz.tinynote.entity.Config;
+import com.xnkfz.tinynote.domain.Config;
 import com.xnkfz.tinynote.mapper.ConfigMapper;
 import com.xnkfz.tinynote.service.IConfigService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

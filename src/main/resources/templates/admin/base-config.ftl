@@ -18,7 +18,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">站点名称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="username" lay-verify="required" placeholder="请输入网站名称" autocomplete="off"
+                    <input type="text" name="site_title" value="${(baseConfig.site_title)!}" lay-verify="required" placeholder="请输入网站名称" autocomplete="off"
                            class="layui-input">
                 </div>
             </div>
@@ -32,21 +32,21 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">站点描述</label>
                 <div class="layui-input-block">
-                    <textarea type="text" name="username" lay-verify="required" placeholder="用于seo和个人简介" autocomplete="off"
-                              class="layui-textarea"></textarea>
+                    <textarea type="text" name="description"    lay-verify="required" placeholder="个人简介" autocomplete="off"
+                              class="layui-textarea">${(baseConfig.description)!}</textarea>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">关键词</label>
                 <div class="layui-input-block">
-                    <input type="text" name="username"  placeholder="用于seo" autocomplete="off"
+                    <input type="text" name="keywords" value="${(baseConfig.keywords)!}"  placeholder="meta" autocomplete="off"
                            class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">爬虫协议</label>
                 <div class="layui-input-block">
-                    <input type="text" name="username"  placeholder="用于在页面meta指定爬虫范围协议" autocomplete="off"
+                    <input type="text" name="robots" value="${(baseConfig.robots)!}"   autocomplete="off"
                            class="layui-input">
                 </div>
             </div>

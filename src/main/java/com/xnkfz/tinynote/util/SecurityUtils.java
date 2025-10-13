@@ -1,6 +1,6 @@
 package com.xnkfz.tinynote.util;
 
-import com.xnkfz.tinynote.entity.LoginUser;
+import com.xnkfz.tinynote.domain.LoginUser;
 
 public abstract class SecurityUtils {
 

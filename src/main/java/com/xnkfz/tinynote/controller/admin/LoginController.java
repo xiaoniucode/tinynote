@@ -2,14 +2,13 @@ package com.xnkfz.tinynote.controller.admin;
 
 import com.xnkfz.tinynote.common.Ajax;
 import com.xnkfz.tinynote.controller.admin.dto.UserLoginReq;
-import com.xnkfz.tinynote.entity.LoginUser;
-import com.xnkfz.tinynote.entity.User;
+import com.xnkfz.tinynote.domain.LoginUser;
+import com.xnkfz.tinynote.domain.User;
 import com.xnkfz.tinynote.util.PasswordUtil;
 import com.xnkfz.tinynote.service.IUserService;
 import com.xnkfz.tinynote.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;

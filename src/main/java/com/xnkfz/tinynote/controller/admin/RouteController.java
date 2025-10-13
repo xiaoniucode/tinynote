@@ -3,7 +3,7 @@ package com.xnkfz.tinynote.controller.admin;
 import com.xnkfz.tinynote.common.PageResult;
 import com.xnkfz.tinynote.controller.admin.dto.GetPostRes;
 import com.xnkfz.tinynote.controller.admin.dto.QueryPostReq;
-import com.xnkfz.tinynote.entity.Content;
+import com.xnkfz.tinynote.domain.Content;
 import com.xnkfz.tinynote.service.IContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RequestMapping("/admin")
 @Controller
@@ -44,10 +43,4 @@ public class RouteController {
         model.addAttribute("post", post);
         return "/admin/write-post";
     }
-
-    @GetMapping("/config-base")
-    public String configBase() {
-        return "/admin/config-base";
-    }
-
 }

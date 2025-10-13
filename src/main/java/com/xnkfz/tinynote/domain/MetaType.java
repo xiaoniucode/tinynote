@@ -1,8 +1,4 @@
-package com.xnkfz.tinynote.entity;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+package com.xnkfz.tinynote.domain;
 
 
 public enum MetaType {

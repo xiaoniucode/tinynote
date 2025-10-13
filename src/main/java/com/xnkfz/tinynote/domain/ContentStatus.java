@@ -1,4 +1,4 @@
-package com.xnkfz.tinynote.entity;
+package com.xnkfz.tinynote.domain;
 
 import com.xnkfz.tinynote.common.BizException;
 import lombok.AllArgsConstructor;

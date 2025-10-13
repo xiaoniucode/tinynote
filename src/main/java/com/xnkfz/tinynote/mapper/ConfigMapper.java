@@ -1,7 +1,7 @@
 package com.xnkfz.tinynote.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.xnkfz.tinynote.entity.Config;
+import com.xnkfz.tinynote.domain.Config;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

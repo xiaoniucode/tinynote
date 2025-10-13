@@ -6,8 +6,8 @@ import com.xnkfz.tinynote.controller.admin.dto.QueryPostReq;
 import com.xnkfz.tinynote.controller.admin.dto.SavePostReq;
 import com.xnkfz.tinynote.controller.theme.dto.PostDetailRes;
 import com.xnkfz.tinynote.controller.theme.dto.QueryPostViewReq;
-import com.xnkfz.tinynote.entity.Content;
-import com.xnkfz.tinynote.entity.ContentStatus;
+import com.xnkfz.tinynote.domain.Content;
+import com.xnkfz.tinynote.domain.ContentStatus;
 
 import java.util.List;
 

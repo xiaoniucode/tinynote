@@ -1,4 +1,4 @@
-package com.xnkfz.tinynote.entity;
+package com.xnkfz.tinynote.domain;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import nonapi.io.github.classgraph.json.Id;
 
 import java.io.Serializable;
 

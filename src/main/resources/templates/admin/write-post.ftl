@@ -10,7 +10,9 @@
 <@c.navigation />
 
 <div class="tn-container mt-3 mb-5">
-    <h2>撰写新文章</h2>
+    <h2>
+        <#if post??>编辑文章<#else >撰写新文章</#if>
+    </h2>
     <div>
         <input id="title" class="layui-input mb-2 mt-3" value="${(post.title)!}" placeholder="标题"
                type="text">
@@ -69,7 +71,7 @@
 <@c.scripts/>
 <script src="/static/cherry/editor.js"></script>
 <script>
-    function myFileUpload(file, callback){
+    function myFileUpload(file, callback) {
         if (/image/i.test(file.type)) {
             var formData = new FormData();
             formData.append("file", file);
@@ -81,12 +83,12 @@
                 contentType: false,
                 success: function (response) {
                     if (response) {
-                        if (response.code===0&&response.data) {
+                        if (response.code === 0 && response.data) {
                             callback(response.data, {
                                 name: file.name.replace(/\.[^.]+$/, ""),
                                 width: '60%', // 图片的宽度，默认100%，可配置百分比，也可配置像素值
                             });
-                        }else{
+                        } else {
                             layer.msg(response.msg);
                         }
                     }
@@ -129,6 +131,7 @@
             themeSettings: {
                 themeList: [
                     {className: 'default', label: '默认'},
+                    {className: 'light', label: '明亮'},
                     {className: 'dark', label: '暗黑'},
                     {className: 'green', label: '清新'},
                     {className: 'red', label: '热情'},
