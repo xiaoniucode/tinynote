@@ -2,7 +2,7 @@
     <ul class="layui-nav">
         <div class="d-flex justify-content-between">
             <div>
-                <li class="layui-nav-item layui-this"><a href="/admin/dashboard">控制面板</a></li>
+                <li class="layui-nav-item"><a href="/admin/dashboard">控制面板</a></li>
                 <li class="layui-nav-item">
                     <a href="/admin/content/write-post">撰写文章</a>
                 </li>

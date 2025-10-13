@@ -217,7 +217,7 @@
         table.on('tool(test)', function (obj) {
             const data = obj.data;
             if (obj.event === 'edit') {
-                window.location.href = "/admin/write-post/" + data.id
+                window.location.href = "/admin/content/write-post/" + data.id
             } else if (obj.event === 'view') {
                 window.location.href = "/post/" + data.id
             }
