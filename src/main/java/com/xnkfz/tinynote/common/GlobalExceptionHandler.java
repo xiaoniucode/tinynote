@@ -16,11 +16,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public Ajax handleAllExceptions(Exception ex) {
         logger.debug("系统异常", ex);
+        ex.printStackTrace();
         return Ajax.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage());
     }
     @ExceptionHandler(BizException.class)
     public Ajax handleCustomException(BizException ex) {
         logger.debug("业务异常", ex);
+        ex.printStackTrace();
         return Ajax.error(ex.getCode(), ex.getMessage());
     }
 

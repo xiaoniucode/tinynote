@@ -52,7 +52,8 @@
                         <div class="layui-form-item" style="margin-bottom: 0;">
                             <label class="layui-form-label">文章标签</label>
                             <div class="layui-input-block">
-                                <input placeholder="英文逗号分隔" class="layui-input" id="tags" name='tags' autofocus
+                                <input placeholder="逗号或顿号或空格分隔" class="layui-input" id="tags" name='tags'
+                                       autofocus
                                        value="${(post.tags?join(','))!}">
                             </div>
                         </div>
@@ -165,7 +166,7 @@
                 return false
             }
             const tags = $('#tags').val()
-            const tagList = tags.split(",")
+            const tagList = tags.split(/[,，、\s]+/)
                 .map(item => item.trim())
                 .filter(item => item.length > 0);
             const body = {
@@ -182,8 +183,12 @@
                 contentType: 'application/json',
                 data: JSON.stringify(body),
                 success: function (res) {
-                    $('#cid').val(res.data)
-                    window.location.href = '/admin/content/posts'
+                   if (res.code===0){
+                       $('#cid').val(res.data)
+                       window.location.href = '/admin/content/posts'
+                   }else {
+                       layer.msg(res.msg)
+                   }
                 },
             });
             return false;
@@ -195,7 +200,7 @@
                 return false
             }
             const tags = $('#tags').val()
-            const tagList = tags.split(",")
+            const tagList = tags.split(/[,，、\s]+/)
                 .map(item => item.trim())
                 .filter(item => item.length > 0);
             const body = {

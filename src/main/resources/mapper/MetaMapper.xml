@@ -4,10 +4,9 @@
     <insert id="batchInsert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO meta (name,type)
         VALUES
-        <foreach collection="list" item="meta" separator=",">
+        <foreach collection="metas" item="meta" separator=",">
             (#{meta.name},#{meta.type})
         </foreach>
-        ON DUPLICATE KEY UPDATE name = name <!-- 防止并发情况下重复插入 -->
     </insert>
 
     <delete id="clearContentMetaRelation">

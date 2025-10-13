@@ -29,7 +29,7 @@ public interface MetaMapper extends BaseMapper<Meta> {
      * 批量插入meta
      * @param metas 需要插入的数据
      */
-    void batchInsert(List<Meta> metas);
+    void batchInsert(@Param("metas") List<Meta> metas);
 
     /**
      * 查询内容关联的meta

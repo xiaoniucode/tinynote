@@ -11,7 +11,7 @@
 <@c.navigation user={}/>
 <div class="tn-container mt-3">
     <div class="d-flex justify-content-center">
-        <div style="min-width: 1200px">
+        <div style="min-width: 1100px">
             <div class="d-flex flex-column mb-2">
                 <div class="mb-3 d-flex align-items-center">
                     <h2 class="me-2">管理文章</h2>

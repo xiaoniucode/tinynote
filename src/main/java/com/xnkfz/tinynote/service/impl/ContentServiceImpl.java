@@ -50,7 +50,7 @@ public class ContentServiceImpl implements IContentService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Integer savePost(SavePostReq req) {
-        Integer uid = 0;
+        Integer uid = SecurityUtils.getUserId();
         //有ID则更新文章
         if (!ObjectUtils.isEmpty(req.getId())) {
             Content content = contentMapper.selectById(req.getId());
@@ -146,12 +146,12 @@ public class ContentServiceImpl implements IContentService {
         boolean isLogin = SecurityUtils.isLogin();
         Page<Content> page = Page.of(req.getCurrent(), req.getSize());
         LambdaQueryWrapper<Content> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Content::getDraft, 0);
         if (StringUtils.hasText(req.getTitle())) {
             wrapper.like(Content::getTitle, req.getTitle());
         }
         if (!isLogin) {
             wrapper.eq(Content::getStatus, 1);
-            wrapper.eq(Content::getDraft, 0);
         }
         wrapper.orderByDesc(Content::getCreatedAt);
         //分别为文章查询标签【数据量大需要优化】
@@ -191,8 +191,8 @@ public class ContentServiceImpl implements IContentService {
         wrapper.eq(Content::getId, id);
         boolean isLogin = SecurityUtils.isLogin();
         if (!isLogin) {
-            wrapper.eq(Content::getDraft, 0);
             wrapper.eq(Content::getStatus, 1);
+            wrapper.eq(Content::getDraft, 0);
         }
         //文章内容
         Content content = contentMapper.selectOne(wrapper);
@@ -209,11 +209,13 @@ public class ContentServiceImpl implements IContentService {
         res.setTags(tags);
         return res;
     }
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void markContentStatus(List<Integer> ids, ContentStatus status) {
         contentMapper.setStatusBatchIds(ids, status.getStatus());
     }
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void batchDeletePost(List<Integer> ids) {
