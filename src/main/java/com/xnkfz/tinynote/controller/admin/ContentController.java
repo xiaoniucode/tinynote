@@ -2,6 +2,7 @@ package com.xnkfz.tinynote.controller.admin;
 
 import com.xnkfz.tinynote.common.Ajax;
 import com.xnkfz.tinynote.common.PageResult;
+import com.xnkfz.tinynote.controller.admin.dto.GetPostRes;
 import com.xnkfz.tinynote.controller.admin.dto.MarkStatusReq;
 import com.xnkfz.tinynote.controller.admin.dto.QueryPostReq;
 import com.xnkfz.tinynote.controller.admin.dto.SavePostReq;
@@ -9,6 +10,8 @@ import com.xnkfz.tinynote.domain.Content;
 import com.xnkfz.tinynote.domain.ContentStatus;
 import com.xnkfz.tinynote.service.IContentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,30 +24,35 @@ import java.util.List;
  * @author 晓牛开发者
  * @since 2025-10-10
  */
-@RestController
+@Controller
 @RequestMapping("/admin/content")
 public class ContentController {
     @Autowired
     private IContentService contentService;
 
-    @PostMapping(value = "save-post",name = "保存文章")
+    @ResponseBody
+    @PostMapping(value = "save-post", name = "保存文章")
     public Ajax savePost(@RequestBody SavePostReq savePostReq) {
         Integer id = contentService.savePost(savePostReq);
         return Ajax.success(id);
     }
-    @DeleteMapping(value = "batch-delete-post",name = "批量删除文章")
+
+    @ResponseBody
+    @DeleteMapping(value = "batch-delete-post", name = "批量删除文章")
     public Ajax batchDeletePost(@RequestBody List<Integer> ids) {
         contentService.batchDeletePost(ids);
         return Ajax.success();
     }
 
+    @ResponseBody
     @PutMapping(value = "mark-post-status", name = "批量标记文章状态")
     public Ajax markContentStatus(@RequestBody MarkStatusReq req) {
         contentService.markContentStatus(req.getIds(), ContentStatus.fromStatus(req.getStatus()));
         return Ajax.success();
     }
 
-    @GetMapping(value = "search",name = "分页条件查询文章列表")
+    @ResponseBody
+    @GetMapping(value = "search", name = "分页条件查询文章列表")
     public Ajax queryPost(
             @RequestParam(defaultValue = "1") Long page,
             @RequestParam(defaultValue = "10") Long limit,
@@ -60,9 +68,33 @@ public class ContentController {
         PageResult<Content> res = contentService.queryPage(req);
         return Ajax.success(res.getRecords()).put("count", res.getTotal());
     }
+
+    /*----------------------------------------视图-------------------------------------------------*/
+    @ResponseBody
     @GetMapping("get-post")
     public Ajax getPost(Integer id) {
         return Ajax.success(contentService.getPost(id));
     }
 
+    @GetMapping("posts")
+    public String posts(Model model) {
+        QueryPostReq req = new QueryPostReq();
+        req.setCurrent(1L);
+        req.setSize(15L);
+        PageResult<Content> res = contentService.queryPage(req);
+        model.addAttribute("posts", res);
+        return "admin/posts";
+    }
+
+    @GetMapping("write-post")
+    public String writePost() {
+        return "/admin/write-post";
+    }
+
+    @GetMapping("write-post/{id}")
+    public String updatePost(Model model, @PathVariable("id") Integer id) {
+        GetPostRes post = contentService.getPost(id);
+        model.addAttribute("post", post);
+        return "/admin/write-post";
+    }
 }

@@ -38,9 +38,6 @@ public class LoginController {
             return Ajax.error("用户名或密码错误");
         }
     }
-
-
-
     @GetMapping("exit")
     public String logout(HttpSession session) {
         session.invalidate();

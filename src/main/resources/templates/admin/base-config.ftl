@@ -41,9 +41,8 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">关键词</label>
                 <div class="layui-input-block">
-                    <input type="text" name="keywords" value="${(baseConfig.keywords)!}" placeholder="meta"
-                           autocomplete="off"
-                           class="layui-input">
+                     <textarea type="text" name="keywords" placeholder="展示HTML在meta中，用于seo" autocomplete="off"
+                               class="layui-textarea">${(baseConfig.keywords)!}</textarea>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -65,6 +64,15 @@
                 <label class="layui-form-label">ICP备案</label>
                 <div class="layui-input-block">
                     <input type="text" name="icp_number" value="${(baseConfig.icp_number)!}" placeholder="icp备案号"
+                           autocomplete="off"
+                           class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">版权信息</label>
+                <div class="layui-input-block">
+                    <input type="text" name="copyright" value="${(baseConfig.copyright)!}"
+                           placeholder="例如：TinyNote © 2004-2025"
                            autocomplete="off"
                            class="layui-input">
                 </div>

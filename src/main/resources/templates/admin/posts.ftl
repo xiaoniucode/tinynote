@@ -15,7 +15,7 @@
             <div class="d-flex flex-column mb-2">
                 <div class="mb-3 d-flex align-items-center">
                     <h2 class="me-2">管理文章</h2>
-                    <button class="layui-btn layui-btn-xs" onclick="window.location.href='/admin/write-post'">
+                    <button class="layui-btn layui-btn-xs" onclick="window.location.href='/admin/content/write-post'">
                         <i class="layui-icon layui-icon-add-1"></i>
                         创作
                     </button>

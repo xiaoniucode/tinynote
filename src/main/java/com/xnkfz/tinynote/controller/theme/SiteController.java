@@ -4,7 +4,6 @@ import com.xnkfz.tinynote.common.PageResult;
 import com.xnkfz.tinynote.controller.theme.dto.PostDetailRes;
 import com.xnkfz.tinynote.controller.theme.dto.QueryPostViewReq;
 import com.xnkfz.tinynote.service.IContentService;
-import com.xnkfz.tinynote.service.IMetaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Slf4j
 @RequestMapping("/")
 @Controller
-public class ViewRouteController extends CommonController {
+public class SiteController extends CommonController {
     @Autowired
     private IContentService contentService;
     @GetMapping("/")
@@ -38,7 +37,7 @@ public class ViewRouteController extends CommonController {
         req.setTag(tag);
         PageResult<PostDetailRes> res = contentService.findPageListView(req);
         mv.addAttribute("postRes", res);
-        return "themes/index";
+        return "themes/default/index";
     }
 
     @GetMapping("post/{id}")
@@ -46,13 +45,13 @@ public class ViewRouteController extends CommonController {
         addCommonModel(mv);
         PostDetailRes res = contentService.getPostDetail(id);
         mv.addAttribute("post", res);
-        return "themes/post";
+        return "themes/default/post";
     }
 
     @GetMapping("tag/{name}")
     public String tag(Model model, @PathVariable String name) {
         addCommonModel(model);
-        return "themes/tag";
+        return "themes/default/tag";
     }
 
 }
