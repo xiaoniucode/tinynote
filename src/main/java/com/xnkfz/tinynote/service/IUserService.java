@@ -5,6 +5,8 @@ import com.xnkfz.tinynote.controller.admin.dto.UpdateUserReq;
 import com.xnkfz.tinynote.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * <p>
  * 服务类
@@ -26,8 +28,9 @@ public interface IUserService extends IService<User> {
      * 更新用户密码
      *
      * @param req 新密码
+     * @param session session
      */
-    void updatePassword(ChangePasswordReq req);
+    void updatePassword(ChangePasswordReq req, HttpSession session);
 
     /**
      * 更新用户信息

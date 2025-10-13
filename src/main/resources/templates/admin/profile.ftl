@@ -6,6 +6,7 @@
     <@c.styles/>
 </head>
 <body>
+<@c.navigation user={}/>
 <!-- 给容器追加 class="layui-form-pane"，即可显示为方框风格 -->
 <form class="layui-form layui-form-pane" action="">
     <div class="layui-form-item">

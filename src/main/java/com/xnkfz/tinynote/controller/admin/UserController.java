@@ -5,10 +5,13 @@ import com.xnkfz.tinynote.controller.admin.dto.ChangePasswordReq;
 import com.xnkfz.tinynote.controller.admin.dto.UpdateUserReq;
 import com.xnkfz.tinynote.domain.User;
 import com.xnkfz.tinynote.service.IUserService;
+import com.xnkfz.tinynote.util.PasswordUtil;
 import com.xnkfz.tinynote.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * <p>
@@ -24,7 +27,7 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @GetMapping
+    @GetMapping("profile")
     public String index() {
         return "/admin/profile";
     }
@@ -54,8 +57,8 @@ public class UserController {
 
     @ResponseBody
     @PutMapping("change-password")
-    public Ajax changePassword(@RequestBody ChangePasswordReq req) {
-        userService.updatePassword(req);
+    public Ajax changePassword(@RequestBody ChangePasswordReq req, HttpSession session) {
+        userService.updatePassword(req,session);
         return Ajax.success();
     }
 

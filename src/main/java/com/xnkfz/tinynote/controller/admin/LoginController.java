@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 /**
  * @author
  */
-@RequestMapping("/admin")
+@RequestMapping("/admin/")
 @Controller
 public class LoginController {
     @Autowired

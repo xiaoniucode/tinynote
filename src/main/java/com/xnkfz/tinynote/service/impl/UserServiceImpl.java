@@ -1,13 +1,20 @@
 package com.xnkfz.tinynote.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.xnkfz.tinynote.common.BizException;
 import com.xnkfz.tinynote.controller.admin.dto.ChangePasswordReq;
+import com.xnkfz.tinynote.controller.admin.dto.UpdateUserReq;
 import com.xnkfz.tinynote.domain.User;
 import com.xnkfz.tinynote.mapper.UserMapper;
 import com.xnkfz.tinynote.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xnkfz.tinynote.util.PasswordUtil;
+import com.xnkfz.tinynote.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * <p>
@@ -29,8 +36,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return userMapper.selectOne(wrapper);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public void updatePassword(ChangePasswordReq req) {
+    public void updatePassword(ChangePasswordReq req, HttpSession session) {
+        Integer userId = SecurityUtils.getUserId();
+        User user = userMapper.selectById(userId);
+        if (PasswordUtil.matches(req.getOldPassword(), user.getPassword())) {
+            user.setPassword(PasswordUtil.encode(req.getNewPassword()));
+            userMapper.updateById(user);
+            //清空登陆信息
+            session.invalidate();
+            SecurityUtils.clear();
+        } else {
+            throw new BizException("旧密码不正确！");
+        }
+    }
+
+    @Override
+    public void updateUser(UpdateUserReq req) {
 
     }
 }
