@@ -183,7 +183,7 @@
                 data: JSON.stringify(body),
                 success: function (res) {
                     $('#cid').val(res.data)
-                    window.location.href = '/admin/posts'
+                    window.location.href = '/admin/content/posts'
                 },
             });
             return false;
@@ -214,7 +214,7 @@
                 data: JSON.stringify(body),
                 success: function (res) {
                     $('#cid').val(res.data)
-                    window.location.href = '/admin/posts'
+                    window.location.href = '/admin/content/posts'
                 },
                 error: function (xhr, status, error) {
                     console.log(status);
