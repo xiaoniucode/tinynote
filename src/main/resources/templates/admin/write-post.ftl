@@ -92,7 +92,7 @@
                         if (response.code === 0 && response.data) {
                             callback(response.data, {
                                 name: file.name.replace(/\.[^.]+$/, ""),
-                                width: '60%',
+                                width: '100%',
                             });
                         } else {
                             layer.msg(response.msg);
