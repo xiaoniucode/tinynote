@@ -4,13 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.util.Optional;
 
-/**
- * @Project Turtle
- * @Description Web工具类
- * @Author xilio
- * @Website https://xilio.cn
- * @Copyright (c) 2025 xilio. All Rights Reserved.
- */
+
 public abstract class WebUtils {
 
     /**

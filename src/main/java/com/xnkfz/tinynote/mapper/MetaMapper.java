@@ -10,16 +10,15 @@ import java.util.List;
 
 /**
  * <p>
- * Mapper 接口
+ * 存储各种标签分类等信息
  * </p>
  *
- * @author 晓牛开发者
+ * @author www.xilio.cn
  * @since 2025-10-10
  */
 @Mapper
 public interface MetaMapper extends BaseMapper<Meta> {
     /**
-     *
      * @param cid
      */
 
@@ -27,13 +26,15 @@ public interface MetaMapper extends BaseMapper<Meta> {
 
     /**
      * 批量插入meta
+     *
      * @param metas 需要插入的数据
      */
     void batchInsert(@Param("metas") List<Meta> metas);
 
     /**
      * 查询内容关联的meta
-     * @param cid 内容id
+     *
+     * @param cid  内容id
      * @param type 类型
      * @return meta列表
      */
@@ -43,6 +44,7 @@ public interface MetaMapper extends BaseMapper<Meta> {
 
     /**
      * 清除所有内容与meta的关联关系
+     *
      * @param ids 内容ID列表
      */
     void clearContentRelationship(@Param("ids") List<Integer> ids);

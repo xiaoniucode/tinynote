@@ -32,10 +32,10 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * 服务实现类
+ * 内容管理服务
  * </p>
  *
- * @author 晓牛开发者
+ * @author www.xilio.cn
  * @since 2025-10-10
  */
 @Service

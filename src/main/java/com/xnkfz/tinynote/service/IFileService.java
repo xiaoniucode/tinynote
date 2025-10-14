@@ -5,6 +5,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * 文件上传服务接口
+ *
  * @author 晓牛
  */
 public interface IFileService {

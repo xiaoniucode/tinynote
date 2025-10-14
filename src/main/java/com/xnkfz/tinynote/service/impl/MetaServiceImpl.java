@@ -19,14 +19,14 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * 服务实现类
+ * 元数据服务
  * </p>
  *
- * @author 晓牛开发者
+ * @author www.xilio.cn
  * @since 2025-10-10
  */
 @Service
-public class MetaServiceImpl extends ServiceImpl<MetaMapper, Meta> implements IMetaService {
+public class MetaServiceImpl implements IMetaService {
     @Autowired
     private MetaMapper metaMapper;
 
@@ -76,6 +76,7 @@ public class MetaServiceImpl extends ServiceImpl<MetaMapper, Meta> implements IM
     public List<Meta> findMetaByContentId(Integer id, MetaType metaType) {
         return metaMapper.selectMetaList(id, metaType.getType());
     }
+
     @Override
     public List<MetaContentCount> metaContentCount(MetaType metaType) {
         boolean isLogin = SecurityUtils.isLogin();

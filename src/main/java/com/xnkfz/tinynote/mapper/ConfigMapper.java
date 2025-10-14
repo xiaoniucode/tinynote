@@ -9,10 +9,10 @@ import java.util.List;
 
 /**
  * <p>
- *  Mapper 接口
+ *  配置管理
  * </p>
  *
- * @author 晓牛开发者
+ * @author www.xilio.cn
  * @since 2025-10-10
  */
 @Mapper

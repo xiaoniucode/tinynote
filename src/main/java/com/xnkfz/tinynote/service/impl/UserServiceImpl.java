@@ -21,14 +21,14 @@ import javax.servlet.http.HttpSession;
 
 /**
  * <p>
- * 服务实现类
+ * 用户服务
  * </p>
  *
- * @author 晓牛开发者
+ * @author www.xilio.cn
  * @since 2025-10-10
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
     @Autowired

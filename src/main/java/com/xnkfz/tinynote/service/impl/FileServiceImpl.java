@@ -18,6 +18,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * 文件上传服务
+ * @author www.xilio.cn
+ */
 @Service
 public class FileServiceImpl implements IFileService {
     @Value("${projectName}")

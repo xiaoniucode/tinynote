@@ -9,16 +9,17 @@ import java.util.List;
 
 /**
  * <p>
- *  服务类
+ * 元数据服务接口
  * </p>
  *
- * @author 晓牛开发者
+ * @author www.xilio.cn
  * @since 2025-10-10
  */
-public interface IMetaService extends IService<Meta> {
+public interface IMetaService {
     /**
      * 根据类型创建，如果Meta不存在则创建
-     * @param metas 需要插入的内容
+     *
+     * @param metas    需要插入的内容
      * @param metaType 类型
      * @return meta ids
      */
@@ -26,7 +27,8 @@ public interface IMetaService extends IService<Meta> {
 
     /**
      * 根据内容ID查询元数据列表
-     * @param id 内容ID
+     *
+     * @param id       内容ID
      * @param metaType meta类型：tag，category
      * @return 元数据列表
      */
@@ -34,6 +36,7 @@ public interface IMetaService extends IService<Meta> {
 
     /**
      * 统计meta对应的content数量
+     *
      * @param metaType meta类型：tag、category
      * @return 数量关系列表
      */
