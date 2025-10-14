@@ -12,8 +12,8 @@
 </head>
 <body>
 <@c.navigation/>
-<div class="tn-container">
-    <div class="d-flex justify-content-center mt-5">
+<div class="mx-5p">
+    <div class="d-flex justify-content-center mt-4">
         <form class="layui-form" action="">
             <div class="layui-form-item">
                 <label class="layui-form-label">网站名称</label>

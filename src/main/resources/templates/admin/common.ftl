@@ -40,14 +40,13 @@
     </div>
 </#macro>
 
-<#macro styles meta={}>
+<#macro styles>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/admin/vendor/layui/css/layui.css">
     <link rel="stylesheet" href="/static/grid.css">
     <link rel="stylesheet" href="/static/global.css">
-    <link rel="stylesheet" href="/static/app.css">
-
+    <link rel="stylesheet" href="/static/admin/css/common.css">
 </#macro>
 
 <#macro scripts>

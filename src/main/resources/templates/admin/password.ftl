@@ -7,7 +7,7 @@
 </head>
 <body>
 <@c.navigation user={}/>
-<div class="layui-card m-3">
+<div class="layui-card m-4">
     <div class="layui-card-header">修改密码</div>
     <div class="layui-card">
         <form class="layui-form layui-form-pane p-3" action="">

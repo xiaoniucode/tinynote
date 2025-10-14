@@ -7,7 +7,7 @@
 </head>
 <body>
 <@c.navigation user={}/>
-<div class="layui-card m-3">
+<div class="layui-card m-4">
     <div class="layui-card-header">个人信息</div>
     <div class="layui-card-body">
 

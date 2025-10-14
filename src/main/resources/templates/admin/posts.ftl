@@ -9,15 +9,14 @@
 </head>
 <body>
 <@c.navigation user={}/>
-<div class="tn-container mt-3">
+<div class="px-10p mt-4">
     <div class="d-flex justify-content-center">
-        <div style="min-width: 1200px">
+        <div class="layui-row" style="width: 100%">
             <div class="d-flex flex-column mb-2">
                 <div class="mb-3 d-flex align-items-center">
                     <h2 class="me-2">管理文章</h2>
                     <button class="layui-btn layui-btn-xs" onclick="window.location.href='/admin/content/write-post'">
-                        <i class="layui-icon layui-icon-add-1"></i>
-                        创作
+                        <i class="layui-icon layui-icon-add-1"></i>创作
                     </button>
                 </div>
                 <div id="tabs" class="layui-tabs layui-tabs-card" lay-options="{index: 0}">
@@ -28,7 +27,7 @@
                         <li lay-id="draft">草稿</li>
                     </ul>
                 </div>
-                <div style="padding: 16px;">
+                <div style="padding: 16px 0">
                     <table class="layui-hide" id="test" lay-filter="test"></table>
                 </div>
             </div>

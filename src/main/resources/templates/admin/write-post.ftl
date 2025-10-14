@@ -9,7 +9,7 @@
 <body>
 <@c.navigation />
 
-<div class="tn-container mt-3 mb-5">
+<div class="mx-3p mt-4">
     <h2>
         <#if post??>编辑文章<#else >撰写新文章</#if>
     </h2>
@@ -52,7 +52,6 @@
                             <label class="layui-form-label">文章标签</label>
                             <div class="layui-input-block">
                                 <input placeholder="逗号或顿号或空格分隔" class="layui-input" id="tags" name='tags'
-                                       autofocus
                                        value="${(post.tags?join(','))!}">
                             </div>
                         </div>
