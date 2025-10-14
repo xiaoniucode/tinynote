@@ -7,14 +7,15 @@
     <link rel="stylesheet" href="/static/site/cus_cherry_editor.css">
 </head>
 <body>
-<div class="main-container">
+<div class="container" style="background-color: white;flex: 1 0 auto">
     <@c.nav meta=meta/>
-    <div>
-        <div class="d-flex  mb-2 mt-2 justify-content-between ">
+    <div class="row">
+        <div class="row d-flex  mb-2 mt-2 justify-content-between ">
             <div style="font-size: 24px;font-weight: bold">${post.title}</div>
             <#if (isLogin!false)>
                 <div style="min-width: 80px;text-align: right">
-                    <a href="/admin/content/write-post/${(post.id)!}" style="cursor: pointer;color: #1e9fff;">编辑</a>
+                    <a href="/admin/content/write-post/${(post.id)!}"
+                       style="cursor: pointer;color: #1e9fff;">编辑</a>
                 </div>
             </#if>
         </div>
@@ -33,9 +34,11 @@
         <div id="editor-preview"></div>
     </div>
 </div>
+<div class="container" style="flex-shrink: 0;">
+    <@c.footer/>
+</div>
 <@c.scripts/>
 <@c.navSearchEvent/>
-<@c.footer/>
 <script src="/static/cherry/editor.js"></script>
 <script>
     $(document).ready(function () {

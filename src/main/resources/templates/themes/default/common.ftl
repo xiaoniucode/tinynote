@@ -1,5 +1,5 @@
 <#macro nav meta={}>
-    <div>
+    <div class="row" style="background-color: white">
         <div class="d-flex justify-content-between align-items-center">
             <div style="font-size: 50px;font-weight: bold">${(meta.site_title)!}</div>
             <div>
@@ -13,7 +13,6 @@
         </div>
         <hr/>
     </div>
-
 </#macro>
 <#macro navSearchEvent>
     <script>
@@ -33,32 +32,35 @@
 </#macro>
 
 <#macro footer>
-    <footer class="flex-footer" style="background-color: white;margin:0 15%">
+    <div class="row" style="background-color: white">
         <div style="border-top: 1px dashed #999; margin: 10px 0;"></div>
-        <div class="d-flex justify-content-center align-items-centet mb-3">
-            <div style="text-align: center">
-                <#if meta.copyright??>
-                    <div>${meta.copyright!''}</div>
-                </#if>
-                <#if meta?? && (meta.public_security??|| meta.icp_number??)>
-                    <div class="mt-2">
-                        <div class="d-flex align-items-center">
-                            <img class="me-2" src="/static/site/images/reords.png">
-                            <#if meta.public_security??>
-                                <a class="me-3" style="text-decoration: none;color: inherit" target="_blank"
-                                   href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=">
-                                    ${meta.public_security!''}</a>
-                            </#if>
-                            <#if meta.icp_number??>
-                                <a style="text-decoration: none;color: inherit" href="https://beian.miit.gov.cn"
-                                   target="_blank">${meta.icp_number!''}</a>
-                            </#if>
+        <footer class="flex-footer">
+            <div class="d-flex justify-content-center align-items-centet mb-3">
+                <div style="text-align: center">
+                    <#if meta.copyright??>
+                        <div>${meta.copyright!''}</div>
+                    </#if>
+                    <#if meta?? && (meta.public_security??|| meta.icp_number??)>
+                        <div class="mt-2">
+                            <div class="d-flex align-items-center">
+                                <img class="me-2" src="/static/site/images/reords.png">
+                                <#if meta.public_security??>
+                                    <a class="me-3" style="text-decoration: none;color: inherit" target="_blank"
+                                       href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=">
+                                        ${meta.public_security!''}</a>
+                                </#if>
+                                <#if meta.icp_number??>
+                                    <a style="text-decoration: none;color: inherit" href="https://beian.miit.gov.cn"
+                                       target="_blank">${meta.icp_number!''}</a>
+                                </#if>
+                            </div>
                         </div>
-                    </div>
-                </#if>
+                    </#if>
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
+
 </#macro>
 
 <#macro styles title="" description="" keywords="" robots="">
@@ -70,14 +72,11 @@
     <meta name="robots" content="${robots!''}">
 <#--    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">-->
     <meta http-equiv="Cache-Control" content="no-transform">
-    <link rel="stylesheet" href="/static/admin/vendor/layui/css/layui.css">
     <link rel="stylesheet" href="/static/grid.css">
     <link rel="stylesheet" href="/static/site/css/common.css">
-    <link rel="stylesheet" href="/static/global.css">
-    <link rel="stylesheet" href="/static/app.css">
+  <#--  <link rel="stylesheet" href="/static/global.css">-->
 </#macro>
 
 <#macro scripts>
     <script src="/static/jquery.js"></script>
-    <script src="/static/admin/vendor/layui/layui.js"></script>
 </#macro>

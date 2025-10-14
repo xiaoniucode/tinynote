@@ -26,15 +26,13 @@ public class SiteController extends CommonController {
     public String index(Model mv,
                         @RequestParam(defaultValue = "1", required = false) Long current,
                         @RequestParam(defaultValue = "30", required = false) Long size,
-                        @RequestParam(required = false) String title,
-                        @RequestParam(required = false) String tag) {
+                        @RequestParam(required = false) String title) {
         addCommonModel(mv);
         addTagPostCountModel(mv);
         QueryPostViewReq req = new QueryPostViewReq();
         req.setCurrent(current);
         req.setSize(size);
         req.setTitle(title);
-        req.setTag(tag);
         PageResult<PostDetailRes> res = contentService.findPageListView(req);
         mv.addAttribute("postRes", res);
         return "themes/default/index";

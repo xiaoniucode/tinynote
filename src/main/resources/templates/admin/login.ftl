@@ -38,7 +38,7 @@
                         <div class="layui-input-prefix">
                             <i class="layui-icon layui-icon-username"></i>
                         </div>
-                        <input type="text" name="username" value="admin" lay-verify="required" placeholder="用户名"
+                        <input type="text" name="username" value="" lay-verify="required" placeholder="用户名"
                                lay-reqtext="请填写用户名" autocomplete="off" class="layui-input" lay-affix="clear">
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                         <div class="layui-input-prefix">
                             <i class="layui-icon layui-icon-password"></i>
                         </div>
-                        <input type="password" name="password" value="123456" lay-verify="required"
+                        <input type="password" name="password" value="" lay-verify="required"
                                placeholder="密   码"
                                lay-reqtext="请填写密码" autocomplete="off" class="layui-input" lay-affix="eye">
                     </div>

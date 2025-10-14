@@ -14,5 +14,4 @@ public class QueryPostViewReq implements Serializable {
     private Long current;
     private Long size ;
     private String title;
-    private String tag;
 }
