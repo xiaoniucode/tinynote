@@ -11,4 +11,5 @@ import java.io.Serializable;
 public class LoginUser implements Serializable {
     private Integer userId;
     private String username;
+    private String nickname;
 }

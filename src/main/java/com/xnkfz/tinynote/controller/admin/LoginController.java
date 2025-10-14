@@ -31,7 +31,8 @@ public class LoginController {
             LoginUser loginUser = new LoginUser();
             loginUser.setUsername(user.getUsername());
             loginUser.setUserId(user.getId());
-            session.setAttribute("user", loginUser);
+            loginUser.setNickname(user.getNickname());
+            session.setAttribute("loginUser", loginUser);
             SecurityUtils.setUser(loginUser);
             return Ajax.success("登陆成功");
         } else {

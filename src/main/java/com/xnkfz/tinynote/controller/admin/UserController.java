@@ -9,6 +9,7 @@ import com.xnkfz.tinynote.util.PasswordUtil;
 import com.xnkfz.tinynote.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -26,9 +27,12 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     private IUserService userService;
-
     @GetMapping("profile")
-    public String index() {
+    public String index(Model model) {
+        Integer userId = SecurityUtils.getUserId();
+        User user = userService.getById(userId);
+        user.setPassword(null);
+        model.addAttribute("user", user);
         return "/admin/profile";
     }
 
@@ -36,16 +40,6 @@ public class UserController {
     public String password() {
         return "/admin/password";
     }
-
-    @ResponseBody
-    @GetMapping("get")
-    public Ajax get() {
-        Integer userId = SecurityUtils.getUserId();
-        User user = userService.getById(userId);
-        user.setPassword(null);
-        return Ajax.success(user);
-    }
-
     @ResponseBody
     @PutMapping("update-user")
     public Ajax updateUser(@RequestBody UpdateUserReq req) {

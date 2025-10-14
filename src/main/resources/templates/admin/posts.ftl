@@ -36,12 +36,20 @@
     </div>
 </div>
 <script type="text/html" id="toolbarDemo">
-    <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" id="dropdownButton">
-            操作选项
-            <i class="layui-icon layui-icon-down layui-font-12"></i>
-        </button>
+    <div class="d-flex align-items-center">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm" id="dropdownButton">
+                操作选项
+                <i class="layui-icon layui-icon-down layui-font-12"></i>
+            </button>
+        </div>
+        <div class="layui-input-wrap">
+            <input id="searchInput" type="text" lay-affix="search" lay-filter="search" lay-options="{split: true}"
+                   placeholder="搜索…"
+                   class="layui-input">
+        </div>
     </div>
+
 </script>
 <script type="text/html" id="post_table_tool">
     <div class="layui-clear-space">
@@ -52,9 +60,10 @@
 <@c.scripts/>
 <@c.footer/>
 <script>
-    layui.use(['table', 'dropdown'], function () {
+    layui.use(['form', 'table', 'dropdown'], function () {
         const table = layui.table;
-        var dropdown = layui.dropdown;
+        const form = layui.form;
+        const dropdown = layui.dropdown;
 
         // 创建渲染实例
         table.render({
@@ -174,6 +183,33 @@
                     });
 
                 }
+            });
+        }
+
+        //搜索文章点击事件
+        form.on('input-affix(search)', function (data) {
+            const inputElem = data.elem;
+            const keyword = inputElem.value;
+            performSearch(keyword);
+        });
+        //搜索文章回车搜索事件
+        $('#searchInput').on('keydown', function (e) {
+            if (e.keyCode === 13) {
+                e.preventDefault();
+                const keyword = $(this).val();
+                performSearch(keyword);
+            }
+        });
+
+        //处理搜索逻辑
+        function performSearch(keyword) {
+            table.reloadData('test', {
+                where: {
+                    status: undefined,
+                    title: keyword
+                },
+                scrollPos: 'fixed',
+                page: {curr: 1, limit: 20}
             });
         }
 

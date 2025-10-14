@@ -28,14 +28,13 @@
                         <div class="layui-form-item" style="margin-bottom: 0;">
                             <label class="layui-form-label">发布日期</label>
                             <div class="layui-input-block">
-                                <input type="text" value="${(post.publishAt)!}" class="layui-input" id="publishDate"
-                                       placeholder="yyyy-MM-dd HH:mm:ss">
+                                <input type="text" value="${(post.publishAt)!}" class="layui-input" id="publishDate">
                             </div>
                         </div>
                     </div>
-                    <div class="layui-col-md4">
+                    <div class="layui-col-md3">
                         <div class="layui-form-item" style="margin-bottom: 0;">
-                            <label class="layui-form-label">发布状态</label>
+                            <label class="layui-form-label">可见范围</label>
                             <div class="layui-input-block">
                                 <select id="status">
                                     <option value="1"
@@ -48,7 +47,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="layui-col-md4">
+                    <div class="layui-col-md5">
                         <div class="layui-form-item" style="margin-bottom: 0;">
                             <label class="layui-form-label">文章标签</label>
                             <div class="layui-input-block">
@@ -66,6 +65,14 @@
                 <button class="layui-btn layui-btn-normal" id="publishPost">发布文章</button>
             </div>
         </div>
+        <#-- <div class="layui-collapse mt-2">
+             <div class="layui-colla-item">
+                 <div class="layui-colla-title">更多配置</div>
+                 <div class="layui-colla-content">
+                     ...
+                 </div>
+             </div>
+         </div>-->
     </form>
 </div>
 <@c.footer/>
@@ -108,9 +115,8 @@
         laydate.render({
             elem: '#publishDate',
             type: 'datetime',
-            format: 'yyyy-MM-dd HH:mm:ss', // 显示格式
+            format: 'yyyy-MM-dd HH:mm:ss',
             isInitValue: true,
-            placeholder: 'yyyy-MM-dd HH:mm:ss',
             fullPanel: true
         });
         const content = "${(post.content?js_string)!''}";
@@ -184,12 +190,12 @@
                 contentType: 'application/json',
                 data: JSON.stringify(body),
                 success: function (res) {
-                   if (res.code===0){
-                       $('#cid').val(res.data)
-                       window.location.href = '/admin/content/posts'
-                   }else {
-                       layer.msg(res.msg)
-                   }
+                    if (res.code === 0) {
+                        $('#cid').val(res.data)
+                        window.location.href = '/admin/content/posts'
+                    } else {
+                        layer.msg(res.msg)
+                    }
                 },
             });
             return false;
