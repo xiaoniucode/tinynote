@@ -7,38 +7,40 @@
 </head>
 <body>
 <@c.navigation user={}/>
-<div class="layui-card m-4">
-    <div class="layui-card-header">个人信息</div>
-    <div class="layui-card-body">
-        <form class="layui-form layui-form-pane" action="">
-            <div class="layui-form-item">
-                <div style="width: 132px;" id="upload-avatar">
-                    <div class="layui-upload-list">
-                        <img src="${user.avatar!}" class="layui-upload-img" id="ID-upload-demo-img"
-                             style="width: 100%; height: 92px;">
+<div class="flex-fluid">
+    <div class="layui-card m-4">
+        <div class="layui-card-header">个人信息</div>
+        <div class="layui-card-body">
+            <form class="layui-form layui-form-pane" action="">
+                <div class="layui-form-item">
+                    <div style="width: 132px;" id="upload-avatar">
+                        <div class="layui-upload-list">
+                            <img src="${user.avatar!}" class="layui-upload-img" id="ID-upload-demo-img"
+                                 style="width: 100%; height: 92px;">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">用户名</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="username" value="${user.username!}" autocomplete="off"
-                           placeholder="请输入登陆用户名" lay-verify="required"
-                           class="layui-input">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">用户名</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="username" value="${user.username!}" autocomplete="off"
+                               placeholder="请输入登陆用户名" lay-verify="required"
+                               class="layui-input">
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">昵称</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="nickname" value="${user.nickname!}" autocomplete="off"
-                           placeholder="请输入展示昵称"
-                           class="layui-input">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">昵称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="nickname" value="${user.nickname!}" autocomplete="off"
+                               placeholder="请输入展示昵称"
+                               class="layui-input">
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <button class="layui-btn" lay-submit lay-filter="saveProfile">确认保存</button>
-            </div>
-        </form>
+                <div class="layui-form-item">
+                    <button class="layui-btn" lay-submit lay-filter="saveProfile">确认保存</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 <@c.footer/>

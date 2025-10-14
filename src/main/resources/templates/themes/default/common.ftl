@@ -33,9 +33,9 @@
 </#macro>
 
 <#macro footer>
-    <footer class="mt-5">
+    <footer class="flex-footer" style="background-color: white;margin:0 15%">
         <div style="border-top: 1px dashed #999; margin: 10px 0;"></div>
-        <div class="d-flex justify-content-center align-items-center">
+        <div class="d-flex justify-content-center align-items-centet mb-3">
             <div style="text-align: center">
                 <#if meta.copyright??>
                     <div>${meta.copyright!''}</div>
@@ -70,11 +70,14 @@
     <meta name="robots" content="${robots!''}">
 <#--    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">-->
     <meta http-equiv="Cache-Control" content="no-transform">
+    <link rel="stylesheet" href="/static/admin/vendor/layui/css/layui.css">
     <link rel="stylesheet" href="/static/grid.css">
+    <link rel="stylesheet" href="/static/site/css/common.css">
     <link rel="stylesheet" href="/static/global.css">
     <link rel="stylesheet" href="/static/app.css">
 </#macro>
 
 <#macro scripts>
     <script src="/static/jquery.js"></script>
+    <script src="/static/admin/vendor/layui/layui.js"></script>
 </#macro>

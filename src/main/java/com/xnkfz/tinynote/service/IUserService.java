@@ -50,4 +50,11 @@ public interface IUserService {
      * @return 上传图片全路径
      */
     String updateAvatar(Integer userId, MultipartFile file, HttpServletRequest request);
+
+    /**
+     * 根据用户ID获取用户信息
+     * @param userId 用户ID
+     * @return 用户信息
+     */
+    User getById(Integer userId);
 }

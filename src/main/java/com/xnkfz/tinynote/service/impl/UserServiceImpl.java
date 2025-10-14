@@ -81,4 +81,9 @@ public class UserServiceImpl implements IUserService {
         userMapper.updateById(user);
         return url;
     }
+
+    @Override
+    public User getById(Integer userId) {
+        return userMapper.selectById(userId);
+    }
 }

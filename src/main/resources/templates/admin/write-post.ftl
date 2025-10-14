@@ -8,67 +8,70 @@
 </head>
 <body>
 <@c.navigation />
-<div class="mx-3p mt-4">
-    <h2><#if post??>编辑文章<#else >撰写新文章</#if></h2>
-    <div>
-        <input id="title" class="layui-input mb-2 mt-3" value="${(post.title)!}" placeholder="请输入文章标题"
-               type="text">
-        <div id="editor" style="height: 65vh;"></div>
-    </div>
-    <form class="layui-form mt-2">
-        <input id="cid" hidden="hidden" value="${(post.id)!}">
-        <div class="layui-row ">
-            <div class="layui-col-md8">
-                <div class="layui-row">
-                    <div class="layui-col-md4">
-                        <div class="layui-form-item" style="margin-bottom: 0;">
-                            <label class="layui-form-label">发布日期</label>
-                            <div class="layui-input-block">
-                                <input type="text" value="${(post.publishAt)!}" class="layui-input" id="publishDate">
+<div class="flex-fluid">
+    <div class="mx-3p mt-4">
+        <h2><#if post??>编辑文章<#else >撰写新文章</#if></h2>
+        <div>
+            <input id="title" class="layui-input mb-2 mt-3" value="${(post.title)!}" placeholder="请输入文章标题"
+                   type="text">
+            <div id="editor" style="height: 65vh;"></div>
+        </div>
+        <form class="layui-form mt-2">
+            <input id="cid" hidden="hidden" value="${(post.id)!}">
+            <div class="layui-row ">
+                <div class="layui-col-md8">
+                    <div class="layui-row">
+                        <div class="layui-col-md4">
+                            <div class="layui-form-item" style="margin-bottom: 0;">
+                                <label class="layui-form-label">发布日期</label>
+                                <div class="layui-input-block">
+                                    <input type="text" value="${(post.publishAt)!}" class="layui-input"
+                                           id="publishDate">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="layui-col-md3">
-                        <div class="layui-form-item" style="margin-bottom: 0;">
-                            <label class="layui-form-label">可见范围</label>
-                            <div class="layui-input-block">
-                                <select id="status">
-                                    <option value="1"
-                                            <#if (post.status)?? && post.status == 1>selected="selected"</#if>>公开
-                                    </option>
-                                    <option value="2"
-                                            <#if (post.status)?? && post.status == 2>selected="selected"</#if>>私密
-                                    </option>
-                                </select>
+                        <div class="layui-col-md3">
+                            <div class="layui-form-item" style="margin-bottom: 0;">
+                                <label class="layui-form-label">可见范围</label>
+                                <div class="layui-input-block">
+                                    <select id="status">
+                                        <option value="1"
+                                                <#if (post.status)?? && post.status == 1>selected="selected"</#if>>公开
+                                        </option>
+                                        <option value="2"
+                                                <#if (post.status)?? && post.status == 2>selected="selected"</#if>>私密
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="layui-col-md5">
-                        <div class="layui-form-item" style="margin-bottom: 0;">
-                            <label class="layui-form-label">文章标签</label>
-                            <div class="layui-input-block">
-                                <input placeholder="逗号或顿号或空格分隔" class="layui-input" id="tags" name='tags'
-                                       value="${(post.tags?join(','))!}">
+                        <div class="layui-col-md5">
+                            <div class="layui-form-item" style="margin-bottom: 0;">
+                                <label class="layui-form-label">文章标签</label>
+                                <div class="layui-input-block">
+                                    <input placeholder="逗号或顿号或空格分隔" class="layui-input" id="tags" name='tags'
+                                           value="${(post.tags?join(','))!}">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="layui-col-md4" style="text-align: right">
+                    <button class="layui-btn layui-btn-primary" id="previewPost">预览文章</button>
+                    <button class="layui-btn" id="saveDraft">保存草稿</button>
+                    <button class="layui-btn layui-btn-normal" id="publishPost">发布文章</button>
+                </div>
             </div>
-            <div class="layui-col-md4" style="text-align: right">
-                <button class="layui-btn layui-btn-primary" id="previewPost">预览文章</button>
-                <button class="layui-btn" id="saveDraft">保存草稿</button>
-                <button class="layui-btn layui-btn-normal" id="publishPost">发布文章</button>
-            </div>
-        </div>
-        <#-- <div class="layui-collapse mt-2">
-             <div class="layui-colla-item">
-                 <div class="layui-colla-title">更多配置</div>
-                 <div class="layui-colla-content">
-                     ...
+            <#-- <div class="layui-collapse mt-2">
+                 <div class="layui-colla-item">
+                     <div class="layui-colla-title">更多配置</div>
+                     <div class="layui-colla-content">
+                         ...
+                     </div>
                  </div>
-             </div>
-         </div>-->
-    </form>
+             </div>-->
+        </form>
+    </div>
 </div>
 <@c.footer/>
 <@c.scripts/>

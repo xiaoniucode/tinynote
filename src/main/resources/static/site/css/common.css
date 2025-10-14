@@ -1,0 +1,7 @@
+.main-container{
+    flex: 1;
+    background-color: #fff;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding: 15px;
+}

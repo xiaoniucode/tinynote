@@ -7,38 +7,40 @@
 </head>
 <body>
 <@c.navigation user={}/>
-<div class="layui-card m-4">
-    <div class="layui-card-header">修改密码</div>
-    <div class="layui-card">
-        <form class="layui-form layui-form-pane p-3" action="">
-            <div class="layui-form-item">
-                <label class="layui-form-label">当前密码</label>
-                <div class="layui-input-inline">
-                    <input type="password" name="oldPassword" placeholder="请输入当前密码" lay-verify="required"
-                           autocomplete="off"
-                           class="layui-input">
+<div class="flex-fluid">
+    <div class="layui-card m-4">
+        <div class="layui-card-header">修改密码</div>
+        <div class="layui-card">
+            <form class="layui-form layui-form-pane p-3" action="">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">当前密码</label>
+                    <div class="layui-input-inline">
+                        <input type="password" name="oldPassword" placeholder="请输入当前密码" lay-verify="required"
+                               autocomplete="off"
+                               class="layui-input">
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">新密码</label>
-                <div class="layui-input-inline">
-                    <input type="password" name="newPassword" placeholder="请输入新密码" lay-verify="required"
-                           autocomplete="off"
-                           class="layui-input">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">新密码</label>
+                    <div class="layui-input-inline">
+                        <input type="password" name="newPassword" placeholder="请输入新密码" lay-verify="required"
+                               autocomplete="off"
+                               class="layui-input">
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">确认密码</label>
-                <div class="layui-input-inline">
-                    <input type="password" name="confirmPassword" placeholder="确认新密码" lay-verify="required"
-                           autocomplete="off"
-                           class="layui-input">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">确认密码</label>
+                    <div class="layui-input-inline">
+                        <input type="password" name="confirmPassword" placeholder="确认新密码" lay-verify="required"
+                               autocomplete="off"
+                               class="layui-input">
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <button class="layui-btn" lay-submit lay-filter="passwordForm">确认修改</button>
-            </div>
-        </form>
+                <div class="layui-form-item">
+                    <button class="layui-btn" lay-submit lay-filter="passwordForm">确认修改</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 <@c.footer/>

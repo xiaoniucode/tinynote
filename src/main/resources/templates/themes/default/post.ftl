@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/static/site/cus_cherry_editor.css">
 </head>
 <body>
-<div class="tn-site-home" style="width: 65%;margin: 0 auto">
+<div class="main-container">
     <@c.nav meta=meta/>
     <div>
         <div class="d-flex  mb-2 mt-2 justify-content-between ">
@@ -30,13 +30,12 @@
             </div>
         </div>
         <div style="border-top: 1px dashed #999; margin: 10px 0;"></div>
-        <div class="mb-5" id="editor-preview"></div>
+        <div id="editor-preview"></div>
     </div>
-    <@c.scripts/>
-    <@c.navSearchEvent/>
-    <@c.footer/>
 </div>
-
+<@c.scripts/>
+<@c.navSearchEvent/>
+<@c.footer/>
 <script src="/static/cherry/editor.js"></script>
 <script>
     $(document).ready(function () {

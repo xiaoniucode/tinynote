@@ -8,11 +8,11 @@
 <body>
 <@c.navigation user={}/>
 
+<div class="flex-fluid">
 
+</div>
 <@c.footer/>
 <@c.scripts/>
-
-
 
 </body>
 </html>

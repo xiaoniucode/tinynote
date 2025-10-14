@@ -29,7 +29,7 @@
     </style>
 </head>
 <body>
-<div>
+<div class="flex-fluid">
     <div>
         <form class="layui-form">
             <div class="tinynote-login-container">

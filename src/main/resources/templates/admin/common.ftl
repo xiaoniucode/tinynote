@@ -20,6 +20,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">
                         <img src="${loginUser.avatar!''}" class="layui-nav-img">
+                        ${loginUser.nickname!}
                     </a>
                     <dl class="layui-nav-child">
                         <dd><a href="/admin/user/profile">个人信息</a></dd>
@@ -35,7 +36,7 @@
 </#macro>
 
 <#macro footer>
-    <div style="flex-shrink:0" class="d-flex justify-content-center">
+    <div class="d-flex layui-footer justify-content-center">
         <p>&copy; 2025 xilio.cn. 版权所有.</p>
     </div>
 </#macro>
