@@ -19,7 +19,7 @@
             <div>
                 <li class="layui-nav-item">
                     <a href="javascript:;">
-                        <img src="https://unpkg.com/outeres@0.0.10/demo/avatar/1.jpg" class="layui-nav-img">
+                        <img src="${loginUser.avatar!''}" class="layui-nav-img">
                     </a>
                     <dl class="layui-nav-child">
                         <dd><a href="/admin/user/profile">个人信息</a></dd>

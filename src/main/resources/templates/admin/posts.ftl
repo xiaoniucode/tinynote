@@ -45,7 +45,7 @@
         </div>
         <div class="layui-input-wrap">
             <input id="searchInput" type="text" lay-affix="search" lay-filter="search" lay-options="{split: true}"
-                   placeholder="搜索…"
+                   placeholder="点击图标或回车搜索"
                    class="layui-input">
         </div>
     </div>

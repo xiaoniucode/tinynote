@@ -9,5 +9,6 @@ import java.io.Serializable;
 @Getter
 @ToString
 public class UpdateUserReq implements Serializable {
-    private Integer userId;
+    private String userName;
+    private String nickname;
 }

@@ -8,10 +8,13 @@ import com.xnkfz.tinynote.service.IUserService;
 import com.xnkfz.tinynote.util.PasswordUtil;
 import com.xnkfz.tinynote.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -27,6 +30,7 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     private IUserService userService;
+
     @GetMapping("profile")
     public String index(Model model) {
         Integer userId = SecurityUtils.getUserId();
@@ -40,19 +44,27 @@ public class UserController {
     public String password() {
         return "/admin/password";
     }
+
     @ResponseBody
     @PutMapping("update-user")
     public Ajax updateUser(@RequestBody UpdateUserReq req) {
         Integer userId = SecurityUtils.getUserId();
-        req.setUserId(userId);
-        userService.updateUser(req);
+        userService.updateUser(userId, req);
         return Ajax.success();
+    }
+
+    @ResponseBody
+    @PostMapping(value = "update-avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, name = "图片上传")
+    public Ajax updateAvatar(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+        Integer userId = SecurityUtils.getUserId();
+        String url = userService.updateAvatar(userId, file, request);
+        return Ajax.success(url);
     }
 
     @ResponseBody
     @PutMapping("change-password")
     public Ajax changePassword(@RequestBody ChangePasswordReq req, HttpSession session) {
-        userService.updatePassword(req,session);
+        userService.updatePassword(req, session);
         return Ajax.success();
     }
 

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 public class FileController {
     @Autowired
     private IFileService fileService;
-    @PostMapping(value = "upload",consumes = MediaType.MULTIPART_FORM_DATA_VALUE,name = "图片上传")
+    @PostMapping(value = "upload",consumes = MediaType.MULTIPART_FORM_DATA_VALUE,name = "文件上传")
     public Ajax uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
          return Ajax.success(fileService.uploadFile(file,request));
     }

@@ -4,7 +4,9 @@ import com.xnkfz.tinynote.controller.admin.dto.ChangePasswordReq;
 import com.xnkfz.tinynote.controller.admin.dto.UpdateUserReq;
 import com.xnkfz.tinynote.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -34,8 +36,16 @@ public interface IUserService extends IService<User> {
 
     /**
      * 更新用户信息
-     *
+     * @param userId 当前登陆用户ID
      * @param req 用户信息
      */
-    void updateUser(UpdateUserReq req);
+    void updateUser(Integer userId,UpdateUserReq req);
+
+    /**
+     * 更新用户头像
+     * @param userId 用户ID
+     * @param file 图片
+     * @return 上传图片全路径
+     */
+    String updateAvatar(Integer userId, MultipartFile file, HttpServletRequest request);
 }

@@ -6,6 +6,7 @@ import com.xnkfz.tinynote.controller.admin.dto.ChangePasswordReq;
 import com.xnkfz.tinynote.controller.admin.dto.UpdateUserReq;
 import com.xnkfz.tinynote.domain.User;
 import com.xnkfz.tinynote.mapper.UserMapper;
+import com.xnkfz.tinynote.service.IFileService;
 import com.xnkfz.tinynote.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xnkfz.tinynote.util.PasswordUtil;
@@ -13,7 +14,9 @@ import com.xnkfz.tinynote.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -28,6 +31,8 @@ import javax.servlet.http.HttpSession;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private IFileService fileService;
 
     @Override
     public User findByUsername(String username) {
@@ -52,8 +57,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public void updateUser(UpdateUserReq req) {
+    public void updateUser(Integer userId, UpdateUserReq req) {
+        User user = userMapper.selectById(userId);
+        user.setUsername(req.getUserName());
+        user.setNickname(req.getNickname());
+        userMapper.updateById(user);
+    }
 
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public String updateAvatar(Integer userId, MultipartFile file, HttpServletRequest request) {
+        String url = fileService.uploadFile(file, request);
+        User user = userMapper.selectById(userId);
+        user.setAvatar(url);
+        userMapper.updateById(user);
+        return url;
     }
 }

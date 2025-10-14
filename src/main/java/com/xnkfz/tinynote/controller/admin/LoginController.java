@@ -31,6 +31,7 @@ public class LoginController {
             LoginUser loginUser = new LoginUser();
             loginUser.setUsername(user.getUsername());
             loginUser.setUserId(user.getId());
+            loginUser.setAvatar(user.getAvatar());
             loginUser.setNickname(user.getNickname());
             session.setAttribute("loginUser", loginUser);
             SecurityUtils.setUser(loginUser);
@@ -39,12 +40,14 @@ public class LoginController {
             return Ajax.error("用户名或密码错误");
         }
     }
+
     @GetMapping("exit")
     public String logout(HttpSession session) {
         session.invalidate();
         SecurityUtils.clear();
         return "redirect:/admin/login";
     }
+
     @GetMapping("login")
     public String showLoginPage(HttpSession session, HttpServletRequest request) {
         return "/admin/login";
