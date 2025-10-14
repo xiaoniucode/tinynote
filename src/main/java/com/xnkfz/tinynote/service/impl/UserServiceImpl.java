@@ -59,11 +59,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void updateUser(Integer userId, UpdateUserReq req) {
+    public void updateUser(Integer userId, UpdateUserReq req, HttpSession session) {
         User user = userMapper.selectById(userId);
-        user.setUsername(req.getUserName());
+        String oldUsername = user.getUsername();
+
+        user.setUsername(req.getUsername());
         user.setNickname(req.getNickname());
-        userMapper.updateById(user);
+        int update = userMapper.updateById(user);
+        //用户登陆名发生更新，退出登陆
+        if (update > 0 && !oldUsername.equals(req.getUsername())) {
+            SecurityUtils.logout(session);
+        }
     }
 
     @Transactional(rollbackFor = Exception.class)

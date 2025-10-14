@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 /**
  * @author
  */
-@RequestMapping("/admin/")
+@RequestMapping("/admin")
 @Controller
 public class LoginController {
     @Autowired
@@ -49,7 +49,7 @@ public class LoginController {
     }
 
     @GetMapping("login")
-    public String showLoginPage(HttpSession session, HttpServletRequest request) {
+    public String showLoginPage() {
         return "/admin/login";
     }
 }

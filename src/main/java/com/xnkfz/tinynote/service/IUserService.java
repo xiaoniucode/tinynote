@@ -39,7 +39,7 @@ public interface IUserService extends IService<User> {
      * @param userId 当前登陆用户ID
      * @param req 用户信息
      */
-    void updateUser(Integer userId,UpdateUserReq req);
+    void updateUser(Integer userId,UpdateUserReq req,HttpSession session);
 
     /**
      * 更新用户头像

@@ -47,9 +47,9 @@ public class UserController {
 
     @ResponseBody
     @PutMapping("update-user")
-    public Ajax updateUser(@RequestBody UpdateUserReq req) {
+    public Ajax updateUser(@RequestBody UpdateUserReq req,HttpSession session) {
         Integer userId = SecurityUtils.getUserId();
-        userService.updateUser(userId, req);
+        userService.updateUser(userId, req,session);
         return Ajax.success();
     }
 

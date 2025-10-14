@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>系统配置</title>
+    <title>系统配置-基本配置</title>
     <@c.styles/>
     <style>
         input {

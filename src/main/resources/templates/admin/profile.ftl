@@ -10,7 +10,6 @@
 <div class="layui-card m-4">
     <div class="layui-card-header">个人信息</div>
     <div class="layui-card-body">
-
         <form class="layui-form layui-form-pane" action="">
             <div class="layui-form-item">
                 <div style="width: 132px;" id="upload-avatar">
@@ -42,8 +41,6 @@
         </form>
     </div>
 </div>
-
-
 <@c.footer/>
 <@c.scripts/>
 <script>
@@ -51,7 +48,6 @@
         const form = layui.form;
         const upload = layui.upload;
         const layer = layui.layer;
-        const element = layui.element;
         const $ = layui.$;
         //更新用户信息按钮事件
         form.on('submit(saveProfile)', function (data) {
@@ -64,6 +60,9 @@
                 success: function (res) {
                     if (res.code === 0) {
                         layer.msg("更新成功")
+                        if (field.username !== "${user.username!}") {
+                            window.location.href = "/admin/exit"
+                        }
                     } else {
                         layer.msg(res.msg)
                     }

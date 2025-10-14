@@ -8,17 +8,13 @@
 </head>
 <body>
 <@c.navigation />
-
 <div class="mx-3p mt-4">
-    <h2>
-        <#if post??>编辑文章<#else >撰写新文章</#if>
-    </h2>
+    <h2><#if post??>编辑文章<#else >撰写新文章</#if></h2>
     <div>
         <input id="title" class="layui-input mb-2 mt-3" value="${(post.title)!}" placeholder="请输入文章标题"
                type="text">
         <div id="editor" style="height: 65vh;"></div>
     </div>
-
     <form class="layui-form mt-2">
         <input id="cid" hidden="hidden" value="${(post.id)!}">
         <div class="layui-row ">
@@ -93,7 +89,7 @@
                         if (response.code === 0 && response.data) {
                             callback(response.data, {
                                 name: file.name.replace(/\.[^.]+$/, ""),
-                                width: '60%', // 图片的宽度，默认100%，可配置百分比，也可配置像素值
+                                width: '60%',
                             });
                         } else {
                             layer.msg(response.msg);
@@ -120,7 +116,7 @@
         });
         const content = "${(post.content?js_string)!''}";
         // 初始化编辑器
-        var cherry = new Cherry({
+        const cherry = new Cherry({
             id: 'editor',
             value: content,
             fileUpload: myFileUpload,

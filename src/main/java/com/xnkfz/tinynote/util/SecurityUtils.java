@@ -2,6 +2,8 @@ package com.xnkfz.tinynote.util;
 
 import com.xnkfz.tinynote.domain.LoginUser;
 
+import javax.servlet.http.HttpSession;
+
 public abstract class SecurityUtils {
 
     // 存储当前线程的用户信息
@@ -39,5 +41,10 @@ public abstract class SecurityUtils {
     // 清除当前线程用户信息
     public static void clear() {
         CURRENT_USER.remove();
+    }
+
+    public static void logout(HttpSession session) {
+        session.invalidate();
+        clear();
     }
 }

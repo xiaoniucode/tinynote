@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Title</title>
+    <title>修改密码</title>
     <@c.styles/>
 </head>
 <body>
@@ -65,23 +65,7 @@
                 data: JSON.stringify(field),
                 success: function (res) {
                     if (res.code === 0) {
-                        layer.msg("更新成功", {icon: 1, time: 1000});
-                        layer.alert('重新登陆', {
-                            time: 3 * 1000,
-                            success: function (layero, index) {
-                                var timeNum = this.time / 1000, setText = function (start) {
-                                    layer.title('<span class="layui-font-red">' + (start ? timeNum : --timeNum) + '</span> 秒后自动关闭', index);
-                                };
-                                setText(!0);
-                                this.timer = setInterval(setText, 1000);
-                                if (timeNum <= 0) clearInterval(this.timer);
-                                window.location.href = "/admin/exit";
-                            },
-                            end: function () {
-                                clearInterval(this.timer);
-                                window.location.href = "/admin/exit";
-                            }
-                        });
+                        window.location.href = "/admin/exit"
                     } else {
                         layer.msg(res.msg)
                     }
