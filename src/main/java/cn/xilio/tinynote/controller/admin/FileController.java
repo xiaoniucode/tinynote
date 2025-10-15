@@ -2,12 +2,12 @@ package cn.xilio.tinynote.controller.admin;
 
 import cn.xilio.tinynote.common.Ajax;
 import cn.xilio.tinynote.service.IFileService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author xiaoniu

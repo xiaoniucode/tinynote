@@ -7,6 +7,8 @@ import cn.xilio.tinynote.domain.User;
 import cn.xilio.tinynote.service.IUserService;
 import cn.xilio.tinynote.util.PasswordUtil;
 import cn.xilio.tinynote.util.SecurityUtils;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -14,8 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 
 /**
  * <p>
@@ -47,7 +48,7 @@ public class UserController {
 
     @ResponseBody
     @PutMapping("update-user")
-    public Ajax updateUser(@RequestBody UpdateUserReq req,HttpSession session) {
+    public Ajax updateUser(@RequestBody UpdateUserReq req, HttpSession session) {
         Integer userId = SecurityUtils.getUserId();
         userService.updateUser(userId, req,session);
         return Ajax.success();

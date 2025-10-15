@@ -5,11 +5,11 @@ import cn.xilio.tinynote.common.BizException;
 import cn.xilio.tinynote.service.IFileService;
 import cn.xilio.tinynote.util.FileTools;
 import cn.xilio.tinynote.util.WebUtils;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;

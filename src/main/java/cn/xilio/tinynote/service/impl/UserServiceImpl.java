@@ -10,14 +10,12 @@ import cn.xilio.tinynote.service.IFileService;
 import cn.xilio.tinynote.service.IUserService;
 import cn.xilio.tinynote.util.PasswordUtil;
 import cn.xilio.tinynote.util.SecurityUtils;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 /**
  * <p>
  * 用户服务

@@ -1,8 +1,8 @@
 package cn.xilio.tinynote.util;
 
 import cn.xilio.tinynote.domain.LoginUser;
+import jakarta.servlet.http.HttpSession;
 
-import javax.servlet.http.HttpSession;
 
 public abstract class SecurityUtils {
 

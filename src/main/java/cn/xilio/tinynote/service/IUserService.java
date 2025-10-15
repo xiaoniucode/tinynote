@@ -3,10 +3,11 @@ package cn.xilio.tinynote.service;
 import cn.xilio.tinynote.controller.admin.dto.ChangePasswordReq;
 import cn.xilio.tinynote.controller.admin.dto.UpdateUserReq;
 import cn.xilio.tinynote.domain.User;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 
 /**
  * <p>

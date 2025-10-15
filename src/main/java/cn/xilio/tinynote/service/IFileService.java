@@ -1,8 +1,8 @@
 package cn.xilio.tinynote.service;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * 文件上传服务接口
