@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xnkfz.tinynote.mapper.MetaMapper">
+<mapper namespace="cn.xilio.tinynote.mapper.MetaMapper">
     <insert id="batchInsert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO meta (name,type)
         VALUES
@@ -14,14 +14,14 @@
         from relationship
         where cid = #{cid};
     </delete>
-    <select id="selectMetaList" resultType="com.xnkfz.tinynote.domain.Meta">
+    <select id="selectMetaList" resultType="cn.xilio.tinynote.domain.Meta">
         select m.id as id, m.name as name, m.type as type
         from meta m
                  left join relationship rs on m.id = rs.mid
         where rs.cid = #{cid}
           and m.type = #{type}
     </select>
-    <select id="findMetaContentCount" resultType="com.xnkfz.tinynote.domain.MetaContentCount">
+    <select id="findMetaContentCount" resultType="cn.xilio.tinynote.domain.MetaContentCount">
         SELECT
         m.name AS name,
         COUNT(c.id) AS count

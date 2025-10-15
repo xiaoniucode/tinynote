@@ -15,8 +15,6 @@
 </div>
 <div class="container" style="flex: 1 0 auto">
     <div class="row" style="background-color: white">
-
-
     <div class="d-flex justify-content-between">
         <div class="me-3"  style="background-color: white">
             <div class="p-1">
