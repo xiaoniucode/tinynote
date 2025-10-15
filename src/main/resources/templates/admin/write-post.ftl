@@ -131,8 +131,83 @@
                     header: {
                         anchorStyle: 'none',
                     },
+                    codeBlock: {
+                        wrap: false,//代码块超过一行不换行
+                    },
+                },
+
+            },
+            toolbars: {
+                showToolbar: true, // false：不展示顶部工具栏； true：展示工具栏; toolbars.showToolbar=false 与 toolbars.toolbar=false 等效
+                toolbar: [
+                    'bold',
+                    'italic',
+                    'strikethrough',
+                    '|',
+                    'color',
+                    'header',
+                    'ruby',
+                    '|',
+                    'list',
+                    'panel',
+                    // 'justify', // 对齐方式，默认不推荐这么“复杂”的样式要求
+                    'detail',
+                    'code',
+                    'link',
+                    'formula',
+                    {
+                        insert: [
+                            'image',
+                            'audio',
+                            'video',
+                            'link',
+                            'hr',
+                            'br',
+                            'inlineCode',
+                            'code',
+                            'formula',
+                            'toc',
+                            'table',
+                            'line-table',
+                            'bar-table',
+                            // 'pdf',
+                            //'word',
+                        ],
+                    },
+                    'graph',
+                    'shortcutKey',
+                    'togglePreview',
+                    'codeTheme',
+                    'search',
+                ],
+                toolbarRight: ['fullScreen', '|', 'export', 'changeLocale', 'wordCount'],
+                sidebar: ['mobilePreview', 'copy', 'theme'],
+                bubble: ['bold', 'italic', 'underline', 'strikethrough', 'sub', 'sup', 'quote', '|', 'size', 'color'], // array or false
+                float: ['h1', 'h2', 'h3', '|', 'checklist', 'quote', 'link', 'table', 'code'], // array or false
+                toc: true, //悬浮目录
+                config: {
+                    formula: {
+                        showLatexLive: true, // true: 显示 www.latexlive.com 外链； false：不显示
+                        templateConfig: false, // false: 使用默认模板
+                    },
+                    changeLocale: [
+                        {
+                            locale: 'zh_CN',
+                            name: '中文',
+                        },
+                        {
+                            locale: 'en_US',
+                            name: 'English',
+                        },
+                        {
+                            locale: 'ru_RU',
+                            name: 'Русский',
+                        },
+                    ],
                 },
             },
+            drawioIframeUrl: '',
+            drawioIframeStyle: 'border: none;',
             nameSpace: "editor",
             themeSettings: {
                 themeList: [

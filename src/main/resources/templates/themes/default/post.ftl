@@ -60,6 +60,9 @@
                 defaultModel: 'previewOnly',
                 keepDocumentScrollAfterInit: true,
             },
+            previewer: {
+                enablePreviewerBubble: false,
+            },
             nameSpace: "preview",
             themeSettings: {
                 themeList: [
