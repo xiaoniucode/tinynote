@@ -34,6 +34,11 @@
         <form class="layui-form">
             <div class="tinynote-login-container">
                 <div class="layui-form-item">
+                    <div class="layui-input-wrap " style="text-align: center;font-size: 24px;">
+                        TinyNote
+                    </div>
+                </div>
+                <div class="layui-form-item">
                     <div class="layui-input-wrap">
                         <div class="layui-input-prefix">
                             <i class="layui-icon layui-icon-username"></i>

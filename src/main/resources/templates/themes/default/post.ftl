@@ -54,6 +54,10 @@
                     header: {
                         anchorStyle: 'none',
                     },
+                    codeBlock: {
+                        wrap: false,
+                        expandCode: false,
+                    }
                 },
             },
             editor: {
