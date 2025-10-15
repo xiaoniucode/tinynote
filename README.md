@@ -1,8 +1,11 @@
 # TinyNote 
 一款轻量级写作软件，遵循大道至简设计思想，引入优质的对写作者友好的markdown的编辑器。
 ![write.png](docs/screenshot/write.png)
+## 线上体验地址
+- 后台管理：http://www.xilio.cn/admin/login （admin,123456）
+- 网站站点：http://www.xilio.cn
 
-
+⚠️备注：不要删东西和发布违规违法内容！
 ## 功能清单
 - 双屏写作，实时预览，编辑器美观，功能强大
 - 复制页面内容自动转markdown格式
