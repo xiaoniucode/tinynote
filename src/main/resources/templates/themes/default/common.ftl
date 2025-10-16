@@ -1,7 +1,11 @@
 <#macro nav meta={}>
     <div style="background-color: white;padding-left: 12px">
         <div class="d-flex justify-content-between align-items-center me-3">
-            <div style="font-size: 36px;">${(meta.site_title)!}</div>
+            <div style="font-size: 33px;">
+                <a class="no-underline" href="/" style="color: black">
+                    ${(meta.site_title)!}
+                </a>
+            </div>
             <div>
                 <input id="searchInput" placeholder="输入关键字搜索" style="width: 100%; max-width: 400px; padding: 8px 12px; font-size: 16px;  /">
             </div>

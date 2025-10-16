@@ -126,7 +126,7 @@
                                 ${post.title!}
                             </a>
                             <#if post.summary??>
-                                <div style="color: #8a919f;font-size: 17px;line-height: 22px">
+                                <div style="color: #8a919f;font-size: 16px;line-height: 22px">
                                     ${(post.summary)!}
                                 </div>
                             </#if>
