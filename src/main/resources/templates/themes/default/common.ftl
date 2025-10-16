@@ -7,7 +7,7 @@
                 </a>
             </div>
             <div>
-                <input id="searchInput" placeholder="输入关键字搜索" style="width: 100%; max-width: 400px; padding: 8px 12px; font-size: 16px;  /">
+                <input id="searchInput" placeholder="输入关键字搜索" style="width: 100%; max-width: 400px; padding: 8px 12px; font-size: 16px;">
             </div>
         </div>
         <div style="color: #4f545d;" class="me-2 my-1">${(meta.bio)!}</div>

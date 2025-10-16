@@ -82,9 +82,9 @@
                 padding: 0 12px;
                 gap: 15px;
             }
+
             .main-left, .main-right {
                 height: auto;
-                min-height: 0;
             }
 
             .navigation {
@@ -97,10 +97,12 @@
                 padding: 0 12px;
             }
         }
-        .text-muted{
+
+        .text-muted {
             color: gray;
         }
-        .page-active{
+
+        .page-active {
             color: #00bb00;
         }
     </style>
@@ -133,7 +135,8 @@
 
                             <div style="width: 100%" class="d-flex flex-row align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
-                                    <div class="me-2" style="color: #8a919f;font-size: 15px;max-width: 132px;line-height: 25px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;word-break: break-all">
+                                    <div class="me-2"
+                                         style="color: #8a919f;font-size: 15px;max-width: 132px;line-height: 25px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;word-break: break-all">
                                         ${(meta.author)!}
                                     </div>
                                     <div style="color: #8a919f;font-size: 15px;line-height: 25px;float: right">
@@ -143,7 +146,8 @@
 
                                 <div style="font-size:15px;">
                                     <#list  post.tags as tag>
-                                        <a style="background-color: #eeeeee;border-radius: 4px;color: black" href="/?tag=${(tag.name)!}" class="me-2 no-underline">${(tag.name)!}</a>
+                                        <a style="background-color: #eeeeee;border-radius: 4px;color: black"
+                                           href="/?tag=${(tag.name)!}" class="me-2 no-underline">${(tag.name)!}</a>
                                     </#list>
                                 </div>
                             </div>
