@@ -27,6 +27,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,59 +48,50 @@ public class ContentServiceImpl implements IContentService {
     @Autowired
     private IMetaService metaService;
 
+    private static final int SUMMARY_MAX_LENGTH = 150;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Integer savePost(SavePostReq req) {
         Integer uid = SecurityUtils.getUserId();
-        //有ID则更新文章
+        List<String> tagNames = req.getTags() != null ? req.getTags() : Collections.emptyList();
+        List<Integer> tagIds = metaService.createMetaIfNotExist(tagNames, MetaType.TAG);
+
+        Content content = new Content();
+        content.setUid(uid);
+        content.setTitle(req.getTitle());
+        content.setText(req.getContent());
+        content.setDraft(req.getDraft());
+        content.setStatus(req.getStatus());
+        content.setSummary(StringUtils.hasText(req.getSummary()) ? req.getSummary() : generateSummary(req.getContent()));
+        content.setCreatedAt(req.getPublishAt());
+        content.setUpdatedAt(req.getPublishAt());
+
         if (!ObjectUtils.isEmpty(req.getId())) {
-            Content content = contentMapper.selectById(req.getId());
-            if (ObjectUtils.isEmpty(content)) {
+            // 更新文章
+            Content existing = contentMapper.selectById(req.getId());
+            if (existing == null) {
                 throw new BizException("文章不存在或已经被删除");
             }
-            content.setTitle(req.getTitle());
-            content.setText(req.getContent());
-            content.setUid(uid);
-            content.setDraft(req.getDraft());
-            content.setStatus(req.getStatus());
-            content.setSummary(generateSummary(req.getContent()));
-            content.setCreatedAt(req.getPublishAt());
-            content.setUpdatedAt(req.getPublishAt());
-            //删掉之前所有关联的标签
+            content.setId(req.getId());
             metaMapper.clearContentMetaRelation(req.getId());
-            //如果标签不存在则创建
-            List<Integer> tagIds = metaService.createMetaIfNotExist(req.getTags(), MetaType.TAG);
             contentMapper.updateById(content);
-            //建立文章和标签的关联
-            if (!CollectionUtils.isEmpty(tagIds)) {
-                contentMapper.relationContentMeta(content.getId(), tagIds);
-            }
-            return content.getId();
         } else {
-            //创建文章
-            Content content = new Content();
-            content.setTitle(req.getTitle());
-            content.setText(req.getContent());
-            content.setUid(uid);
-            content.setDraft(req.getDraft());
-            content.setStatus(req.getStatus());
-            content.setSummary(generateSummary(req.getContent()));
-            content.setCreatedAt(req.getPublishAt());
-            content.setUpdatedAt(req.getPublishAt());
-            //如果标签不存在则创建
-            List<Integer> tagIds = metaService.createMetaIfNotExist(req.getTags(), MetaType.TAG);
+            // 创建文章
             contentMapper.insert(content);
-            //建立文章和标签的关联
-            if (!CollectionUtils.isEmpty(tagIds)) {
-                contentMapper.relationContentMeta(content.getId(), tagIds);
-            }
-            return content.getId();
         }
+
+        // 建立标签关联（如果有标签）
+        if (!CollectionUtils.isEmpty(tagIds)) {
+            contentMapper.relationContentMeta(content.getId(), tagIds);
+        }
+        return content.getId();
     }
 
-    public String generateSummary(String text) {
+    private String generateSummary(String text) {
         if (StringUtils.hasText(text)) {
-            return text.trim().length() > 150 ? text.trim().substring(0, 150) : text;
+            String trimmed = text.trim();
+            return trimmed.length() > SUMMARY_MAX_LENGTH ? trimmed.substring(0, SUMMARY_MAX_LENGTH) : trimmed;
         }
         return "";
     }
@@ -135,6 +127,7 @@ public class ContentServiceImpl implements IContentService {
         res.setTitle(content.getTitle());
         res.setContent(content.getText());
         res.setTags(tagList);
+        res.setSummary(content.getSummary());
         res.setPublishAt(DateUtils.format(content.getCreatedAt()));
         res.setStatus(content.getStatus());
         return res;

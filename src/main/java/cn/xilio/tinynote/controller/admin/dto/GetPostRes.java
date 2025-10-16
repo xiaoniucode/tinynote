@@ -17,4 +17,5 @@ public class GetPostRes implements Serializable {
     private List<String> tags;
     private Integer status;
     private String publishAt;
+    private String summary;
 }

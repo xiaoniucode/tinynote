@@ -9,7 +9,7 @@
 <body>
 <@c.navigation />
 <div class="flex-fluid">
-    <div class="mx-3p mt-4">
+    <div class="mx-3p mt-4 mb-5">
         <h2><#if post??>编辑文章<#else >撰写新文章</#if></h2>
         <div>
             <input id="title" class="layui-input mb-2 mt-3" value="${(post.title)!}" placeholder="请输入文章标题"
@@ -62,14 +62,16 @@
                     <button class="layui-btn layui-btn-normal" id="publishPost">发布文章</button>
                 </div>
             </div>
-            <#-- <div class="layui-collapse mt-2">
-                 <div class="layui-colla-item">
-                     <div class="layui-colla-title">更多配置</div>
-                     <div class="layui-colla-content">
-                         ...
-                     </div>
-                 </div>
-             </div>-->
+            <div class="layui-collapse mt-2">
+                <div class="layui-colla-item">
+                    <div class="layui-colla-title">更多配置</div>
+                    <div class="layui-colla-content">
+                        <label>文章摘要</label>
+                        <textarea id="summary" style="width: 50%" type="text" name="summary" placeholder="如果没有填写会自动截取内容作为摘要～" autocomplete="off"
+                                  class="layui-textarea">${(post.summary)!}</textarea>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 </div>
@@ -251,6 +253,7 @@
             const body = {
                 id: $('#cid').val(),
                 title: $("#title").val(),
+                summary: $("#summary").val(),
                 content: cherry.getMarkdown(),
                 publishAt: $('#publishDate').val(),
                 tags: tagList,
@@ -286,6 +289,7 @@
             const body = {
                 id: $('#cid').val(),
                 title: $("#title").val(),
+                summary: $("#summary").val(),
                 content: cherry.getMarkdown(),
                 publishAt: $('#publishDate').val(),
                 tags: tagList,

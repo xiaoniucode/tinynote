@@ -17,6 +17,7 @@ import java.util.List;
 public class SavePostReq implements Serializable {
     private Integer id;
     private String title;
+    private String  summary;
     private String content;
     private List<String> tags;
     private Integer status;

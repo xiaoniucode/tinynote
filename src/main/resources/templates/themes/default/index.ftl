@@ -121,26 +121,29 @@
                 <#list postRes.records as post>
                     <div>
                         <div style="border-bottom: 1px solid rgba(211,214,220,0.8);width: 100%">
-                            <a href="/post/${post.id}"
-                               style="font-weight: 600;font-size: 20px;line-height: 24px;color: #252933;width: 100%">
-                                ${post.title}
+                            <a href="/post/${post.id!}"
+                               style="font-weight: 600;font-size: 20px;line-height: 28px;color: #252933;width: 100%">
+                                ${post.title!}
                             </a>
-                            <div style="color: #8a919f;font-size: 17px;line-height: 22px">
-                                ${(post.summary)!}
-                            </div>
+                            <#if post.summary??>
+                                <div style="color: #8a919f;font-size: 17px;line-height: 22px">
+                                    ${(post.summary)!}
+                                </div>
+                            </#if>
+
                             <div style="width: 100%" class="d-flex flex-row align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     <div class="me-2" style="color: #8a919f;font-size: 15px;max-width: 132px;line-height: 25px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;word-break: break-all">
-                                        ${(meta.author)}
+                                        ${(meta.author)!}
                                     </div>
                                     <div style="color: #8a919f;font-size: 15px;line-height: 25px;float: right">
-                                        2028-12-12 21:32
+                                        ${post.publishAt!}
                                     </div>
                                 </div>
 
-                                <div style="font-size:15px;color: #8a919f;background-color: #f2f3f5">
+                                <div style="font-size:15px;">
                                     <#list  post.tags as tag>
-                                        <a href="/?tag=${(tag.name)!}" class="me-1 no-underline">${(tag.name)!}</a>
+                                        <a style="background-color: #f0ebeb;border-radius: 4px;color: black" href="/?tag=${(tag.name)!}" class="me-2 no-underline">${(tag.name)!}</a>
                                     </#list>
                                 </div>
                             </div>
