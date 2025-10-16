@@ -160,8 +160,8 @@
                     {
                         insert: [
                             'image',
-                            'audio',
-                            'video',
+                           // 'audio',
+                           // 'video',
                             'link',
                             'hr',
                             'br',

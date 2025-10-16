@@ -25,6 +25,15 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
+                    <label class="layui-form-label">个人简介</label>
+                    <div class="layui-input-block">
+                       <textarea  id="bio" type="text" name="bio"
+                                 placeholder="个人简介，用于网站自我介绍信息"
+                                 autocomplete="off"
+                                 class="layui-textarea">${(baseConfig.bio)!}</textarea >
+                    </div>
+                </div>
+                <div class="layui-form-item">
                     <label class="layui-form-label">网站域名</label>
                     <div class="layui-input-block">
                         <input type="text" name="site_url" value="${baseConfig.site_url!}" placeholder="站点访问地址"
@@ -35,7 +44,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">网站描述</label>
                     <div class="layui-input-block">
-                    <textarea type="text" name="description" placeholder="用于展示在html meta中" autocomplete="off"
+                    <textarea type="text" name="description" placeholder="用于seo，显示在页面meta中" autocomplete="off"
                               class="layui-textarea">${(baseConfig.description)!}</textarea>
                     </div>
                 </div>
@@ -119,7 +128,7 @@
                 },
             });
             return false;
-        });
+        })
     });
 </script>
 </body>

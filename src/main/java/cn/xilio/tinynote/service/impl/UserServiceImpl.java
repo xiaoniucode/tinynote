@@ -59,7 +59,6 @@ public class UserServiceImpl implements IUserService {
     public void updateUser(Integer userId, UpdateUserReq req, HttpSession session) {
         User user = userMapper.selectById(userId);
         String oldUsername = user.getUsername();
-
         user.setUsername(req.getUsername());
         user.setNickname(req.getNickname());
         int update = userMapper.updateById(user);
