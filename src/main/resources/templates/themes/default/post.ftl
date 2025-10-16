@@ -95,7 +95,7 @@
             <div class="d-flex align-items-center">
                 <#if post.tags??>
                     <#list post.tags as tag>
-                        <label style="background-color: #f0ebeb;border-radius: 4px" class="${(tag?has_next)?then('me-2','')}">${(tag.name)!}</label>
+                        <label style="background-color: #eeeeee;border-radius: 4px" class="${(tag?has_next)?then('me-2','')}">${(tag.name)!}</label>
                     </#list>
                 </#if>
             </div>

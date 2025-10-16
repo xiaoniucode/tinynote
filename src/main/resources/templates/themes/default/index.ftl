@@ -143,7 +143,7 @@
 
                                 <div style="font-size:15px;">
                                     <#list  post.tags as tag>
-                                        <a style="background-color: #f0ebeb;border-radius: 4px;color: black" href="/?tag=${(tag.name)!}" class="me-2 no-underline">${(tag.name)!}</a>
+                                        <a style="background-color: #eeeeee;border-radius: 4px;color: black" href="/?tag=${(tag.name)!}" class="me-2 no-underline">${(tag.name)!}</a>
                                     </#list>
                                 </div>
                             </div>
@@ -154,14 +154,12 @@
             <#if postRes??>
                 <div class="d-flex justify-content-center mt-2 mb-2">
                     <div class="d-flex align-items-center">
-                        <#-- 上一页（只有不是第一页时才显示） -->
                         <#if postRes.current gt 1>
                             <a href="/?current=${postRes.current - 1}" class="me-3 no-underline page-active">上一页</a>
                         <#else>
                             <span class="me-3 text-muted">上一页</span>
                         </#if>
 
-                        <#-- 下一页（只有不是最后一页时才显示） -->
                         <#if postRes.current lt postRes.pages>
                             <a href="/?current=${postRes.current + 1}" class="no-underline page-active">下一页</a>
                         <#else>
