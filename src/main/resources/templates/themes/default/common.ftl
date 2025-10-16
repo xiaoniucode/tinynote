@@ -1,9 +1,11 @@
 <#macro nav meta={}>
     <div style="background-color: white;padding-left: 12px">
         <div class="d-flex justify-content-between align-items-center me-3">
-            <div style="font-size: 50px;font-weight: bold">${(meta.site_title)!}</div>
+            <div style="font-size: 36px;font-weight: bold">${(meta.site_title)!}</div>
             <div>
-                <input id="searchInput" placeholder="输入关键字搜索">
+                <!-- 修改后的 input：添加宽度样式，使其更宽（e.g., width: 100% 占满容器，或固定 300px）。若在导航搜索框，100% 自适应加宽；加 max-width 防止过宽。 -->
+
+                <input id="searchInput" placeholder="输入关键字搜索" style="width: 100%; max-width: 400px; padding: 8px 12px; font-size: 16px;  /">
             </div>
         </div>
         <div>${(meta.site_description)!}</div>
