@@ -80,12 +80,13 @@
 
 <main>
     <div class="content-container">
-        <div class="d-flex mb-2 mt-2 justify-content-between align-items-center"
+        <div class="d-flex mb-2 mt-2 justify-content-between "
              style="padding: 0 15px;">
             <div style="font-size: 24px; font-weight: bold; ">${post.title}</div>
             <#if (isLogin!false)>
-                <div style=" text-align: right">
-                    <a class="no-underline" href="/admin/content/write-post/${(post.id)!}" style="cursor: pointer; color: #1e9fff;">编辑</a>
+                <div style=" text-align: right;min-width: 35px">
+                    <a class="no-underline" href="/admin/content/write-post/${(post.id)!}"
+                       style="cursor: pointer; color: #1e9fff;min-width: 50px">编辑</a>
                 </div>
             </#if>
         </div>
@@ -95,7 +96,8 @@
             <div class="d-flex align-items-center">
                 <#if post.tags??>
                     <#list post.tags as tag>
-                        <label style="background-color: #eeeeee;border-radius: 4px" class="${(tag?has_next)?then('me-2','')}">${(tag.name)!}</label>
+                        <label style="background-color: #eeeeee;border-radius: 4px"
+                               class="${(tag?has_next)?then('me-2','')}">${(tag.name)!}</label>
                     </#list>
                 </#if>
             </div>
