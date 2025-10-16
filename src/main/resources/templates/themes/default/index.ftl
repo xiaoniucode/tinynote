@@ -8,70 +8,182 @@
     description=meta.description
     keywords=meta.keywords
     robots=meta.robots/>
+    <style>
+        /* 布局相关 CSS */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            background-color: #f6f6f3;
+        }
+
+        body {
+            background-color: #f6f6f3;
+        }
+
+        header, main, footer {
+            width: 100%;
+        }
+
+        header {
+
+
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer {
+            padding-left: 15%;
+            padding-right: 15%;
+        }
+
+        .nav-container, .main-container {
+            display: flex;
+            width: calc(100% - 30%);
+            gap: 0 15px;
+            margin: 0 auto; /* 居中对齐 */
+        }
+
+        .navigation {
+            flex: 1;
+            background-color: #fff;
+        }
+
+        .main-left {
+            padding: 4px 12px 15px;
+            flex: 4;
+            height: 100%;
+            background-color: white;
+        }
+
+        .main-right {
+            flex: 1;
+            background-color: #fff;
+            height: 100%;
+            padding: 4px 12px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container, .main-container {
+                flex-direction: column;
+                width: 100%;
+                margin: 0;
+                padding: 0 12px;
+                gap: 15px;
+            }
+            .main-left, .main-right {
+                height: auto;
+                min-height: 0;
+            }
+
+            .navigation {
+                flex: auto;
+            }
+
+            .footer {
+                width: 100%;
+                margin: 0;
+                padding: 0 12px;
+            }
+        }
+        .text-muted{
+            color: gray;
+        }
+        .page-active{
+            color: #00bb00;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <@c.nav meta=meta/>
-</div>
-<div class="container" style="flex: 1 0 auto">
-    <div class="row" style="background-color: white">
-    <div class="d-flex justify-content-between">
-        <div class="me-3"  style="background-color: white">
-            <div class="p-1">
-                <#if postRes??>
-                    <#list postRes.records as post>
-                        <div>
-                            <div style="border-bottom: 1px solid rgba(211,214,220,0.5);">
-                                <a href="/post/${post.id}"
-                                   style="font-weight: 600;font-size: 16px;line-height: 24px;color: #252933;width: 100%">
-                                    ${post.title}
-                                </a>
-                                <div style="color: #8a919f;font-size: 13px;line-height: 22px">
-                                 <#--   ${(post.summary)!}-->
-                                </div>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center ">
-                                        <div style="color: #8a919f;font-size: 13px;max-width: 132px;line-height: 22px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;word-break: break-all">
-                                            ${(meta.author)}
-                                        </div>
-                                        <div style="color: #8a919f;font-size: 13px;line-height: 22px">
-                                            2028-12-12 21:32
-                                        </div>
-                                    </div>
+<header>
+    <div class="nav-container">
+        <div class="navigation">
+            <@c.nav meta=meta/>
+        </div>
+    </div>
+</header>
 
-                                    <div style="font-size:13px;color: #8a919f;background-color: #f2f3f5">
-                                        <#list  post.tags as tag>
-                                            <a href="/?tag=${(tag.name)!}" class="me-1">${(tag.name)!}</a>
-                                        </#list>
+<main>
+    <div class="main-container">
+        <div class="main-left">
+            <#if postRes??>
+                <#list postRes.records as post>
+                    <div>
+                        <div style="border-bottom: 1px solid rgba(211,214,220,1);width: 100%">
+                            <a href="/post/${post.id}"
+                               style="font-weight: 600;font-size: 20px;line-height: 24px;color: #252933;width: 100%">
+                                ${post.title}
+                            </a>
+                            <div style="color: #8a919f;font-size: 17px;line-height: 22px">
+                                ${(post.summary)!}
+                            </div>
+                            <div style="width: 100%" class="d-flex flex-row align-items-center justify-content-between">
+                                <div class="d-flex align-items-center me-2 ">
+                                    <div style="color: #8a919f;font-size: 15px;max-width: 132px;line-height: 22px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;word-break: break-all">
+                                        ${(meta.author)}
                                     </div>
+                                    <div style="color: #8a919f;font-size: 15px;line-height: 22px;float: right">
+                                        2028-12-12 21:32
+                                    </div>
+                                </div>
+
+                                <div style="font-size:15px;color: #8a919f;background-color: #f2f3f5">
+                                    <#list  post.tags as tag>
+                                        <a href="/?tag=${(tag.name)!}" class="me-1 no-underline">${(tag.name)!}</a>
+                                    </#list>
                                 </div>
                             </div>
                         </div>
-                    </#list>
-                </#if>
-            </div>
+                    </div>
+                </#list>
+            </#if>
+            <#if postRes??>
+                <div class="d-flex justify-content-center mt-2 mb-2">
+                    <div class="d-flex align-items-center">
+                        <#-- 上一页（只有不是第一页时才显示） -->
+                        <#if postRes.current gt 1>
+                            <a href="/?current=${postRes.current - 1}" class="me-3 no-underline page-active">上一页</a>
+                        <#else>
+                            <span class="me-3 text-muted">上一页</span>
+                        </#if>
+
+                        <#-- 下一页（只有不是最后一页时才显示） -->
+                        <#if postRes.current lt postRes.pages>
+                            <a href="/?current=${postRes.current + 1}" class="no-underline page-active">下一页</a>
+                        <#else>
+                            <span class="text-muted">下一页</span>
+                        </#if>
+                    </div>
+                </div>
+            </#if>
         </div>
-        <div class="col-3">
+        <div class="main-right">
             <div class="d-flex flex-column">
                 <#list tagRes as t>
-                    <a href="/?tag=${(t.name)!}">
+                    <a class="mb-2 no-underline" href="/?tag=${(t.name)!}" style="color: black">
                         ${(t.name)!} (${(t.count)!})
                     </a>
                 </#list>
             </div>
         </div>
     </div>
-    </div>
+</main>
 
-</div>
-<div class="container" style="flex-shrink: 0;">
+<div class="footer">
     <@c.footer/>
 </div>
-
 <@c.scripts/>
 <@c.navSearchEvent/>
-<script>
-
-</script>
 </body>
 </html>

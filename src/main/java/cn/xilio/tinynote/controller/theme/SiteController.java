@@ -25,7 +25,7 @@ public class SiteController extends CommonController {
     @GetMapping("/")
     public String index(Model mv,
                         @RequestParam(defaultValue = "1", required = false) Long current,
-                        @RequestParam(defaultValue = "30", required = false) Long size,
+                        @RequestParam(defaultValue = "5", required = false) Long size,
                         @RequestParam(required = false) String title) {
         addCommonModel(mv);
         addTagPostCountModel(mv);

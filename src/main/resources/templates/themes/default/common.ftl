@@ -1,17 +1,16 @@
 <#macro nav meta={}>
-    <div class="row" style="background-color: white">
-        <div class="d-flex justify-content-between align-items-center">
+    <div style="background-color: white;padding-left: 12px">
+        <div class="d-flex justify-content-between align-items-center me-3">
             <div style="font-size: 50px;font-weight: bold">${(meta.site_title)!}</div>
             <div>
                 <input id="searchInput" placeholder="输入关键字搜索">
             </div>
         </div>
         <div>${(meta.site_description)!}</div>
-
-        <div class="mt-3">
-            <a style="font-size: 21px" href="/">首页</a>
+        <div class="mt-3" style="border-bottom: 1px solid #ccc; padding-bottom: 5px;">
+            <a class="no-underline" style="font-size: 21px;font-weight: bold;color: black;cursor: pointer" href="/">首页</a>
         </div>
-        <hr/>
+
     </div>
 </#macro>
 <#macro navSearchEvent>
@@ -32,37 +31,33 @@
 </#macro>
 
 <#macro footer>
-    <div class="row" style="background-color: white">
-        <div style="border-top: 1px dashed #999; margin: 10px 0;"></div>
-        <footer class="flex-footer">
-            <div class="d-flex justify-content-center align-items-centet mb-3">
-                <div style="text-align: center">
-                    <#if meta.copyright??>
-                        <div>${meta.copyright!''}</div>
-                    </#if>
-                    <#if meta?? && (meta.public_security??|| meta.icp_number??)>
-                        <div class="mt-2">
-                            <div class="d-flex align-items-center">
-                                <img class="me-2" src="/static/site/images/reords.png">
-                                <#if meta.public_security??>
-                                    <a class="me-3" style="text-decoration: none;color: inherit" target="_blank"
-                                       href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=">
-                                        ${meta.public_security!''}</a>
-                                </#if>
-                                <#if meta.icp_number??>
-                                    <a style="text-decoration: none;color: inherit" href="https://beian.miit.gov.cn"
-                                       target="_blank">${meta.icp_number!''}</a>
-                                </#if>
-                            </div>
+    <div style="background-color: white">
+        <div style="border-top: 1px dashed #999; "></div>
+        <div class="d-flex justify-content-center align-items-center mt-3">
+            <div style="text-align: center">
+                <#if meta.copyright??>
+                    <div>${meta.copyright!''}</div>
+                </#if>
+                <#if meta?? && (meta.public_security??|| meta.icp_number??)>
+                    <div class="mt-2 mb-3">
+                        <div class="d-flex align-items-center">
+                            <img class="me-2" src="/static/site/images/reords.png">
+                            <#if meta.public_security??>
+                                <a class="me-3" style="text-decoration: none;color: inherit" target="_blank"
+                                   href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=">
+                                    ${meta.public_security!''}</a>
+                            </#if>
+                            <#if meta.icp_number??>
+                                <a style="text-decoration: none;color: inherit" href="https://beian.miit.gov.cn"
+                                   target="_blank">${meta.icp_number!''}</a>
+                            </#if>
                         </div>
-                    </#if>
-                </div>
+                    </div>
+                </#if>
             </div>
-        </footer>
+        </div>
     </div>
-
 </#macro>
-
 <#macro styles title="" description="" keywords="" robots="">
     <meta charset="UTF-8">
     <title>${title!''}</title>
@@ -74,7 +69,7 @@
     <meta http-equiv="Cache-Control" content="no-transform">
     <link rel="stylesheet" href="/static/grid.css">
     <link rel="stylesheet" href="/static/site/css/common.css">
-  <#--  <link rel="stylesheet" href="/static/global.css">-->
+<#--  <link rel="stylesheet" href="/static/global.css">-->
 </#macro>
 
 <#macro scripts>

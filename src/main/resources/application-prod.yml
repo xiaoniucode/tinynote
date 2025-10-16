@@ -17,10 +17,7 @@ spring:
     expose-request-attributes: true # 允许模板访问请求属性
     expose-session-attributes: true # 允许模板访问会话属性
     expose-spring-macro-helpers: true # 支持 Spring 的 FreeMarker 宏
-springfox:
-  documentation:
-    swagger-ui:
-      enabled: false
+
 
 
 
