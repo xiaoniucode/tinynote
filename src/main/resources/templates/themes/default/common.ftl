@@ -45,7 +45,7 @@
                 <#if meta?? && (meta.public_security??|| meta.icp_number??)>
                     <div class="mt-2 mb-3">
                         <div class="d-flex align-items-center">
-                            <img class="me-2" src="/static/site/images/reords.png">
+                            <img class="me-2" src="/site/images/reords.png">
                             <#if meta.public_security??>
                                 <a class="me-3" style="text-decoration: none;color: inherit" target="_blank"
                                    href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=">

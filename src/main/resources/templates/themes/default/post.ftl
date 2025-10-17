@@ -84,7 +84,7 @@
              style="padding: 0 15px;">
             <div style="font-size: 24px; font-weight: bold; ">${post.title}</div>
             <#if (isLogin!false)>
-                <div style=" text-align: right;min-width: 35px">
+                <div style=" text-align: right;min-width: 40px">
                     <a class="no-underline" href="/admin/content/write-post/${(post.id)!}"
                        style="cursor: pointer; color: #1e9fff;min-width: 50px">编辑</a>
                 </div>
