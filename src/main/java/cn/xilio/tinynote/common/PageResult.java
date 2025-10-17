@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -17,7 +18,7 @@ public class PageResult<T> implements Serializable {
     private long size;
     private long total;
     private long pages;
-    private List<T> records;
+    private List<T> records=new ArrayList<>();
 
     public static <T> PageResult<T> of(Page<T> page) {
         PageResult<T> res = new PageResult<>();

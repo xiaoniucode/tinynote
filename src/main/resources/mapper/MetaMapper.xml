@@ -23,6 +23,7 @@
     </select>
     <select id="findMetaContentCount" resultType="cn.xilio.tinynote.domain.MetaContentCount">
         SELECT
+        m.id as id,
         m.name AS name,
         COUNT(c.id) AS count
         FROM
@@ -53,5 +54,19 @@
         <foreach item="id" collection="ids" open="(" separator="," close=")">
             #{id}
         </foreach>
+    </select>
+    <select id="selectMetasByContentIds" resultType="cn.xilio.tinynote.domain.MetaContentDTO">
+        SELECT
+        m.id as mid,
+        r.cid as cid,
+        m.name,
+        m.type
+        FROM meta m
+        INNER JOIN relationship r ON m.id = r.mid
+        WHERE r.cid IN
+        <foreach collection="cids" item="cid" open="(" separator="," close=")">
+            #{cid}
+        </foreach>
+        ORDER BY r.cid, m.id
     </select>
 </mapper>

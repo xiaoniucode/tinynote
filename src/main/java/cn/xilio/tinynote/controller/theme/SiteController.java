@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SiteController extends CommonController {
     @Autowired
     private IContentService contentService;
+
     @GetMapping("/")
     public String index(Model mv,
                         @RequestParam(defaultValue = "1", required = false) Long current,
@@ -37,6 +38,19 @@ public class SiteController extends CommonController {
         mv.addAttribute("postRes", res);
         return "themes/default/index";
     }
+
+    @GetMapping("/find-by-tag")
+    public String findContentByTag(Model mv,
+                                   @RequestParam(defaultValue = "1", required = false) Long current,
+                                   @RequestParam(defaultValue = "30", required = false) Long size,
+                                   @RequestParam(required = false) Integer tagId) {
+        addCommonModel(mv);
+        addTagPostCountModel(mv);
+        PageResult<PostDetailRes> res = contentService.findByMetaId(current, size, tagId);
+        mv.addAttribute("postRes", res);
+        return "themes/default/index";
+    }
+
 
     @GetMapping("post/{id}")
     public String post(Model mv, @PathVariable Integer id) {

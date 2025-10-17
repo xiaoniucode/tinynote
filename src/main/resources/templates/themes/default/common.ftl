@@ -14,7 +14,6 @@
         <div class="mt-3" style="border-bottom: 1px solid #ccc; padding-bottom: 5px;">
             <a class="no-underline" style="font-size: 21px;color: black;cursor: pointer" href="/">首页</a>
         </div>
-
     </div>
 </#macro>
 <#macro navSearchEvent>

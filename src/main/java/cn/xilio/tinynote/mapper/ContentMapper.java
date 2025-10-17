@@ -1,7 +1,10 @@
 package cn.xilio.tinynote.mapper;
 
+import cn.xilio.tinynote.controller.theme.dto.PostDetailRes;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import cn.xilio.tinynote.domain.Content;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -31,4 +34,10 @@ public interface ContentMapper extends BaseMapper<Content> {
      * @return 影响的行数
      */
     int setStatusBatchIds(@Param("ids") List<Integer> ids, @Param("status") Integer status);
+
+    IPage<PostDetailRes> selectContentListByMetaId(
+            @Param("page") Page<PostDetailRes> page,
+            @Param("metaId") Integer metaId,
+            @Param("status") Integer status
+    );
 }

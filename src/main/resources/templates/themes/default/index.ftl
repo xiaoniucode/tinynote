@@ -119,7 +119,7 @@
 <main>
     <div class="main-container">
         <div class="main-left">
-            <#if postRes??>
+            <#if postRes??&& postRes.records??>
                 <#list postRes.records as post>
                     <div>
                         <div style="border-bottom: 1px solid rgba(211,214,220,0.8);width: 100%">
@@ -147,7 +147,7 @@
                                 <div style="font-size:15px;">
                                     <#list  post.tags as tag>
                                         <a style="background-color: #eeeeee;border-radius: 4px;color: black"
-                                           href="/?tag=${(tag.name)!}" class="me-2 no-underline">${(tag.name)!}</a>
+                                           href="/find-by-tag?tagId=${(tag.id)!}" class="me-2 no-underline">${(tag.name)!}</a>
                                     </#list>
                                 </div>
                             </div>
@@ -176,7 +176,7 @@
         <div class="main-right">
             <div class="d-flex flex-column">
                 <#list tagRes as t>
-                    <a class="mb-2 no-underline" href="/?tag=${(t.name)!}" style="color: black">
+                    <a class="mb-2 no-underline" href="/find-by-tag?tagId=${(t.id)!}" style="color: black">
                         ${(t.name)!} (${(t.count)!})
                     </a>
                 </#list>

@@ -72,4 +72,13 @@ public interface IContentService {
      * @param ids 需要删除的文章ID
      */
     void batchDeletePost(List<Integer> ids);
+
+    /**
+     * 根据meta分页查询文章: metaId是唯一的，meta可以是：category、tag
+     * @param current 当前页
+     * @param size 每页大小
+     * @param metaId 标签ID
+     * @return 返回内容
+     */
+    PageResult<PostDetailRes> findByMetaId(Long current, Long size, Integer metaId);
 }

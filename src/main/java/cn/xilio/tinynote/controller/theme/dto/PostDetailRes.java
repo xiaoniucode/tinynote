@@ -16,7 +16,7 @@ public class PostDetailRes implements Serializable {
     private Integer id;
     private String title;
     private String summary;
-    private String content;
+   // private String content;
     private String publishAt;
     private List<Meta> tags;
 

@@ -5,12 +5,13 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-
-@Setter
 @Getter
+@Setter
 @ToString
-public class MetaContentCount implements Serializable {
-    private Integer id;
+public class MetaContentDTO implements Serializable {
+    private Integer mid;
+    private Integer cid;
     private String name;
-    private Integer count;
+    private String type;
+
 }

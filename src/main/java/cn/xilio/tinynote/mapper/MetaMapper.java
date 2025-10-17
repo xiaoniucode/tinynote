@@ -1,11 +1,13 @@
 package cn.xilio.tinynote.mapper;
 
+import cn.xilio.tinynote.domain.MetaContentDTO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import cn.xilio.tinynote.domain.Meta;
 import cn.xilio.tinynote.domain.MetaContentCount;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,4 +50,11 @@ public interface MetaMapper extends BaseMapper<Meta> {
      * @param ids 内容ID列表
      */
     void clearContentRelationship(@Param("ids") List<Integer> ids);
+
+    /**
+     * 通过内容ID列表查询所有的meta信息：一对多关系
+     * @param cids 内容id列表
+     * @return meta列表
+     */
+    List<MetaContentDTO> selectMetasByContentIds(@Param("cids") List<Integer> cids);
 }

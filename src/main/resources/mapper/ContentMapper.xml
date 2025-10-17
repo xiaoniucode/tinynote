@@ -18,4 +18,18 @@
             #{id}
         </foreach>
     </update>
+    <select id="selectContentListByMetaId" resultType="cn.xilio.tinynote.controller.theme.dto.PostDetailRes">
+        SELECT
+            c.id,
+            c.title,
+            c.summary,
+            c.created_at as publishAt
+        FROM relationship r
+                 INNER JOIN content c ON c.id = r.cid
+        WHERE r.mid = #{metaId}
+          AND c.status = #{status}
+          AND c.draft = 0
+        ORDER BY c.created_at DESC
+
+    </select>
 </mapper>

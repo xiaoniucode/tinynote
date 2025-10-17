@@ -1,6 +1,8 @@
 package cn.xilio.tinynote.service.impl;
 
+import cn.xilio.tinynote.domain.*;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.xilio.tinynote.common.BizException;
 import cn.xilio.tinynote.common.PageResult;
@@ -9,10 +11,6 @@ import cn.xilio.tinynote.controller.admin.dto.QueryPostReq;
 import cn.xilio.tinynote.controller.admin.dto.SavePostReq;
 import cn.xilio.tinynote.controller.theme.dto.PostDetailRes;
 import cn.xilio.tinynote.controller.theme.dto.QueryPostViewReq;
-import cn.xilio.tinynote.domain.Content;
-import cn.xilio.tinynote.domain.ContentStatus;
-import cn.xilio.tinynote.domain.Meta;
-import cn.xilio.tinynote.domain.MetaType;
 import cn.xilio.tinynote.mapper.ContentMapper;
 import cn.xilio.tinynote.mapper.MetaMapper;
 import cn.xilio.tinynote.service.IContentService;
@@ -27,8 +25,10 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -171,7 +171,7 @@ public class ContentServiceImpl implements IContentService {
         PostDetailRes res = new PostDetailRes();
         res.setId(content.getId());
         res.setTitle(content.getTitle());
-        res.setContent(content.getText());
+        // res.setContent(content.getText());
         res.setSummary(content.getSummary());
         res.setPublishAt(DateUtils.format(content.getCreatedAt()));
         return res;
@@ -197,11 +197,12 @@ public class ContentServiceImpl implements IContentService {
         res.setId(content.getId());
         res.setSummary(content.getSummary());
         res.setTitle(content.getTitle());
-        res.setContent(content.getText());
+        //res.setContent(content.getText());
         res.setPublishAt(DateUtils.format(content.getCreatedAt()));
         res.setTags(tags);
         return res;
     }
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void markContentStatus(List<Integer> ids, ContentStatus status) {
@@ -212,6 +213,42 @@ public class ContentServiceImpl implements IContentService {
     @Override
     public void batchDeletePost(List<Integer> ids) {
         //逻辑删除
-        contentMapper.deleteByIds(ids,true);
+        contentMapper.deleteByIds(ids, true);
+    }
+
+    @Override
+    public PageResult<PostDetailRes> findByMetaId(Long current, Long size, Integer metaId) {
+        //根据标签ID分页查询文章的ID
+        Page<PostDetailRes> page = Page.of(current, size);
+        IPage<PostDetailRes> contents = contentMapper.selectContentListByMetaId(page, metaId, ContentStatus.PUBLISHED.getStatus());
+        if (CollectionUtils.isEmpty(contents.getRecords())) {
+            return new PageResult<>();
+        }
+        List<PostDetailRes> postList = contents.getRecords();
+        List<Integer> cids = contents.getRecords().stream().map(PostDetailRes::getId).toList();
+        if (!CollectionUtils.isEmpty(cids)) {
+            List<MetaContentDTO> allTags = metaMapper.selectMetasByContentIds(cids);
+            Map<Integer, List<Meta>> tagsMap = allTags.stream()
+                    .collect(Collectors.groupingBy(
+                            MetaContentDTO::getCid,
+                            Collectors.mapping(dto -> {
+                                Meta meta = new Meta();
+                                meta.setId(dto.getMid());
+                                meta.setName(dto.getName());
+                                meta.setType(dto.getType());
+                                return meta;
+                            }, Collectors.toList())
+                    ));
+            for (PostDetailRes post : postList) {
+                List<Meta> postTags = tagsMap.getOrDefault(post.getId(), Collections.emptyList());
+                post.setTags(postTags);
+            }
+        }
+        PageResult<PostDetailRes> res = new PageResult<>();
+        res.setCurrent(page.getCurrent());
+        res.setSize(page.getSize());
+        res.setTotal(page.getTotal());
+        res.setRecords(postList);
+        return res;
     }
 }
