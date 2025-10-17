@@ -197,7 +197,7 @@ public class ContentServiceImpl implements IContentService {
         res.setId(content.getId());
         res.setSummary(content.getSummary());
         res.setTitle(content.getTitle());
-        //res.setContent(content.getText());
+        res.setContent(content.getText());
         res.setPublishAt(DateUtils.format(content.getCreatedAt()));
         res.setTags(tags);
         return res;

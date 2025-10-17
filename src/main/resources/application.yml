@@ -19,7 +19,7 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
   profiles:
-    active: dev
+    active: prod
 #  sql:
 #    init:
 #      schema-locations: classpath:db/schema-mysql.sql
