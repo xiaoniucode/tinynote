@@ -1,9 +1,6 @@
 package cn.xilio.tinynote.domain;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
@@ -54,4 +51,6 @@ public class Content implements Serializable {
 
     @TableField("uid")
     private Integer uid;
+    @TableLogic
+    private Integer deleted;
 }

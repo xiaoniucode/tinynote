@@ -202,7 +202,6 @@ public class ContentServiceImpl implements IContentService {
         res.setTags(tags);
         return res;
     }
-
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void markContentStatus(List<Integer> ids, ContentStatus status) {
@@ -212,9 +211,7 @@ public class ContentServiceImpl implements IContentService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void batchDeletePost(List<Integer> ids) {
-        //删除所有内容
-        contentMapper.deleteBatchIds(ids);
-        //删除内容与meta元数据的关联
-        metaMapper.clearContentRelationship(ids);
+        //逻辑删除
+        contentMapper.deleteByIds(ids,true);
     }
 }
