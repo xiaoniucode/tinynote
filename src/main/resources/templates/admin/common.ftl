@@ -44,14 +44,14 @@
 <#macro styles>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/admin/vendor/layui/css/layui.css">
-    <link rel="stylesheet" href="/static/grid.css">
-    <link rel="stylesheet" href="/static/global.css">
-    <link rel="stylesheet" href="/static/admin/css/common.css">
+    <link rel="stylesheet" href="/admin-static/vendor/layui/css/layui.css">
+    <link rel="stylesheet" href="/grid.css">
+    <link rel="stylesheet" href="/global.css">
+    <link rel="stylesheet" href="/admin-static/css/common.css">
 </#macro>
 
 <#macro scripts>
-    <script src="/static/jquery.js"></script>
-    <script src="/static/admin/vendor/layui/layui.js"></script>
+    <script src="/jquery.js"></script>
+    <script src="/admin-static/vendor/layui/layui.js"></script>
 </#macro>
 

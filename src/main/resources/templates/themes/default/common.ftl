@@ -71,11 +71,11 @@
     <meta name="robots" content="${robots!''}">
 <#--    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">-->
     <meta http-equiv="Cache-Control" content="no-transform">
-    <link rel="stylesheet" href="/static/grid.css">
-    <link rel="stylesheet" href="/static/site/css/common.css">
+    <link rel="stylesheet" href="/grid.css">
+    <link rel="stylesheet" href="/site/css/common.css">
 <#--  <link rel="stylesheet" href="/static/global.css">-->
 </#macro>
 
 <#macro scripts>
-    <script src="/static/jquery.js"></script>
+    <script src="/jquery.js"></script>
 </#macro>

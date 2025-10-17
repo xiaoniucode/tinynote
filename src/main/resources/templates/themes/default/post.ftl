@@ -3,8 +3,8 @@
 <html lang="zh-CN">
 <head>
     <@c.styles title=post.title description=post.summary keywords=post.title robots=meta.robots/>
-    <link rel="stylesheet" href="/static/cherry/editor.css">
-    <link rel="stylesheet" href="/static/site/cus_cherry_editor.css">
+    <link rel="stylesheet" href="/cherry/editor.css">
+    <link rel="stylesheet" href="/site/cus_cherry_editor.css">
     <style>
         *, *::before, *::after {
             box-sizing: border-box;
@@ -113,7 +113,7 @@
 
 <@c.scripts/>
 <@c.navSearchEvent/>
-<script src="/static/cherry/editor.js"></script>
+<script src="/cherry/editor.js"></script>
 <script>
     $(document).ready(function () {
         const content = "${(post.content!'')?js_string}"

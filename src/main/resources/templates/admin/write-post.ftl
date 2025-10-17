@@ -4,7 +4,7 @@
 <head>
     <title>撰写文章</title>
     <@c.styles/>
-    <link rel="stylesheet" href="/static/cherry/editor.css">
+    <link rel="stylesheet" href="/cherry/editor.css">
 </head>
 <body>
 <@c.navigation />
@@ -77,7 +77,7 @@
 </div>
 <@c.footer/>
 <@c.scripts/>
-<script src="/static/cherry/editor.js"></script>
+<script src="/cherry/editor.js"></script>
 <script>
     function myFileUpload(file, callback) {
         if (/image/i.test(file.type)) {
