@@ -58,6 +58,7 @@ CREATE TABLE `content` (
                            `uid` int NOT NULL,
                            `status` tinyint(1) NOT NULL,
                            `draft` tinyint(1) NOT NULL DEFAULT '0',
+                           `deleted` tinyint(1) NOT NULL DEFAULT '0',
                            PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -65,7 +66,9 @@ CREATE TABLE `content` (
 -- Records of content
 -- ----------------------------
 BEGIN;
-INSERT INTO `content` (`id`, `title`, `summary`, `text`, `created_at`, `updated_at`, `uid`, `status`, `draft`) VALUES (98, '我的第一篇文章', '我的第一篇文章', '# 摘要\n\n\n``` \npublic class Hello{\n\n}\n```\n\n```mermaid\npie\ntitle hello\n\"A\" : 100\n\"B\" : 80\n\"C\" : 40\n\"D\" : 30\n```\n', '2025-10-17 11:14:44', '2025-10-17 11:14:44', 1, 1, 0);
+INSERT INTO `content` (`id`, `title`, `summary`, `text`, `created_at`, `updated_at`, `uid`, `status`, `draft`, `deleted`)
+VALUES (98, '我的第一篇文章', '我的第一篇文章', '# 摘要\n\n\n``` \npublic class Hello{\n\n}\n```\n\n```mermaid\npie\ntitle hello\n\"A\" : 100\n\"B\" : 80\n\"C\" : 40\n\"D\" : 30\n```\n',
+        '2025-10-17 11:14:44', '2025-10-17 11:14:44', 1, 1, 0, 0);
 COMMIT;
 
 -- ----------------------------
