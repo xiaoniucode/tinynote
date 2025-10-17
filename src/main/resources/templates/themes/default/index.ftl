@@ -123,7 +123,7 @@
                 <#list postRes.records as post>
                     <div>
                         <div style="border-bottom: 1px solid rgba(211,214,220,0.8);width: 100%">
-                            <a href="/post/${post.id!}"
+                            <a class="no-underline" href="/post/${post.id!}"
                                style="font-weight: 600;font-size: 20px;line-height: 28px;color: #252933;width: 100%">
                                 ${post.title!}
                             </a>
@@ -135,10 +135,10 @@
 
                             <div style="width: 100%" class="d-flex flex-row align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
-                                    <div class="me-2"
+                                <#--    <div class="me-2"
                                          style="color: #8a919f;font-size: 15px;max-width: 132px;line-height: 25px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;word-break: break-all">
                                         ${(meta.author)!}
-                                    </div>
+                                    </div>-->
                                     <div style="color: #8a919f;font-size: 15px;line-height: 25px;float: right">
                                         ${post.publishAt!}
                                     </div>

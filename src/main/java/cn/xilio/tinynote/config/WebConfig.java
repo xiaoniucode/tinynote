@@ -33,7 +33,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "/admin/login",
                         "/admin/doLogin",
                         "/static/**",
-                        "/favicon.ico"
+                        "/static/favicon.ico"
                 );
     }
 
